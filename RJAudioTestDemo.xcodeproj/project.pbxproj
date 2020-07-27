@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869F724CEBEDC00520011 /* AppDelegate.m */; };
+		BFD869FB24CEBEDC00520011 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FA24CEBEDC00520011 /* SceneDelegate.m */; };
+		BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FD24CEBEDC00520011 /* ViewController.m */; };
+		BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD869FF24CEBEDC00520011 /* Main.storyboard */; };
+		BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD86A0224CEBEDD00520011 /* Assets.xcassets */; };
+		BFD86A0624CEBEDD00520011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD86A0424CEBEDD00520011 /* LaunchScreen.storyboard */; };
+		BFD86A0924CEBEDD00520011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A0824CEBEDD00520011 /* main.m */; };
+		BFD86A1324CEBEDD00520011 /* RJAudioTestDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A1224CEBEDD00520011 /* RJAudioTestDemoTests.m */; };
+		BFD86A1E24CEBEDD00520011 /* RJAudioTestDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A1D24CEBEDD00520011 /* RJAudioTestDemoUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFD86A0F24CEBEDD00520011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFD869EB24CEBEDC00520011 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFD869F224CEBEDC00520011;
+			remoteInfo = RJAudioTestDemo;
+		};
+		BFD86A1A24CEBEDD00520011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFD869EB24CEBEDC00520011 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFD869F224CEBEDC00520011;
+			remoteInfo = RJAudioTestDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RJAudioTestDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD869F624CEBEDC00520011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BFD869F724CEBEDC00520011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BFD869F924CEBEDC00520011 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		BFD869FA24CEBEDC00520011 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		BFD869FC24CEBEDC00520011 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BFD869FD24CEBEDC00520011 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BFD86A0024CEBEDC00520011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BFD86A0224CEBEDD00520011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD86A0524CEBEDD00520011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BFD86A0724CEBEDD00520011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD86A0824CEBEDD00520011 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BFD86A0E24CEBEDD00520011 /* RJAudioTestDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RJAudioTestDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD86A1224CEBEDD00520011 /* RJAudioTestDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioTestDemoTests.m; sourceTree = "<group>"; };
+		BFD86A1424CEBEDD00520011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD86A1924CEBEDD00520011 /* RJAudioTestDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RJAudioTestDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD86A1D24CEBEDD00520011 /* RJAudioTestDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioTestDemoUITests.m; sourceTree = "<group>"; };
+		BFD86A1F24CEBEDD00520011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFD869F024CEBEDC00520011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A0B24CEBEDD00520011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A1624CEBEDD00520011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFD869EA24CEBEDC00520011 = {
+			isa = PBXGroup;
+			children = (
+				BFD869F524CEBEDC00520011 /* RJAudioTestDemo */,
+				BFD86A1124CEBEDD00520011 /* RJAudioTestDemoTests */,
+				BFD86A1C24CEBEDD00520011 /* RJAudioTestDemoUITests */,
+				BFD869F424CEBEDC00520011 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFD869F424CEBEDC00520011 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */,
+				BFD86A0E24CEBEDD00520011 /* RJAudioTestDemoTests.xctest */,
+				BFD86A1924CEBEDD00520011 /* RJAudioTestDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFD869F524CEBEDC00520011 /* RJAudioTestDemo */ = {
+			isa = PBXGroup;
+			children = (
+				BFD869F624CEBEDC00520011 /* AppDelegate.h */,
+				BFD869F724CEBEDC00520011 /* AppDelegate.m */,
+				BFD869F924CEBEDC00520011 /* SceneDelegate.h */,
+				BFD869FA24CEBEDC00520011 /* SceneDelegate.m */,
+				BFD869FC24CEBEDC00520011 /* ViewController.h */,
+				BFD869FD24CEBEDC00520011 /* ViewController.m */,
+				BFD869FF24CEBEDC00520011 /* Main.storyboard */,
+				BFD86A0224CEBEDD00520011 /* Assets.xcassets */,
+				BFD86A0424CEBEDD00520011 /* LaunchScreen.storyboard */,
+				BFD86A0724CEBEDD00520011 /* Info.plist */,
+				BFD86A0824CEBEDD00520011 /* main.m */,
+			);
+			path = RJAudioTestDemo;
+			sourceTree = "<group>";
+		};
+		BFD86A1124CEBEDD00520011 /* RJAudioTestDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFD86A1224CEBEDD00520011 /* RJAudioTestDemoTests.m */,
+				BFD86A1424CEBEDD00520011 /* Info.plist */,
+			);
+			path = RJAudioTestDemoTests;
+			sourceTree = "<group>";
+		};
+		BFD86A1C24CEBEDD00520011 /* RJAudioTestDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BFD86A1D24CEBEDD00520011 /* RJAudioTestDemoUITests.m */,
+				BFD86A1F24CEBEDD00520011 /* Info.plist */,
+			);
+			path = RJAudioTestDemoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFD869F224CEBEDC00520011 /* RJAudioTestDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD86A2224CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemo" */;
+			buildPhases = (
+				BFD869EF24CEBEDC00520011 /* Sources */,
+				BFD869F024CEBEDC00520011 /* Frameworks */,
+				BFD869F124CEBEDC00520011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RJAudioTestDemo;
+			productName = RJAudioTestDemo;
+			productReference = BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFD86A0D24CEBEDD00520011 /* RJAudioTestDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD86A2524CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemoTests" */;
+			buildPhases = (
+				BFD86A0A24CEBEDD00520011 /* Sources */,
+				BFD86A0B24CEBEDD00520011 /* Frameworks */,
+				BFD86A0C24CEBEDD00520011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFD86A1024CEBEDD00520011 /* PBXTargetDependency */,
+			);
+			name = RJAudioTestDemoTests;
+			productName = RJAudioTestDemoTests;
+			productReference = BFD86A0E24CEBEDD00520011 /* RJAudioTestDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BFD86A1824CEBEDD00520011 /* RJAudioTestDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD86A2824CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemoUITests" */;
+			buildPhases = (
+				BFD86A1524CEBEDD00520011 /* Sources */,
+				BFD86A1624CEBEDD00520011 /* Frameworks */,
+				BFD86A1724CEBEDD00520011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFD86A1B24CEBEDD00520011 /* PBXTargetDependency */,
+			);
+			name = RJAudioTestDemoUITests;
+			productName = RJAudioTestDemoUITests;
+			productReference = BFD86A1924CEBEDD00520011 /* RJAudioTestDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFD869EB24CEBEDC00520011 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = RJSoft;
+				TargetAttributes = {
+					BFD869F224CEBEDC00520011 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					BFD86A0D24CEBEDD00520011 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = BFD869F224CEBEDC00520011;
+					};
+					BFD86A1824CEBEDD00520011 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = BFD869F224CEBEDC00520011;
+					};
+				};
+			};
+			buildConfigurationList = BFD869EE24CEBEDC00520011 /* Build configuration list for PBXProject "RJAudioTestDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFD869EA24CEBEDC00520011;
+			productRefGroup = BFD869F424CEBEDC00520011 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFD869F224CEBEDC00520011 /* RJAudioTestDemo */,
+				BFD86A0D24CEBEDD00520011 /* RJAudioTestDemoTests */,
+				BFD86A1824CEBEDD00520011 /* RJAudioTestDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFD869F124CEBEDC00520011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD86A0624CEBEDD00520011 /* LaunchScreen.storyboard in Resources */,
+				BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */,
+				BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A0C24CEBEDD00520011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A1724CEBEDD00520011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFD869EF24CEBEDC00520011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */,
+				BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */,
+				BFD86A0924CEBEDD00520011 /* main.m in Sources */,
+				BFD869FB24CEBEDC00520011 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A0A24CEBEDD00520011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD86A1324CEBEDD00520011 /* RJAudioTestDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD86A1524CEBEDD00520011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD86A1E24CEBEDD00520011 /* RJAudioTestDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFD86A1024CEBEDD00520011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFD869F224CEBEDC00520011 /* RJAudioTestDemo */;
+			targetProxy = BFD86A0F24CEBEDD00520011 /* PBXContainerItemProxy */;
+		};
+		BFD86A1B24CEBEDD00520011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFD869F224CEBEDC00520011 /* RJAudioTestDemo */;
+			targetProxy = BFD86A1A24CEBEDD00520011 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BFD869FF24CEBEDC00520011 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFD86A0024CEBEDC00520011 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BFD86A0424CEBEDD00520011 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFD86A0524CEBEDD00520011 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BFD86A2024CEBEDD00520011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BFD86A2124CEBEDD00520011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFD86A2324CEBEDD00520011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFD86A2424CEBEDD00520011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BFD86A2624CEBEDD00520011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RJAudioTestDemo.app/RJAudioTestDemo";
+			};
+			name = Debug;
+		};
+		BFD86A2724CEBEDD00520011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RJAudioTestDemo.app/RJAudioTestDemo";
+			};
+			name = Release;
+		};
+		BFD86A2924CEBEDD00520011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RJAudioTestDemo;
+			};
+			name = Debug;
+		};
+		BFD86A2A24CEBEDD00520011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ2G45B9KH;
+				INFOPLIST_FILE = RJAudioTestDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RJAudioTestDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFD869EE24CEBEDC00520011 /* Build configuration list for PBXProject "RJAudioTestDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD86A2024CEBEDD00520011 /* Debug */,
+				BFD86A2124CEBEDD00520011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD86A2224CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD86A2324CEBEDD00520011 /* Debug */,
+				BFD86A2424CEBEDD00520011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD86A2524CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD86A2624CEBEDD00520011 /* Debug */,
+				BFD86A2724CEBEDD00520011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD86A2824CEBEDD00520011 /* Build configuration list for PBXNativeTarget "RJAudioTestDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD86A2924CEBEDD00520011 /* Debug */,
+				BFD86A2A24CEBEDD00520011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFD869EB24CEBEDC00520011 /* Project object */;
+}
