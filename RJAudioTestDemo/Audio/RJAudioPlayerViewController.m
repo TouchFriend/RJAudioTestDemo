@@ -7,13 +7,13 @@
 //
 
 #import "RJAudioPlayerViewController.h"
-#import "RJAudioPlayer.h"
-#import "RJAudioPlayerControlView.h"
+#import "RJAudioPlayerController.h"
 
 @interface RJAudioPlayerViewController ()
 
 /// <#Desription#>
-@property (nonatomic, strong) RJAudioPlayer *player;
+@property (nonatomic, strong) RJAudioPlayerController *audioPlayerController;
+
 
 
 @end
@@ -36,30 +36,20 @@
 #pragma mark - Setup Init
 
 - (void)setupInit {
-    
-    RJAudioPlayerControlView *controlView = [[RJAudioPlayerControlView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:controlView];
-    
-//    [self setupPlayer];
+    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
+    self.audioPlayerController.controlView = [[RJAudioPlayerControlView alloc] init];
 }
 
 - (void)setupPlayer {
     // https://mr3.doubanio.com/f229d8a03ba08bde8969de3899f773d2/0/fm/song/p1390309_128k.mp4
         NSString *urlString = @"https://mr3.doubanio.com/f229d8a03ba08bde8969de3899f773d2/0/fm/song/p1390309_128k.mp4";
-        self.player = [RJAudioPlayer playerWithURL:[NSURL URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+        
 //        self.player = [RJAudioPlayer playerWithURL:[NSURL URLWithString:urlString]];
         
     //    NSString *path = [[NSBundle mainBundle] pathForResource:@"蒲公英的约定" ofType:@"mp3"];
     //    self.player = [RJAudioPlayer playerWithURL:[NSURL fileURLWithPath:path]];
 }
 
-- (void)play {
-    [self.player play];
-}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    ![self.player isPlaying] ? [self play] : [self.player stop];
-    
-}
 
 @end

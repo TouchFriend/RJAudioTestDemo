@@ -24,6 +24,7 @@
 		BFD86A2D24CEBF1900520011 /* RJAudioTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A2C24CEBF1900520011 /* RJAudioTestViewController.m */; };
 		BFF3E84124D3FEF200CBA623 /* RJAudioPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */; };
 		BFF3E84424D40ECF00CBA623 /* RJSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3E84324D40ECF00CBA623 /* RJSliderView.m */; };
+		BFFEAD8D24D80EC10089A462 /* RJAudioPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFEAD8C24D80EC10089A462 /* RJAudioPlayerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayerControlView.m; sourceTree = "<group>"; };
 		BFF3E84224D40ECF00CBA623 /* RJSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJSliderView.h; sourceTree = "<group>"; };
 		BFF3E84324D40ECF00CBA623 /* RJSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJSliderView.m; sourceTree = "<group>"; };
+		BFFEAD8B24D80EC10089A462 /* RJAudioPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayerController.h; sourceTree = "<group>"; };
+		BFFEAD8C24D80EC10089A462 /* RJAudioPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				BF1D666924D7A81700FE9720 /* RJAudioConst.h */,
 				BF42674D24D2B45800611045 /* RJAudioPlayerViewController.h */,
 				BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */,
+				BFFEAD8B24D80EC10089A462 /* RJAudioPlayerController.h */,
+				BFFEAD8C24D80EC10089A462 /* RJAudioPlayerController.m */,
 				BF42674A24D2B44100611045 /* RJAudioPlayer.h */,
 				BF42674B24D2B44100611045 /* RJAudioPlayer.m */,
 				BFF3E83F24D3FEF200CBA623 /* RJAudioPlayerControlView.h */,
@@ -340,6 +345,7 @@
 				BFF3E84124D3FEF200CBA623 /* RJAudioPlayerControlView.m in Sources */,
 				BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */,
 				BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */,
+				BFFEAD8D24D80EC10089A462 /* RJAudioPlayerController.m in Sources */,
 				BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */,
 				BFD86A0924CEBEDD00520011 /* main.m in Sources */,
 				BFF3E84424D40ECF00CBA623 /* RJSliderView.m in Sources */,

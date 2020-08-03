@@ -30,7 +30,7 @@
 }
 
 + (instancetype)playerWithURL:(NSURL *)url {
-    return [[RJAudioPlayer alloc] initWithURL:url];
+    return [[self alloc] initWithURL:url];
 }
 
 #pragma mark - Life Cycle
