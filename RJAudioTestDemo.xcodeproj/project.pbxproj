@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674B24D2B44100611045 /* RJAudioPlayer.m */; };
+		BF42674F24D2B45800611045 /* RJAudioPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */; };
+		BF42675424D2C7C600611045 /* 蒲公英的约定.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF42675324D2C7C600611045 /* 蒲公英的约定.mp3 */; };
+		BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF56402524D003EB00C1BFB3 /* RJLargeTapRangeButton.m */; };
+		BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */; };
+		BF6C598924CFD08200C591BA /* RJPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6C598824CFD08200C591BA /* RJPerson.m */; };
 		BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869F724CEBEDC00520011 /* AppDelegate.m */; };
-		BFD869FB24CEBEDC00520011 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FA24CEBEDC00520011 /* SceneDelegate.m */; };
 		BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FD24CEBEDC00520011 /* ViewController.m */; };
 		BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD869FF24CEBEDC00520011 /* Main.storyboard */; };
 		BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD86A0224CEBEDD00520011 /* Assets.xcassets */; };
@@ -16,6 +21,9 @@
 		BFD86A0924CEBEDD00520011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A0824CEBEDD00520011 /* main.m */; };
 		BFD86A1324CEBEDD00520011 /* RJAudioTestDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A1224CEBEDD00520011 /* RJAudioTestDemoTests.m */; };
 		BFD86A1E24CEBEDD00520011 /* RJAudioTestDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A1D24CEBEDD00520011 /* RJAudioTestDemoUITests.m */; };
+		BFD86A2D24CEBF1900520011 /* RJAudioTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD86A2C24CEBF1900520011 /* RJAudioTestViewController.m */; };
+		BFF3E84124D3FEF200CBA623 /* RJAudioPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */; };
+		BFF3E84424D40ECF00CBA623 /* RJSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3E84324D40ECF00CBA623 /* RJSliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +44,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF1D666924D7A81700FE9720 /* RJAudioConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioConst.h; sourceTree = "<group>"; };
+		BF42674A24D2B44100611045 /* RJAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayer.h; sourceTree = "<group>"; };
+		BF42674B24D2B44100611045 /* RJAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayer.m; sourceTree = "<group>"; };
+		BF42674D24D2B45800611045 /* RJAudioPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayerViewController.h; sourceTree = "<group>"; };
+		BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayerViewController.m; sourceTree = "<group>"; };
+		BF42675324D2C7C600611045 /* 蒲公英的约定.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "蒲公英的约定.mp3"; sourceTree = "<group>"; };
+		BF56402424D003EB00C1BFB3 /* RJLargeTapRangeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJLargeTapRangeButton.h; sourceTree = "<group>"; };
+		BF56402524D003EB00C1BFB3 /* RJLargeTapRangeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJLargeTapRangeButton.m; sourceTree = "<group>"; };
+		BF609FEE24D3CAFC009FE5E4 /* RJCMTimeTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJCMTimeTestViewController.h; sourceTree = "<group>"; };
+		BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJCMTimeTestViewController.m; sourceTree = "<group>"; };
+		BF6C598724CFD08200C591BA /* RJPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJPerson.h; sourceTree = "<group>"; };
+		BF6C598824CFD08200C591BA /* RJPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJPerson.m; sourceTree = "<group>"; };
 		BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RJAudioTestDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD869F624CEBEDC00520011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFD869F724CEBEDC00520011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BFD869F924CEBEDC00520011 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		BFD869FA24CEBEDC00520011 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		BFD869FC24CEBEDC00520011 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BFD869FD24CEBEDC00520011 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BFD86A0024CEBEDC00520011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,6 +72,12 @@
 		BFD86A1924CEBEDD00520011 /* RJAudioTestDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RJAudioTestDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD86A1D24CEBEDD00520011 /* RJAudioTestDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioTestDemoUITests.m; sourceTree = "<group>"; };
 		BFD86A1F24CEBEDD00520011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD86A2B24CEBF1900520011 /* RJAudioTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioTestViewController.h; sourceTree = "<group>"; };
+		BFD86A2C24CEBF1900520011 /* RJAudioTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioTestViewController.m; sourceTree = "<group>"; };
+		BFF3E83F24D3FEF200CBA623 /* RJAudioPlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayerControlView.h; sourceTree = "<group>"; };
+		BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayerControlView.m; sourceTree = "<group>"; };
+		BFF3E84224D40ECF00CBA623 /* RJSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJSliderView.h; sourceTree = "<group>"; };
+		BFF3E84324D40ECF00CBA623 /* RJSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJSliderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +105,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF42674824D2B41C00611045 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				BF609FEE24D3CAFC009FE5E4 /* RJCMTimeTestViewController.h */,
+				BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */,
+				BFD86A2B24CEBF1900520011 /* RJAudioTestViewController.h */,
+				BFD86A2C24CEBF1900520011 /* RJAudioTestViewController.m */,
+				BF6C598724CFD08200C591BA /* RJPerson.h */,
+				BF6C598824CFD08200C591BA /* RJPerson.m */,
+				BF56402424D003EB00C1BFB3 /* RJLargeTapRangeButton.h */,
+				BF56402524D003EB00C1BFB3 /* RJLargeTapRangeButton.m */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		BF42674924D2B42D00611045 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BF1D666924D7A81700FE9720 /* RJAudioConst.h */,
+				BF42674D24D2B45800611045 /* RJAudioPlayerViewController.h */,
+				BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */,
+				BF42674A24D2B44100611045 /* RJAudioPlayer.h */,
+				BF42674B24D2B44100611045 /* RJAudioPlayer.m */,
+				BFF3E83F24D3FEF200CBA623 /* RJAudioPlayerControlView.h */,
+				BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */,
+				BFF3E84224D40ECF00CBA623 /* RJSliderView.h */,
+				BFF3E84324D40ECF00CBA623 /* RJSliderView.m */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		BF42675024D2C47800611045 /* mp3 */ = {
+			isa = PBXGroup;
+			children = (
+				BF42675324D2C7C600611045 /* 蒲公英的约定.mp3 */,
+			);
+			path = mp3;
+			sourceTree = "<group>";
+		};
 		BFD869EA24CEBEDC00520011 = {
 			isa = PBXGroup;
 			children = (
@@ -104,10 +167,10 @@
 		BFD869F524CEBEDC00520011 /* RJAudioTestDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BF42674924D2B42D00611045 /* Audio */,
+				BF42674824D2B41C00611045 /* Test */,
 				BFD869F624CEBEDC00520011 /* AppDelegate.h */,
 				BFD869F724CEBEDC00520011 /* AppDelegate.m */,
-				BFD869F924CEBEDC00520011 /* SceneDelegate.h */,
-				BFD869FA24CEBEDC00520011 /* SceneDelegate.m */,
 				BFD869FC24CEBEDC00520011 /* ViewController.h */,
 				BFD869FD24CEBEDC00520011 /* ViewController.m */,
 				BFD869FF24CEBEDC00520011 /* Main.storyboard */,
@@ -115,6 +178,7 @@
 				BFD86A0424CEBEDD00520011 /* LaunchScreen.storyboard */,
 				BFD86A0724CEBEDD00520011 /* Info.plist */,
 				BFD86A0824CEBEDD00520011 /* main.m */,
+				BF42675024D2C47800611045 /* mp3 */,
 			);
 			path = RJAudioTestDemo;
 			sourceTree = "<group>";
@@ -199,6 +263,7 @@
 		BFD869EB24CEBEDC00520011 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = RJ;
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = RJSoft;
 				TargetAttributes = {
@@ -243,6 +308,7 @@
 				BFD86A0624CEBEDD00520011 /* LaunchScreen.storyboard in Resources */,
 				BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */,
 				BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */,
+				BF42675424D2C7C600611045 /* 蒲公英的约定.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,9 +334,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */,
+				BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */,
+				BF42674F24D2B45800611045 /* RJAudioPlayerViewController.m in Sources */,
+				BF6C598924CFD08200C591BA /* RJPerson.m in Sources */,
+				BFF3E84124D3FEF200CBA623 /* RJAudioPlayerControlView.m in Sources */,
+				BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */,
+				BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */,
 				BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */,
 				BFD86A0924CEBEDD00520011 /* main.m in Sources */,
-				BFD869FB24CEBEDC00520011 /* SceneDelegate.m in Sources */,
+				BFF3E84424D40ECF00CBA623 /* RJSliderView.m in Sources */,
+				BFD86A2D24CEBF1900520011 /* RJAudioTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,13 +515,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RJ2G45B9KH;
 				INFOPLIST_FILE = RJAudioTestDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -459,13 +533,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RJ2G45B9KH;
 				INFOPLIST_FILE = RJAudioTestDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RJSoftware.RJAudioTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
