@@ -9,6 +9,7 @@
 #import "RJAudioPlayerControlView.h"
 #import "RJSliderView.h"
 #import "RJAudioConst.h"
+#import <UIImageView+WebCache.h>
 
 static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotation";
 
@@ -16,8 +17,8 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
 
 /// 标题
 @property (nonatomic, strong) UILabel *titleLbl;
-/// 歌手图片
-@property (nonatomic, strong) UIImageView *playerIconImageV;
+/// 专辑图片
+@property (nonatomic, strong) UIImageView *albumIconImageV;
 /// 操作view
 @property (nonatomic, strong) UIView *actionView;
 /// 进度view
@@ -84,14 +85,14 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
     viewY = (CGRectGetHeight(self.playActionView.frame) - viewHeight) * 0.5;
     self.playOrPauseBtn.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
     
-    viewWidth = 30.0;
-    viewHeight = 30.0;
+    viewWidth = 40.0;
+    viewHeight = 40.0;
     viewX = (CGRectGetMinX(self.playOrPauseBtn.frame) - viewWidth) * 0.5 + 3.0;
     viewY = (CGRectGetHeight(self.playActionView.frame) - viewHeight) * 0.5;
     self.previousBtn.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
     
-    viewWidth = 30.0;
-    viewHeight = 30.0;
+    viewWidth = 40.0;
+    viewHeight = 40.0;
     viewX = CGRectGetMaxX(self.playOrPauseBtn.frame) + (CGRectGetWidth(self.playActionView.frame) - CGRectGetMaxX(self.playOrPauseBtn.frame)) * 0.5 - viewWidth * 0.5 - 3.0;
     viewY = (CGRectGetHeight(self.playActionView.frame) - viewHeight) * 0.5;
     self.nextBtn.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
@@ -158,14 +159,14 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
     viewHeight = viewWidth;
     viewX = (maxWidth - viewWidth) * 0.5;
     viewY = CGRectGetMaxY(self.titleLbl.frame) + 60.0;
-    self.playerIconImageV.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
+    self.albumIconImageV.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
 }
 
 #pragma mark - Add Subviews
 
 - (void)addAllSubviews {
     [self addSubview:self.titleLbl];
-    [self addSubview:self.playerIconImageV];
+    [self addSubview:self.albumIconImageV];
     
     [self addSubview:self.actionView];
     [self.actionView addSubview:self.downloadBtn];
@@ -195,12 +196,12 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
 
 /// 开始旋转动画
 - (void)beginRotationAnimation {
-    [self resumeLayer:_playerIconImageV.layer];
+    [self resumeLayer:_albumIconImageV.layer];
 }
 
 // 停止旋转动画
 - (void)stopRotationAnimation {
-    [self pauseLayer:_playerIconImageV.layer];
+    [self pauseLayer:_albumIconImageV.layer];
     
 }
 
@@ -218,7 +219,7 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
 /// 暂停图层动画
 /// @param layer 图层
 - (void)pauseLayer:(CALayer *)layer {
-    CFTimeInterval pausedTime = [self.playerIconImageV.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    CFTimeInterval pausedTime = [self.albumIconImageV.layer convertTime:CACurrentMediaTime() fromLayer:nil];
     layer.speed = 0.0;
     layer.timeOffset = pausedTime;
 }
@@ -227,9 +228,19 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
 
 - (void)showTitle:(NSString *)title playerIcon:(UIImage *)playerIcon currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
     self.titleLbl.text = title;
-    self.playerIconImageV.image = playerIcon ? playerIcon : [UIImage imageNamed:@"audio_play_spin_icon"];
+    self.albumIconImageV.image = playerIcon ? playerIcon : [UIImage imageNamed:@"audio_play_spin_icon"];
     self.currentTimeLbl.text = [self convertTimeFormate:currentTime];
     self.totalTimeLbl.text = [self convertTimeFormate:totalTime];
+}
+
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL {
+    self.titleLbl.text = title;
+    UIImage *placeholder = [UIImage imageNamed:@"audio_play_spin_icon"];
+    if (!albumURL || albumURL.absoluteString.length == 0) {
+        self.albumIconImageV.image = placeholder;
+    } else {
+        [self.albumIconImageV sd_setImageWithURL:albumURL placeholderImage:placeholder];
+    }
 }
 
 - (void)currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
@@ -400,15 +411,15 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
     return _actionView;
 }
 
-- (UIImageView *)playerIconImageV {
-    if (!_playerIconImageV) {
-        _playerIconImageV = [[UIImageView alloc] init];
-        _playerIconImageV.backgroundColor = [UIColor clearColor];
-        _playerIconImageV.image = [UIImage imageNamed:@"audio_play_spin_icon"];
-        [_playerIconImageV.layer addAnimation:self.rotationAnimation forKey:RJPlayerIconRotationAnimationKey];
+- (UIImageView *)albumIconImageV {
+    if (!_albumIconImageV) {
+        _albumIconImageV = [[UIImageView alloc] init];
+        _albumIconImageV.backgroundColor = [UIColor clearColor];
+        _albumIconImageV.image = [UIImage imageNamed:@"audio_play_spin_icon"];
+        [_albumIconImageV.layer addAnimation:self.rotationAnimation forKey:RJPlayerIconRotationAnimationKey];
         [self stopRotationAnimation]; // 停止旋转
     }
-    return _playerIconImageV;;
+    return _albumIconImageV;;
 }
 
 - (UILabel *)titleLbl {
@@ -482,7 +493,7 @@ static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotatio
         CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         rotationAnimation.fromValue = @(0);
         rotationAnimation.toValue = @(M_PI * 2);
-        rotationAnimation.duration = 5.0;
+        rotationAnimation.duration = 15.0;
         rotationAnimation.repeatCount = CGFLOAT_MAX;
         rotationAnimation.removedOnCompletion = NO;
         rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];

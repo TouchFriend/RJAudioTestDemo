@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 全部时间
 @property (nonatomic, assign) NSTimeInterval totalTime;
 
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL;
 
 - (void)showTitle:(NSString *)title playerIcon:(UIImage *)playerIcon currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime;
 

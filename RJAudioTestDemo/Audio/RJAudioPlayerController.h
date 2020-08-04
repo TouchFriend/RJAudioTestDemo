@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RJAudioPlayer.h"
 #import "RJAudioPlayerControlView.h"
+#import "RJAudioAssertItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,11 +21,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) RJAudioPlayer *currentPlayer;
 /// 控制view
 @property (nonatomic, strong, readonly) RJAudioPlayerControlView *controlView;
+/// 音频资源
+@property (nonatomic, strong) NSArray<RJAudioAssertItem *> *audioAsserts;
+
+/// 当前播放索引，默认为0
+@property (nonatomic, assign, readonly) NSInteger currentPlayIndex;
+
+
 
 + (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
 
 - (instancetype)initWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
 
+- (void)playNextSong;
+
+- (void)playPreviousSong;
+
+- (void)playWithIndex:(NSInteger)index;
+
+- (void)stop;
 
 @end
 

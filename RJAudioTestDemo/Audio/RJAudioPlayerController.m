@@ -27,7 +27,6 @@
     if (self) {
         self.currentPlayer = player;
         self.containerView = containerView;
-        [self.controlView showTitle:@"" playerIcon:nil currentTime:player.currentTime totalTime:player.totalTime];
     }
     return self;
 }
@@ -91,7 +90,7 @@
         if (self.currentPlayer.playbackState == RJAudioPlayerPlaybackStatePaused) {
             [self.currentPlayer resume];
         } else {
-            [self.currentPlayer play];
+            [self play];
         }
         
     } else {
@@ -100,11 +99,11 @@
 }
 
 - (void)controlViewDidClickNextButton:(RJAudioPlayerControlView *)controlView {
-    
+    [self playNextSong];
 }
 
 - (void)controlViewDidClickPreviousButton:(RJAudioPlayerControlView *)controlView {
-    
+    [self playPreviousSong];
 }
 
 - (void)controlViewDidClickDownloadButton:(RJAudioPlayerControlView *)controlView {
@@ -136,6 +135,47 @@
         completionHandler(finished);
         NSLog(@"滑动条拖拽:%@", finished ? @"成功" : @"失败");
     }];
+}
+
+#pragma mark - Public Methods
+
+- (void)play {
+    if (self.audioAsserts.count == 0) {
+        return;
+    }
+    
+    RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
+    [self.controlView showTitle:item.title albumURL:item.albumIconURL];
+    [self.currentPlayer playWithURL:item.assertURL];
+}
+
+- (void)playNextSong {
+    if (self.audioAsserts.count == 0) {
+        return;
+    }
+    
+    NSInteger count = self.audioAsserts.count;
+    _currentPlayIndex = MAX((self.currentPlayIndex + 1) % count, 0);
+    [self playWithIndex:_currentPlayIndex];
+}
+
+- (void)playPreviousSong {
+    if (self.audioAsserts.count == 0) {
+        return;
+    }
+    
+    NSInteger count = self.audioAsserts.count;
+    _currentPlayIndex = MAX((self.currentPlayIndex - 1) % count, 0);
+    [self playWithIndex:_currentPlayIndex];
+}
+
+- (void)playWithIndex:(NSInteger)index {
+    if (self.audioAsserts.count == 0 || index < 0 || index >= self.audioAsserts.count) {
+        return;
+    }
+    
+    _currentPlayIndex = index;
+    [self play];
 }
 
 #pragma mark - Property Methods

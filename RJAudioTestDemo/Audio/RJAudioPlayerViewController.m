@@ -8,6 +8,7 @@
 
 #import "RJAudioPlayerViewController.h"
 #import "RJAudioPlayerController.h"
+#import "RJAudioAssertItem.h"
 
 @interface RJAudioPlayerViewController ()
 
@@ -36,9 +37,18 @@
 #pragma mark - Setup Init
 
 - (void)setupInit {
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"蒲公英的约定" ofType:@"mp3"];
     NSURL *url = [NSURL fileURLWithPath:path];
-    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer playerWithURL:url] containerView:self.view];
+    RJAudioAssertItem *item = [[RJAudioAssertItem alloc] init];
+    item.title = @"蒲公英的约定";
+    item.assertURL = url;
+    NSString *urlString = @"https://mr3.doubanio.com/f229d8a03ba08bde8969de3899f773d2/0/fm/song/p1390309_128k.mp4";
+    RJAudioAssertItem *item2 = [[RJAudioAssertItem alloc] init];
+    item2.title = @"偏爱";
+    item2.assertURL = [NSURL URLWithString:urlString];
+    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
+    self.audioPlayerController.audioAsserts = @[item, item2];
 //    [self.audioPlayerController.currentPlayer play];
 }
 
