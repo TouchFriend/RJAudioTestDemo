@@ -36,8 +36,10 @@
 #pragma mark - Setup Init
 
 - (void)setupInit {
-    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
-    self.audioPlayerController.controlView = [[RJAudioPlayerControlView alloc] init];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"蒲公英的约定" ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer playerWithURL:url] containerView:self.view];
+//    [self.audioPlayerController.currentPlayer play];
 }
 
 - (void)setupPlayer {

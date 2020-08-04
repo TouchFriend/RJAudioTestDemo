@@ -60,6 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGSize thumSize;
 /// 是否允许点击，默认YES
 @property (nonatomic, assign) BOOL allowTapped;
+/// 是否正在拖拽
+@property (nonatomic, assign) BOOL isdragging;
+
 
 
 /// 设置滑块背景色

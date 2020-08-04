@@ -10,6 +10,8 @@
 #import "RJSliderView.h"
 #import "RJAudioConst.h"
 
+static NSString * const RJPlayerIconRotationAnimationKey = @"player_Icon_Rotation";
+
 @interface RJAudioPlayerControlView () <RJSliderViewDelegate>
 
 /// 标题
@@ -40,6 +42,9 @@
 @property (nonatomic, strong) UIButton *playOrderBtn;
 /// 播放菜单按钮
 @property (nonatomic, strong) UIButton *playMenuBtn;
+/// <#Desription#>
+@property (nonatomic, strong) CABasicAnimation *rotationAnimation;
+
 
 @end
 
@@ -161,6 +166,7 @@
 - (void)addAllSubviews {
     [self addSubview:self.titleLbl];
     [self addSubview:self.playerIconImageV];
+    
     [self addSubview:self.actionView];
     [self.actionView addSubview:self.downloadBtn];
     [self.actionView addSubview:self.playOrderBtn];
@@ -175,25 +181,162 @@
     [self.playActionView addSubview:self.playOrPauseBtn];
     [self.playActionView addSubview:self.nextBtn];
     [self.playActionView addSubview:self.previousBtn];
-
+    
     
 }
 
+#pragma mark - Private Methods
+
+- (NSString *)convertTimeFormate:(NSTimeInterval)interval {
+    NSInteger minute = interval / 60;
+    NSInteger second = interval - minute * 60;
+    return [NSString stringWithFormat:@"%02ld:%02ld", minute, second];
+}
+
+/// 开始旋转动画
+- (void)beginRotationAnimation {
+    [self resumeLayer:_playerIconImageV.layer];
+}
+
+// 停止旋转动画
+- (void)stopRotationAnimation {
+    [self pauseLayer:_playerIconImageV.layer];
+    
+}
+
+/// 恢复图层动画
+/// @param layer 图层
+- (void)resumeLayer:(CALayer *)layer {
+    CFTimeInterval pausedTime = layer.timeOffset;
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    layer.beginTime = timeSincePause;
+}
+
+/// 暂停图层动画
+/// @param layer 图层
+- (void)pauseLayer:(CALayer *)layer {
+    CFTimeInterval pausedTime = [self.playerIconImageV.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+}
+
+#pragma mark - Public Methdos
+
+- (void)showTitle:(NSString *)title playerIcon:(UIImage *)playerIcon currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
+    self.titleLbl.text = title;
+    self.playerIconImageV.image = playerIcon ? playerIcon : [UIImage imageNamed:@"audio_play_spin_icon"];
+    self.currentTimeLbl.text = [self convertTimeFormate:currentTime];
+    self.totalTimeLbl.text = [self convertTimeFormate:totalTime];
+}
+
+- (void)currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
+    if (self.sliderView.isdragging) {
+        return;
+    }
+    
+    if (isnan(currentTime) || currentTime < 0) {
+        currentTime = 0;
+    }
+    if (isnan(totalTime) || totalTime < 0) {
+        totalTime = 0;
+    }
+    
+    self.totalTime = totalTime;
+    self.currentTimeLbl.text = [self convertTimeFormate:currentTime];
+    self.totalTimeLbl.text = [self convertTimeFormate:totalTime];
+    self.sliderView.value = currentTime * 1.0 / totalTime;
+}
+
+- (void)play {
+    self.playOrPauseBtn.selected = YES;
+    [self beginRotationAnimation];
+}
+
+- (void)pause {
+    self.playOrPauseBtn.selected = NO;
+    [self stopRotationAnimation];
+}
 
 #pragma mark - Target Methods
 
 - (void)playOrPauseBtnClick:(UIButton *)btn {
     btn.selected = !btn.selected;
+    if ([self.delegate respondsToSelector:@selector(controlView:didClickPlayOrPauseButton:)]) {
+        [self.delegate controlView:self didClickPlayOrPauseButton:btn.selected];
+    }
 }
+
+- (void)nextBtnClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickNextButton:)]) {
+        [self.delegate controlViewDidClickNextButton:self];
+    }
+}
+
+- (void)previousBtnClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickPreviousButton:)]) {
+        [self.delegate controlViewDidClickPreviousButton:self];
+    }
+}
+
+- (void)downloadBtnClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickDownloadButton:)]) {
+        [self.delegate controlViewDidClickDownloadButton:self];
+    }
+}
+
+- (void)playOrderBtnClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickPlayOrderButton:playOrder:)]) {
+        [self.delegate controlViewDidClickPlayOrderButton:self playOrder:self.playOrder];
+    }
+}
+
+- (void)playMenuBtnClick:(UIButton *)btn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickPlayMenuButton:)]) {
+        [self.delegate controlViewDidClickPlayMenuButton:self];
+    }
+}
+
+
 
 #pragma mark - RJSliderViewDelegate Methods
 
+- (void)sliderTouchBegan:(RJSliderView *)sliderView value:(float)value
+{
+    self.sliderView.isdragging = YES;
+}
+
 - (void)sliderValueChanged:(RJSliderView *)sliderView value:(float)value {
+    self.sliderView.isdragging = YES;
+    NSTimeInterval currentTime = self.totalTime * value;
+    self.currentTimeLbl.text = [self convertTimeFormate:currentTime];
+    if ([self.delegate respondsToSelector:@selector(controlView:sliderValueDidChanged:)]) {
+        [self.delegate controlView:self sliderValueDidChanged:value];
+    }
+}
+
+- (void)sliderTouchEnded:(RJSliderView *)sliderView value:(float)value {
+    if (self.totalTime > 0) {
+        self.sliderView.isdragging = YES;
+        if ([self.delegate respondsToSelector:@selector(controlView:sliderTouchDidEnded:completionHandler:)]) {
+            [self.delegate controlView:self sliderTouchDidEnded:value completionHandler:^(BOOL finished) {
+                self.sliderView.isdragging = NO;
+            }];
+        }
+    } else {
+        self.sliderView.isdragging = NO;
+        self.sliderView.value = 0;
+    }
+    
     
 }
 
 - (void)sliderTapped:(RJSliderView *)sliderView value:(float)value {
-    
+    if ([self.delegate respondsToSelector:@selector(controlView:sliderDidTapped:)]) {
+        [self.delegate controlView:self sliderDidTapped:value];
+    }
 }
 
 #pragma mark - Property Methods
@@ -217,10 +360,10 @@
 - (RJSliderView *)sliderView {
     if (!_sliderView) {
         _sliderView = [[RJSliderView alloc] init];
-        _sliderView.value = 0.2;
-        _sliderView.bufferValue = 0.5;
+        _sliderView.value = 0.0;
+        _sliderView.bufferValue = 0.0;
         _sliderView.sliderHeight = 3;
-        _sliderView.sliderRadius = 1.5;
+        _sliderView.sliderRadius = _sliderView.sliderHeight * 0.5;
         _sliderView.thumSize = CGSizeMake(9.0, 9.0);
         _sliderView.delegate = self;
     }
@@ -262,6 +405,8 @@
         _playerIconImageV = [[UIImageView alloc] init];
         _playerIconImageV.backgroundColor = [UIColor clearColor];
         _playerIconImageV.image = [UIImage imageNamed:@"audio_play_spin_icon"];
+        [_playerIconImageV.layer addAnimation:self.rotationAnimation forKey:RJPlayerIconRotationAnimationKey];
+        [self stopRotationAnimation]; // 停止旋转
     }
     return _playerIconImageV;;
 }
@@ -291,6 +436,7 @@
     if (!_nextBtn) {
         _nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_nextBtn setImage:[UIImage imageNamed:@"audio_next_song"] forState:UIControlStateNormal];
+        [_nextBtn addTarget:self action:@selector(nextBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextBtn;
 }
@@ -299,6 +445,7 @@
     if (!_previousBtn) {
         _previousBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_previousBtn setImage:[UIImage imageNamed:@"audio_previous_song"] forState:UIControlStateNormal];
+        [_previousBtn addTarget:self action:@selector(previousBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _previousBtn;
 }
@@ -307,6 +454,7 @@
     if (!_downloadBtn) {
         _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_downloadBtn setImage:[UIImage imageNamed:@"audio_download_icon"] forState:UIControlStateNormal];
+        [_downloadBtn addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadBtn;
 }
@@ -315,6 +463,7 @@
     if (!_playOrderBtn) {
         _playOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_playOrderBtn setImage:[UIImage imageNamed:@"audio_play_order_circle"] forState:UIControlStateNormal];
+        [_playOrderBtn addTarget:self action:@selector(playOrderBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playOrderBtn;
 }
@@ -323,10 +472,24 @@
     if (!_playMenuBtn) {
         _playMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_playMenuBtn setImage:[UIImage imageNamed:@"audio_music_list"] forState:UIControlStateNormal];
+        [_playMenuBtn addTarget:self action:@selector(playMenuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playMenuBtn;
 }
 
+- (CABasicAnimation *)rotationAnimation {
+    if (!_rotationAnimation) {
+        CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationAnimation.fromValue = @(0);
+        rotationAnimation.toValue = @(M_PI * 2);
+        rotationAnimation.duration = 5.0;
+        rotationAnimation.repeatCount = CGFLOAT_MAX;
+        rotationAnimation.removedOnCompletion = NO;
+        rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        _rotationAnimation = rotationAnimation;
+    }
+    return _rotationAnimation;
+}
 
 
 @end

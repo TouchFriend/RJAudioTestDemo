@@ -13,6 +13,7 @@
 		BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF56402524D003EB00C1BFB3 /* RJLargeTapRangeButton.m */; };
 		BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */; };
 		BF6C598924CFD08200C591BA /* RJPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6C598824CFD08200C591BA /* RJPerson.m */; };
+		BF8E860C24D8FDA8003225EE /* RJAudioGlobalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */; };
 		BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869F724CEBEDC00520011 /* AppDelegate.m */; };
 		BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FD24CEBEDC00520011 /* ViewController.m */; };
 		BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD869FF24CEBEDC00520011 /* Main.storyboard */; };
@@ -57,6 +58,8 @@
 		BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJCMTimeTestViewController.m; sourceTree = "<group>"; };
 		BF6C598724CFD08200C591BA /* RJPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJPerson.h; sourceTree = "<group>"; };
 		BF6C598824CFD08200C591BA /* RJPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJPerson.m; sourceTree = "<group>"; };
+		BF8E860A24D8FDA8003225EE /* RJAudioGlobalConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioGlobalConst.h; sourceTree = "<group>"; };
+		BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioGlobalConst.m; sourceTree = "<group>"; };
 		BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RJAudioTestDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD869F624CEBEDC00520011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFD869F724CEBEDC00520011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				BF1D666924D7A81700FE9720 /* RJAudioConst.h */,
+				BF8E860A24D8FDA8003225EE /* RJAudioGlobalConst.h */,
+				BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */,
 				BF42674D24D2B45800611045 /* RJAudioPlayerViewController.h */,
 				BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */,
 				BFFEAD8B24D80EC10089A462 /* RJAudioPlayerController.h */,
@@ -347,6 +352,7 @@
 				BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */,
 				BFFEAD8D24D80EC10089A462 /* RJAudioPlayerController.m in Sources */,
 				BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */,
+				BF8E860C24D8FDA8003225EE /* RJAudioGlobalConst.m in Sources */,
 				BFD86A0924CEBEDD00520011 /* main.m in Sources */,
 				BFF3E84424D40ECF00CBA623 /* RJSliderView.m in Sources */,
 				BFD86A2D24CEBF1900520011 /* RJAudioTestViewController.m in Sources */,

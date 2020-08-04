@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, RJAudioPlayerPlaybackState) {
+    RJAudioPlayerPlaybackStateUnknow = 0,   // <#mark#>
+    RJAudioPlayerPlaybackStatePlaying,
+    RJAudioPlayerPlaybackStatePaused,
+    RJAudioPlayerPlaybackStatePlayFailed,
+    RJAudioPlayerPlaybackStatePlayStopped
+};
+
 @class RJAudioPlayer;
 
 @protocol RJAudioPlayerDelegate <NSObject>
@@ -67,6 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSTimeInterval totalTime;
 /// 时间观察队列，只能是串行队列，如果是并发队列，可能会造成未知问题。 为Null，则使用主队列
 @property (nonatomic, strong, nullable) dispatch_queue_t timeObserverQueue;
+/// 播放状态
+@property (nonatomic, assign) RJAudioPlayerPlaybackState playbackState;
 
 
 /// 构造方法

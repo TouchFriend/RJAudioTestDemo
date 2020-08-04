@@ -110,6 +110,7 @@
     }
     
     [self.player play]; // 播放
+    self.playbackState = RJAudioPlayerPlaybackStatePlaying;
     // 标记为正在播放
     _playing = YES;
 }
@@ -120,6 +121,7 @@
     }
     
     [self.player pause];
+    self.playbackState = RJAudioPlayerPlaybackStatePaused;
     _playing = NO;
     if ([self.delegate respondsToSelector:@selector(audioPlayer:didPausedPlayWithURL:)]) {
         [self.delegate audioPlayer:self didPausedPlayWithURL:self.url];
@@ -132,6 +134,7 @@
     }
     
     [self.player play];
+    self.playbackState = RJAudioPlayerPlaybackStatePlaying;
     _playing = YES;
     if ([self.delegate respondsToSelector:@selector(audioPlayer:didResumedPlayWithURL:)]) {
         [self.delegate audioPlayer:self didResumedPlayWithURL:self.url];
@@ -141,6 +144,7 @@
 - (void)stop {
     [self.player pause];
     [self.player replaceCurrentItemWithPlayerItem:nil];
+    self.playbackState = RJAudioPlayerPlaybackStatePlayStopped;
     
     if (_playing) {
         _playing = NO;
@@ -181,6 +185,7 @@
 #pragma mark - Target Methods
 
 - (void)didPlayeToEndTime {
+    self.playbackState = RJAudioPlayerPlaybackStatePlayFailed;
     if ([self.delegate respondsToSelector:@selector(audioPlayer:didPlayeToEndTimeWithURL:)]) {
         [self.delegate audioPlayer:self didPlayeToEndTimeWithURL:self.url];
     }

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 播放器
 @property (nonatomic, strong) RJAudioPlayer *currentPlayer;
 /// 控制view
-@property (nonatomic, strong) RJAudioPlayerControlView *controlView;
+@property (nonatomic, strong, readonly) RJAudioPlayerControlView *controlView;
 
 + (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
 
