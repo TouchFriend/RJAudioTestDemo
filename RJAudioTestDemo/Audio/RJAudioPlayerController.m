@@ -76,11 +76,15 @@
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player didPlayeToEndTimeWithURL:(NSURL *)url {
-    
+    if (self.playOrder == RJAudioPlayOrderSingleCircle) {
+        [self play];
+        return;
+    }
+    [self playNextSong];
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player failedToPlayToEndTimeWithURL:(NSURL *)url error:(NSError *)error {
-    
+    NSLog(@"播放出错, %@ error:%@", url, error);
 }
 
 #pragma mark - RJAudioPlayerControlViewDelegate Methods
@@ -111,7 +115,7 @@
 }
 
 - (void)controlViewDidClickPlayOrderButton:(RJAudioPlayerControlView *)controlView playOrder:(RJAudioPlayOrder)playOrder {
-    
+    self.playOrder = playOrder;
 }
 
 - (void)controlViewDidClickPlayMenuButton:(RJAudioPlayerControlView *)controlView {
@@ -145,18 +149,31 @@
     }
     
     RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
-    [self.controlView showTitle:item.title albumURL:item.albumIconURL];
     [self.currentPlayer playWithURL:item.assertURL];
+    [self.controlView showTitle:item.title albumURL:item.albumIconURL];
 }
 
 - (void)playNextSong {
     if (self.audioAsserts.count == 0) {
         return;
     }
-    
     NSInteger count = self.audioAsserts.count;
-    _currentPlayIndex = MAX((self.currentPlayIndex + 1) % count, 0);
+#warning 暂时这样实现随机播放
+    if (self.playOrder == RJAudioPlayOrderRandom) {
+        _currentPlayIndex = [self randomPlayIndex:count current:_currentPlayIndex];
+    } else {
+        _currentPlayIndex = MAX((self.currentPlayIndex + 1) % count, 0);
+    }
+    
     [self playWithIndex:_currentPlayIndex];
+}
+
+- (NSUInteger)randomPlayIndex:(NSUInteger)count current:(NSInteger)current {
+    NSInteger newIndex = current;
+    while (newIndex == current) {
+        newIndex = arc4random_uniform(count);
+    }
+    return newIndex;
 }
 
 - (void)playPreviousSong {
@@ -165,7 +182,12 @@
     }
     
     NSInteger count = self.audioAsserts.count;
-    _currentPlayIndex = MAX((self.currentPlayIndex - 1) % count, 0);
+    if (self.playOrder == RJAudioPlayOrderRandom) {
+        _currentPlayIndex = [self randomPlayIndex:count current:_currentPlayIndex];
+    } else {
+        _currentPlayIndex = MAX((self.currentPlayIndex - 1  + count) % count, 0);
+    }
+    
     [self playWithIndex:_currentPlayIndex];
 }
 

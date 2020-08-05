@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		BF6C598924CFD08200C591BA /* RJPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6C598824CFD08200C591BA /* RJPerson.m */; };
 		BF8E860C24D8FDA8003225EE /* RJAudioGlobalConst.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */; };
 		BF8E861224D95F80003225EE /* RJAudioAssertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E861124D95F80003225EE /* RJAudioAssertItem.m */; };
+		BFCB891A24DA45BF00D9C3F6 /* 偏爱.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BFCB891924DA45BF00D9C3F6 /* 偏爱.mp4 */; };
 		BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869F724CEBEDC00520011 /* AppDelegate.m */; };
 		BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD869FD24CEBEDC00520011 /* ViewController.m */; };
 		BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD869FF24CEBEDC00520011 /* Main.storyboard */; };
@@ -75,6 +76,7 @@
 		BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioGlobalConst.m; sourceTree = "<group>"; };
 		BF8E861024D95F80003225EE /* RJAudioAssertItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioAssertItem.h; sourceTree = "<group>"; };
 		BF8E861124D95F80003225EE /* RJAudioAssertItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioAssertItem.m; sourceTree = "<group>"; };
+		BFCB891924DA45BF00D9C3F6 /* 偏爱.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "偏爱.mp4"; sourceTree = "<group>"; };
 		BFD869F324CEBEDC00520011 /* RJAudioTestDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RJAudioTestDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD869F624CEBEDC00520011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFD869F724CEBEDC00520011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -149,7 +151,6 @@
 				7715F3DC6D5B0DAD20B0A4A7 /* Pods-RJAudioTestDemoUITests.debug.xcconfig */,
 				6680220492AC9EE72A723B03 /* Pods-RJAudioTestDemoUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -193,6 +194,7 @@
 		BF42675024D2C47800611045 /* mp3 */ = {
 			isa = PBXGroup;
 			children = (
+				BFCB891924DA45BF00D9C3F6 /* 偏爱.mp4 */,
 				BF42675324D2C7C600611045 /* 蒲公英的约定.mp3 */,
 			);
 			path = mp3;
@@ -366,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD86A0624CEBEDD00520011 /* LaunchScreen.storyboard in Resources */,
+				BFCB891A24DA45BF00D9C3F6 /* 偏爱.mp4 in Resources */,
 				BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */,
 				BFD86A0124CEBEDC00520011 /* Main.storyboard in Resources */,
 				BF42675424D2C7C600611045 /* 蒲公英的约定.mp3 in Resources */,

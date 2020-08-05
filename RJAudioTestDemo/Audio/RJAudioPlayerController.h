@@ -26,12 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 当前播放索引，默认为0
 @property (nonatomic, assign, readonly) NSInteger currentPlayIndex;
+/// 播放顺序
+@property (nonatomic, assign) RJAudioPlayOrder playOrder;
 
 
 
 + (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
 
 - (instancetype)initWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
+
+- (void)play;
 
 - (void)playNextSong;
 
