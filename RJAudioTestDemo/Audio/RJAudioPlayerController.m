@@ -7,6 +7,7 @@
 //
 
 #import "RJAudioPlayerController.h"
+#import "RJAudioRemoteControlHelper.h"
 
 @interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate> {
     RJAudioPlayerControlView *_controlView;
@@ -57,6 +58,7 @@
 
 - (void)audioPlayer:(RJAudioPlayer *)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total {
     [self.controlView currentTime:current totalTime:total];
+    [RJAudioRemoteControlHelper setupLockScreenMediaInfo:self];
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player beginPlayWithURL:(NSURL *)url {
@@ -142,6 +144,14 @@
 }
 
 #pragma mark - Public Methods
+
+- (RJAudioAssertItem *)currentAssertItem {
+    if (self.audioAsserts.count == 0) {
+        return nil;
+    }
+    
+    return self.audioAsserts[_currentPlayIndex];
+}
 
 - (void)play {
     if (self.audioAsserts.count == 0) {

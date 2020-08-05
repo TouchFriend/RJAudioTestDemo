@@ -10,6 +10,7 @@
 		0AA06870B51E5B6FD7DE8BCC /* Pods_RJAudioTestDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908C12889AD5A045ED8102B2 /* Pods_RJAudioTestDemoTests.framework */; };
 		42D47EBC6FC792B49907DF5E /* Pods_RJAudioTestDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91E021E3C7C978DEB15ECB3 /* Pods_RJAudioTestDemo.framework */; };
 		657EA06184068AF547F42BED /* Pods_RJAudioTestDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CECB3DE2EC88909C3578909 /* Pods_RJAudioTestDemoUITests.framework */; };
+		BF3FBF6724DAAB970014E592 /* RJAudioRemoteControlHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */; };
 		BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674B24D2B44100611045 /* RJAudioPlayer.m */; };
 		BF42674F24D2B45800611045 /* RJAudioPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */; };
 		BF42675424D2C7C600611045 /* 蒲公英的约定.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF42675324D2C7C600611045 /* 蒲公英的约定.mp3 */; };
@@ -61,6 +62,8 @@
 		908C12889AD5A045ED8102B2 /* Pods_RJAudioTestDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RJAudioTestDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91E021E3C7C978DEB15ECB3 /* Pods_RJAudioTestDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RJAudioTestDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1D666924D7A81700FE9720 /* RJAudioConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioConst.h; sourceTree = "<group>"; };
+		BF3FBF6524DAAB970014E592 /* RJAudioRemoteControlHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioRemoteControlHelper.h; sourceTree = "<group>"; };
+		BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioRemoteControlHelper.m; sourceTree = "<group>"; };
 		BF42674A24D2B44100611045 /* RJAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayer.h; sourceTree = "<group>"; };
 		BF42674B24D2B44100611045 /* RJAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioPlayer.m; sourceTree = "<group>"; };
 		BF42674D24D2B45800611045 /* RJAudioPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayerViewController.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				BFF3E84324D40ECF00CBA623 /* RJSliderView.m */,
 				BF8E861024D95F80003225EE /* RJAudioAssertItem.h */,
 				BF8E861124D95F80003225EE /* RJAudioAssertItem.m */,
+				BF3FBF6524DAAB970014E592 /* RJAudioRemoteControlHelper.h */,
+				BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF3FBF6724DAAB970014E592 /* RJAudioRemoteControlHelper.m in Sources */,
 				BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */,
 				BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */,
 				BF42674F24D2B45800611045 /* RJAudioPlayerViewController.m in Sources */,

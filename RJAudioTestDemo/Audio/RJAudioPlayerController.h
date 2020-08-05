@@ -30,10 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RJAudioPlayOrder playOrder;
 
 
-
 + (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
 
 - (instancetype)initWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
+
+- (RJAudioAssertItem *)currentAssertItem;
 
 - (void)play;
 

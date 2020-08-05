@@ -11,6 +11,8 @@
 
 @interface RJAudioPlayer ()
 
+/// url资源
+@property (nonatomic, strong) AVURLAsset *urlAsset;
 /// 播放器模型
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 /// 播放器
@@ -86,7 +88,8 @@
         return;
     }
     
-    self.playerItem = [AVPlayerItem playerItemWithURL:self.url];
+    self.urlAsset = [AVURLAsset URLAssetWithURL:self.url options:nil];
+    self.playerItem = [AVPlayerItem playerItemWithAsset:self.urlAsset];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     
     [self addNotificationObserver];
