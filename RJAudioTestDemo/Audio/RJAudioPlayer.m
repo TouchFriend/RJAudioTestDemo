@@ -46,6 +46,7 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     self = [self init];
     if (self) {
         _url = url;
+        _shouldAutoPlay = YES;
     }
     return self;
 }
@@ -67,17 +68,85 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
 #pragma mark - Public Methods
 
 - (void)playWithURL:(NSURL *)url {
-    [self stop];
+    if (self.player) {
+        [self stop];
+    }
     _url = url;
-    [self play];
+    [self prepareToPlay];
 }
 
-- (void)play {
-    [self stop];
+- (void)prepareToPlay {
     if (!self.url || self.url.absoluteString.length == 0) {
         return;
     }
     
+    _isPreparedToPlay = YES;
+    [self initializePlayer];
+    
+    if (self.shouldAutoPlay) {
+        [self play]; // 自动播放
+    }
+    self.loadState = RJAudioPlayerLoadStatePrepare;
+}
+
+- (void)play {
+    if (!_isPreparedToPlay) {
+        [self prepareToPlay];
+    } else {
+        [self.player play]; // 播放
+        // 标记为正在播放
+        _playing = YES;
+        self.playbackState = RJAudioPlayerPlaybackStatePlaying;
+    }
+}
+
+- (void)pause {
+    [self.player pause];
+    _playing = NO;
+    self.playbackState = RJAudioPlayerPlaybackStatePaused;
+    [_playerItem cancelPendingSeeks];
+    [_urlAsset cancelLoading];
+}
+
+- (void)stop {
+    [self removeItemObserving];
+    self.playbackState = RJAudioPlayerPlaybackStatePlayStopped;
+    self.loadState = RJAudioPlayerLoadStateUnknow;
+    if (self.player.rate != 0) {
+        [self.player pause];
+    }
+    [_playerItem cancelPendingSeeks];
+    [_urlAsset cancelLoading];
+    if (self.timeObserver) {
+        [self.player removeTimeObserver:self.timeObserver];
+        self.timeObserver = nil;
+    }
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+    _playing = NO;
+    _isPreparedToPlay = NO;
+    _urlAsset = nil;
+    _playerItem = nil;
+    _player = nil;
+    _bufferTime = 0;
+}
+
+- (void)replay {
+    __weak typeof(self) weakSelf = self;
+    [self seekToTime:0 completionHandler:^(BOOL finished) {
+        if (finished) {
+            [weakSelf play];
+        }
+    }];
+}
+
+- (void)seekToTime:(NSTimeInterval)time completionHandler:(void (^)(BOOL finished))completionHandler {
+    CMTime seekTime = CMTimeMake(time, 1);
+    [self.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:completionHandler];
+}
+
+#pragma mark - Private Methods
+
+- (void)initializePlayer {
     // 设置后台播放
     NSError *categoryError = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&categoryError];
@@ -95,13 +164,14 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     
     self.urlAsset = [AVURLAsset URLAssetWithURL:self.url options:nil];
     self.playerItem = [AVPlayerItem playerItemWithAsset:self.urlAsset];
+    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    
     if (@available(iOS 10.0, *)) {
         self.playerItem.preferredForwardBufferDuration = 5.0; // 缓存几秒开始播放
     }
     self.playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = NO; // 停止时不允许加载
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     
-    [self addItemObserving];
+    [self addItemObserving]; // 监听值改变
     __weak typeof(self) weakSelf = self;
     // 播放进度改变回调
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
@@ -116,77 +186,17 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
         }
         
     }];
-    
-    if ([self.delegate respondsToSelector:@selector(audioPlayer:beginPlayWithURL:)]) {
-        [self.delegate audioPlayer:self beginPlayWithURL:self.url];
-    }
-    
-    [self.player play]; // 播放
-    self.playbackState = RJAudioPlayerPlaybackStatePlaying;
-    // 标记为正在播放
-    _playing = YES;
 }
-
-- (void)pause {
-    if (!_playing) {
-        return;
-    }
-    
-    [self.player pause];
-    self.playbackState = RJAudioPlayerPlaybackStatePaused;
-    _playing = NO;
-    if ([self.delegate respondsToSelector:@selector(audioPlayer:didPausedPlayWithURL:)]) {
-        [self.delegate audioPlayer:self didPausedPlayWithURL:self.url];
-    }
-}
-
-- (void)resume {
-    if (_playing) {
-        return;
-    }
-    
-    [self.player play];
-    self.playbackState = RJAudioPlayerPlaybackStatePlaying;
-    _playing = YES;
-    if ([self.delegate respondsToSelector:@selector(audioPlayer:didResumedPlayWithURL:)]) {
-        [self.delegate audioPlayer:self didResumedPlayWithURL:self.url];
-    }
-}
-
-- (void)stop {
-    [self.player pause];
-    [self.player replaceCurrentItemWithPlayerItem:nil];
-    self.playbackState = RJAudioPlayerPlaybackStatePlayStopped;
-    
-    if (_playing) {
-        _playing = NO;
-        if ([self.delegate respondsToSelector:@selector(audioPlayer:didStopedPlayWithURL:)]) {
-            [self.delegate audioPlayer:self didStopedPlayWithURL:self.url];
-        }
-    }
-    
-    [self removeItemObserving];
-    self.urlAsset = nil;
-    self.playerItem = nil;
-    
-    if (self.timeObserver) {
-        [self.player removeTimeObserver:self.timeObserver];
-        self.timeObserver = nil;
-    }
-    
-}
-
-- (void)seekToTime:(NSTimeInterval)time completionHandler:(void (^)(BOOL finished))completionHandler {
-    CMTime seekTime = CMTimeMake(time, 1);
-    [self.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:completionHandler];
-}
-
-#pragma mark - Private Methods
 
 - (void)addItemObserving {
     [_playerItem addObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey options:NSKeyValueObservingOptionNew context:nil];
     [self addNotificationObserver];
     
+}
+
+- (void)removeItemObserving {
+    [_playerItem removeObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey];
+    [self removeNotificationObserver];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -228,9 +238,7 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     return 0;
 }
 
-- (void)removeItemObserving {
-    [self removeNotificationObserver];
-}
+
 
 - (void)addNotificationObserver {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -288,5 +296,18 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     return time;
 }
 
+- (void)setPlaybackState:(RJAudioPlayerPlaybackState)playbackState {
+    _playbackState = playbackState;
+    if ([self.delegate respondsToSelector:@selector(audioPlayer:forURL:playStateChanged:)]) {
+        [self.delegate audioPlayer:self forURL:self.url playStateChanged:playbackState];
+    }
+}
+
+- (void)setLoadState:(RJAudioPlayerLoadState)loadState {
+    _loadState = loadState;
+    if ([self.delegate respondsToSelector:@selector(audioPlayer:forURL:loadStateChanged:)]) {
+        [self.delegate audioPlayer:self forURL:self.url loadStateChanged:loadState];
+    }
+}
 
 @end

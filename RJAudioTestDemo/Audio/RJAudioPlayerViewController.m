@@ -65,7 +65,7 @@
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
     [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
         NSLog(@"播放音频");
-        [weakSelf.audioPlayerController.currentPlayer resume];
+        [weakSelf.audioPlayerController.currentPlayer play];
         return MPRemoteCommandHandlerStatusSuccess;
     }];
     
@@ -114,7 +114,7 @@
         if ([player isPlaying]) {
             [player pause];
         } else {
-            [player resume];
+            [player play];
         }
         [weakSelf.audioPlayerController playPreviousSong];
         return MPRemoteCommandHandlerStatusSuccess;

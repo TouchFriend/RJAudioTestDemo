@@ -9,11 +9,19 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, RJAudioPlayerPlaybackState) {
-    RJAudioPlayerPlaybackStateUnknow = 0,   // <#mark#>
-    RJAudioPlayerPlaybackStatePlaying,
-    RJAudioPlayerPlaybackStatePaused,
-    RJAudioPlayerPlaybackStatePlayFailed,
-    RJAudioPlayerPlaybackStatePlayStopped
+    RJAudioPlayerPlaybackStateUnknow = 0,       // 未知
+    RJAudioPlayerPlaybackStatePlaying,          // 正在播放
+    RJAudioPlayerPlaybackStatePaused,           // 暂停
+    RJAudioPlayerPlaybackStatePlayFailed,       // 播放失败
+    RJAudioPlayerPlaybackStatePlayStopped       // 停止
+};
+
+typedef NS_ENUM(NSUInteger, RJAudioPlayerLoadState) {
+    RJAudioPlayerLoadStateUnknow = 0,           // 未知
+    RJAudioPlayerLoadStatePrepare,              // 准备
+    RJAudioPlayerLoadStatePlayable,             // 可播放
+    RJAudioPlayerLoadStatePlayThroughOK,        // 在这个状态会自动开始播放
+    RJAudioPlayerLoadStateStalled               // 在这个状态会自动暂停播放
 };
 
 @class RJAudioPlayer;
@@ -31,25 +39,17 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerPlaybackState) {
 /// @param bufferTime 缓存时间
 - (void)audioPlayer:(RJAudioPlayer *_Nonnull)player bufferTimeDidChange:(NSTimeInterval)bufferTime;
 
-/// 开始播放
+/// 播放状态改变
 /// @param player 播放器
 /// @param url 播放地址
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player beginPlayWithURL:(NSURL *_Nonnull)url;
+/// @param state 播放状态
+- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player forURL:(NSURL *_Nonnull)url playStateChanged:(RJAudioPlayerPlaybackState)state;
 
-/// 暂停播放
+/// 加载状态改变
 /// @param player 播放器
 /// @param url 播放地址
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player didPausedPlayWithURL:(NSURL *_Nonnull)url;
-
-/// 恢复播放
-/// @param player 播放器
-/// @param url 播放地址
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player didResumedPlayWithURL:(NSURL *_Nonnull)url;
-
-/// 停止播放
-/// @param player 播放器
-/// @param url 播放地址
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player didStopedPlayWithURL:(NSURL *_Nonnull)url;
+/// @param loadState 加载状态
+- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player forURL:(NSURL *_Nonnull)url loadStateChanged:(RJAudioPlayerLoadState)loadState;
 
 /// 播放到末尾
 /// @param player 播放器
@@ -74,6 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <RJAudioPlayerDelegate> delegate;
 /// 播放地址
 @property (nonatomic, strong, readonly, nullable) NSURL *url;
+/// 是否准备好可以播放
+@property (nonatomic, assign, readonly) BOOL isPreparedToPlay;
+/// 是否允许自动播放，默认YES
+@property (nonatomic, assign) BOOL shouldAutoPlay;
+
 /// 是否正在播放
 @property (nonatomic, assign, readonly, getter=isPlaying) BOOL playing;
 /// 当前时间
@@ -86,6 +91,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) dispatch_queue_t timeObserverQueue;
 /// 播放状态
 @property (nonatomic, assign) RJAudioPlayerPlaybackState playbackState;
+/// 加载状态
+@property (nonatomic, assign) RJAudioPlayerLoadState loadState;
 
 
 /// 构造方法
@@ -109,11 +116,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 暂停播放
 - (void)pause;
 
-/// 恢复播放
-- (void)resume;
-
 /// 停止播放
 - (void)stop;
+
+/// 重头开始播放
+- (void)replay;
 
 /// 从指定时间播放
 /// @param time 时间

@@ -65,16 +65,27 @@
     [self.controlView changeBufferTime:bufferTime];
 }
 
-- (void)audioPlayer:(RJAudioPlayer *)player beginPlayWithURL:(NSURL *)url {
-    [self.controlView play];
-}
-
-- (void)audioPlayer:(RJAudioPlayer *)player didPausedPlayWithURL:(NSURL *)url {
-    [self.controlView pause];
-}
-
-- (void)audioPlayer:(RJAudioPlayer *)player didResumedPlayWithURL:(NSURL *)url {
-    [self.controlView play];
+- (void)audioPlayer:(RJAudioPlayer *)player forURL:(NSURL *)url playStateChanged:(RJAudioPlayerPlaybackState)state {
+    switch (state) {
+        case RJAudioPlayerPlaybackStatePlaying:
+        {
+            [self.controlView play];
+        }
+            break;
+        case RJAudioPlayerPlaybackStatePaused:
+        {
+            [self.controlView pause];
+        }
+            break;
+        case RJAudioPlayerPlaybackStatePlayStopped:
+        {
+            [self.controlView pause];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player didStopedPlayWithURL:(NSURL *)url {
@@ -97,12 +108,7 @@
 
 - (void)controlView:(RJAudioPlayerControlView *)controlView didClickPlayOrPauseButton:(BOOL)isPlay {
     if (isPlay) {
-        if (self.currentPlayer.playbackState == RJAudioPlayerPlaybackStatePaused) {
-            [self.currentPlayer resume];
-        } else {
-            [self play];
-        }
-        
+        [self play];
     } else {
         [self.currentPlayer pause];
     }
