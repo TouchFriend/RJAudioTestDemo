@@ -279,13 +279,17 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 }
 
 - (void)play {
-    self.playOrPauseBtn.selected = YES;
-    [self beginRotationAnimation];
+    if (!self.playOrPauseBtn.selected) {
+        self.playOrPauseBtn.selected = YES;
+        [self beginRotationAnimation];
+    }
 }
 
 - (void)pause {
-    self.playOrPauseBtn.selected = NO;
-    [self stopRotationAnimation];
+    if (self.playOrPauseBtn.selected) {
+        self.playOrPauseBtn.selected = NO;
+        [self stopRotationAnimation];
+    }
 }
 
 #pragma mark - Target Methods

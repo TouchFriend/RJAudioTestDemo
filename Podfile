@@ -6,6 +6,7 @@ target 'RJAudioTestDemo' do
   use_frameworks!
   
   pod 'SDWebImage'
+  pod 'AFNetworking/Reachability'
 
   # Pods for RJAudioTestDemo
 

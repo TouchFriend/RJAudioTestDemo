@@ -32,12 +32,12 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerLoadState) {
 /// @param player 播放器
 /// @param current 当前播放时间
 /// @param total 全部播放时间
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total;
+- (void)audioPlayerPlayTimeChanged:(RJAudioPlayer *_Nonnull)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total;
 
 /// 缓存时间改变
 /// @param player 播放器
 /// @param bufferTime 缓存时间
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player bufferTimeDidChange:(NSTimeInterval)bufferTime;
+- (void)audioPlayerBufferTimeDidChanged:(RJAudioPlayer *_Nonnull)player bufferTime:(NSTimeInterval)bufferTime;
 
 /// 播放状态改变
 /// @param player 播放器
@@ -51,6 +51,11 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerLoadState) {
 /// @param loadState 加载状态
 - (void)audioPlayer:(RJAudioPlayer *_Nonnull)player forURL:(NSURL *_Nonnull)url loadStateChanged:(RJAudioPlayerLoadState)loadState;
 
+/// 准备好播放
+/// @param player 播放器
+/// @param url 播放地址
+- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player readyToPlayForURL:(NSURL *_Nonnull)url;
+
 /// 播放到末尾
 /// @param player 播放器
 /// @param url 播放地址
@@ -60,9 +65,7 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerLoadState) {
 /// @param player 播放器
 /// @param url 播放地址
 /// @param error 错误
-- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player failedToPlayToEndTimeWithURL:(NSURL *_Nonnull)url error:(NSError *_Nonnull)error;
-
-
+- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player playFailedForURL:(NSURL *_Nonnull)url error:(NSError *_Nonnull)error;
 
 @end
 
@@ -87,6 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSTimeInterval totalTime;
 /// 缓存时间
 @property (nonatomic, assign, readonly) NSTimeInterval bufferTime;
+/// 播放器的seek time
+@property (nonatomic, assign) NSTimeInterval seekTime;
+
 /// 时间观察队列，只能是串行队列，如果是并发队列，可能会造成未知问题。 为Null，则使用主队列
 @property (nonatomic, strong, nullable) dispatch_queue_t timeObserverQueue;
 /// 播放状态
@@ -109,6 +115,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 播放音频
 /// @param url 播放地址
 - (void)playWithURL:(NSURL *)url;
+
+/// 准备播放
+- (void)prepareToPlay;
 
 /// 播放
 - (void)play;

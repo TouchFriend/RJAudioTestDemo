@@ -56,12 +56,12 @@
 
 #pragma mark - RJAudioPlayerDelegate Methods
 
-- (void)audioPlayer:(RJAudioPlayer *)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total {
+- (void)audioPlayerPlayTimeChanged:(RJAudioPlayer *)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total {
     [self.controlView changeCurrentTime:current totalTime:total];
     [RJAudioRemoteControlHelper setupLockScreenMediaInfo:self];
 }
 
-- (void)audioPlayer:(RJAudioPlayer *)player bufferTimeDidChange:(NSTimeInterval)bufferTime {
+- (void)audioPlayerBufferTimeDidChanged:(RJAudioPlayer *)player bufferTime:(NSTimeInterval)bufferTime {
     [self.controlView changeBufferTime:bufferTime];
 }
 
@@ -100,7 +100,7 @@
     [self playNextSong];
 }
 
-- (void)audioPlayer:(RJAudioPlayer *)player failedToPlayToEndTimeWithURL:(NSURL *)url error:(NSError *)error {
+- (void)audioPlayer:(RJAudioPlayer *)player playFailedForURL:(NSURL *)url error:(NSError *)error {
     NSLog(@"播放出错, %@ error:%@", url, error);
 }
 
@@ -108,7 +108,11 @@
 
 - (void)controlView:(RJAudioPlayerControlView *)controlView didClickPlayOrPauseButton:(BOOL)isPlay {
     if (isPlay) {
-        [self.currentPlayer play];
+        if (!self.currentPlayer.url) {
+            [self play];
+        } else {
+            [self.currentPlayer play];
+        }
     } else {
         [self.currentPlayer pause];
     }
