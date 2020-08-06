@@ -241,6 +241,18 @@ static CGFloat const RJProgressHeight = 1.0;
     self.sliderProgressView.frame = sliderProgressViewFrame;
 }
 
+- (void)setBufferValue:(CGFloat)bufferValue {
+    if (isnan(bufferValue)) {
+        return;
+    }
+    
+    bufferValue = MIN(MAX(bufferValue, 0), 1.0);
+    _bufferValue = bufferValue;
+    CGRect bufferProgressViewFrame = self.bufferProgressView.frame;
+    bufferProgressViewFrame.size.width = CGRectGetWidth(self.bgProgressView.frame) * bufferValue;
+    self.bufferProgressView.frame = bufferProgressViewFrame;
+}
+
 - (void)setMaximumTrackTintColor:(UIColor *)maximumTrackTintColor {
     _maximumTrackTintColor = maximumTrackTintColor;
     self.bgProgressView.backgroundColor = maximumTrackTintColor;

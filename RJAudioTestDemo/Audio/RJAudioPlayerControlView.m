@@ -227,15 +227,15 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 #pragma mark - Public Methdos
 
-- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
-    [self showTitle:title albumURL:albumURL placeholder:nil currentTime:currentTime totalTime:totalTime];
-}
-
 - (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL {
-    [self showTitle:title albumURL:albumURL currentTime:0 totalTime:0];
+    [self showTitle:title albumURL:albumURL currentTime:0 totalTime:0 bufferTime:0];
 }
 
-- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL placeholder:(UIImage *)placeholder currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime bufferTime:(NSTimeInterval)bufferTime {
+    [self showTitle:title albumURL:albumURL placeholder:nil currentTime:currentTime totalTime:totalTime bufferTime:bufferTime];
+}
+
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL placeholder:(UIImage *)placeholder currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime bufferTime:(NSTimeInterval)bufferTime {
     self.titleLbl.text = title;
     placeholder = placeholder ? : [UIImage imageNamed:RJAlbumDefaultPlaceholderName];
     if (!albumURL || albumURL.absoluteString.length == 0) {
@@ -248,10 +248,11 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
             [self.albumIconImageV sd_setImageWithURL:albumURL placeholderImage:placeholder];
         }
     }
-    [self currentTime:currentTime totalTime:totalTime];
+    [self changeCurrentTime:currentTime totalTime:totalTime];
+    [self changeBufferTime:bufferTime];
 }
 
-- (void)currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
+- (void)changeCurrentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime {
     if (self.sliderView.isdragging) {
         return;
     }
@@ -267,6 +268,14 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     self.currentTimeLbl.text = [self convertTimeFormate:currentTime];
     self.totalTimeLbl.text = [self convertTimeFormate:totalTime];
     self.sliderView.value = totalTime == 0 ? 0 : currentTime * 1.0 / totalTime;
+}
+
+- (void)changeBufferTime:(NSTimeInterval)bufferTime {
+    if (isnan(bufferTime) || bufferTime < 0) {
+        return;
+    }
+    
+    self.sliderView.bufferValue = _totalTime == 0 ? 0 : bufferTime / self.totalTime;
 }
 
 - (void)play {
@@ -388,6 +397,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
         _sliderView.sliderRadius = _sliderView.sliderHeight * 0.5;
         _sliderView.thumSize = CGSizeMake(9.0, 9.0);
         _sliderView.delegate = self;
+        _sliderView.bufferTrackTintColor = [UIColor redColor];
     }
     return _sliderView;
 }

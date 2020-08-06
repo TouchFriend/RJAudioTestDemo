@@ -48,12 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL;
 
-- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime;
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime bufferTime:(NSTimeInterval)bufferTime;
 
-- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL placeholder:(UIImage *_Nullable)placeholder currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime;
+- (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL placeholder:(UIImage * _Nullable)placeholder currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime bufferTime:(NSTimeInterval)bufferTime;
 
-- (void)currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime;
-- (void)bufferTime:(NSTimeInterval)bufferTime;
+- (void)changeCurrentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime;
+
+- (void)changeBufferTime:(NSTimeInterval)bufferTime;
 
 - (void)play;
 

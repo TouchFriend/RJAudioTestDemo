@@ -57,8 +57,12 @@
 #pragma mark - RJAudioPlayerDelegate Methods
 
 - (void)audioPlayer:(RJAudioPlayer *)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total {
-    [self.controlView currentTime:current totalTime:total];
+    [self.controlView changeCurrentTime:current totalTime:total];
     [RJAudioRemoteControlHelper setupLockScreenMediaInfo:self];
+}
+
+- (void)audioPlayer:(RJAudioPlayer *)player bufferTimeDidChange:(NSTimeInterval)bufferTime {
+    [self.controlView changeBufferTime:bufferTime];
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player beginPlayWithURL:(NSURL *)url {

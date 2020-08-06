@@ -26,6 +26,11 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerPlaybackState) {
 /// @param total 全部播放时间
 - (void)audioPlayer:(RJAudioPlayer *_Nonnull)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total;
 
+/// 缓存时间改变
+/// @param player 播放器
+/// @param bufferTime 缓存时间
+- (void)audioPlayer:(RJAudioPlayer *_Nonnull)player bufferTimeDidChange:(NSTimeInterval)bufferTime;
+
 /// 开始播放
 /// @param player 播放器
 /// @param url 播放地址
@@ -57,6 +62,8 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerPlaybackState) {
 /// @param error 错误
 - (void)audioPlayer:(RJAudioPlayer *_Nonnull)player failedToPlayToEndTimeWithURL:(NSURL *_Nonnull)url error:(NSError *_Nonnull)error;
 
+
+
 @end
 
 NS_ASSUME_NONNULL_BEGIN
@@ -73,6 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 /// 全部时间
 @property (nonatomic, assign, readonly) NSTimeInterval totalTime;
+/// 缓存时间
+@property (nonatomic, assign, readonly) NSTimeInterval bufferTime;
 /// 时间观察队列，只能是串行队列，如果是并发队列，可能会造成未知问题。 为Null，则使用主队列
 @property (nonatomic, strong, nullable) dispatch_queue_t timeObserverQueue;
 /// 播放状态

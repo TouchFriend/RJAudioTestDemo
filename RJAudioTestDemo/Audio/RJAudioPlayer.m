@@ -9,6 +9,11 @@
 #import "RJAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
+static NSString * const RJPlayerItemObserverStatusKey = @"status";
+static NSString * const RJPlayerItemObserverLoadedTimeRangesKey = @"loadedTimeRanges";
+static NSString * const RJPlayerItemObserverPlaybackBufferEmptyKey = @"playbackBufferEmpty";
+static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playbackLikelyToKeepUp";
+
 @interface RJAudioPlayer ()
 
 /// url资源
@@ -90,9 +95,13 @@
     
     self.urlAsset = [AVURLAsset URLAssetWithURL:self.url options:nil];
     self.playerItem = [AVPlayerItem playerItemWithAsset:self.urlAsset];
+    if (@available(iOS 10.0, *)) {
+        self.playerItem.preferredForwardBufferDuration = 5.0; // 缓存几秒开始播放
+    }
+    self.playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = NO; // 停止时不允许加载
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     
-    [self addNotificationObserver];
+    [self addItemObserving];
     __weak typeof(self) weakSelf = self;
     // 播放进度改变回调
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
@@ -156,7 +165,8 @@
         }
     }
     
-    [self removeNotificationObserver];
+    [self removeItemObserving];
+    self.urlAsset = nil;
     self.playerItem = nil;
     
     if (self.timeObserver) {
@@ -173,6 +183,55 @@
 
 #pragma mark - Private Methods
 
+- (void)addItemObserving {
+    [_playerItem addObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey options:NSKeyValueObservingOptionNew context:nil];
+    [self addNotificationObserver];
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([keyPath isEqualToString:RJPlayerItemObserverLoadedTimeRangesKey]) {
+            NSTimeInterval bufferTime = [self availableBufferDuration];
+            NSLog(@"缓存时间改变:%lf", bufferTime);
+            self->_bufferTime = bufferTime;
+            if ([self.delegate respondsToSelector:@selector(audioPlayer:bufferTimeDidChange:)]) {
+                [self.delegate audioPlayer:self bufferTimeDidChange:bufferTime];
+            }
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
+    });
+}
+
+
+/// 计算缓冲进度
+- (NSTimeInterval)availableBufferDuration{
+    NSArray<NSValue *> *loadedTimeRanges = _playerItem.loadedTimeRanges;
+    CMTime currentTime = [_player currentTime];
+    BOOL foundRange = NO;
+    CMTimeRange timeRange = {0};
+    if (loadedTimeRanges.count > 0) {
+        timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];
+        if (CMTimeRangeContainsTime(timeRange, currentTime)) {
+            foundRange = YES;
+        }
+    }
+    
+    if (foundRange) {
+        CMTime maxTime = CMTimeRangeGetEnd(timeRange);
+        NSTimeInterval playableDuration = CMTimeGetSeconds(maxTime);
+        if (playableDuration > 0) {
+            return playableDuration;
+        }
+    }
+    return 0;
+}
+
+- (void)removeItemObserving {
+    [self removeNotificationObserver];
+}
+
 - (void)addNotificationObserver {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didPlayeToEndTime) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
@@ -184,6 +243,7 @@
     [center removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
     [center removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.playerItem];
 }
+
 
 #pragma mark - Target Methods
 
