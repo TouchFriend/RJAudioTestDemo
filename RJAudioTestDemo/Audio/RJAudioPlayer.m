@@ -62,7 +62,6 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
 
 - (void)dealloc {
     [self stop];
-    self.player = nil;
 }
 
 #pragma mark - Public Methods
@@ -109,7 +108,7 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
 }
 
 - (void)stop {
-    [self removeItemObserving];
+    [self removeItemObserving]; // 移除监听
     self.playbackState = RJAudioPlayerPlaybackStatePlayStopped;
     self.loadState = RJAudioPlayerLoadStateUnknow;
     if (self.player.rate != 0) {
@@ -117,10 +116,7 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     }
     [_playerItem cancelPendingSeeks];
     [_urlAsset cancelLoading];
-    if (self.timeObserver) {
-        [self.player removeTimeObserver:self.timeObserver];
-        self.timeObserver = nil;
-    }
+    
     [self.player replaceCurrentItemWithPlayerItem:nil];
     _playing = NO;
     _isPreparedToPlay = NO;
@@ -172,31 +168,46 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
     self.playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = NO; // 停止时不允许加载
     
     [self addItemObserving]; // 监听值改变
+}
+
+- (void)addItemObserving {
+    [_playerItem addObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey options:NSKeyValueObservingOptionNew context:nil];
+    
     __weak typeof(self) weakSelf = self;
     // 播放进度改变回调
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
     self.timeObserver = [self.player addPeriodicTimeObserverForInterval:interval queue:self.timeObserverQueue usingBlock:^(CMTime time) {
         
-        NSTimeInterval currentTime = CMTimeGetSeconds(time);
-        NSTimeInterval totalTime = weakSelf.totalTime;
-        if (!isnan(currentTime)&& !isnan(totalTime)) {
+        NSArray<NSValue *> *loadedTimeRanges = weakSelf.playerItem.loadedTimeRanges;
+        if (loadedTimeRanges.count > 0) {
             if ([weakSelf.delegate respondsToSelector:@selector(audioPlayer:currentTime:totalTime:)]) {
-                [weakSelf.delegate audioPlayer:weakSelf currentTime:currentTime totalTime:totalTime];
+                [weakSelf.delegate audioPlayer:weakSelf currentTime:weakSelf.currentTime totalTime:weakSelf.totalTime];
             }
         }
-        
     }];
-}
-
-- (void)addItemObserving {
-    [_playerItem addObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey options:NSKeyValueObservingOptionNew context:nil];
     [self addNotificationObserver];
     
 }
 
 - (void)removeItemObserving {
     [_playerItem removeObserver:self forKeyPath:RJPlayerItemObserverLoadedTimeRangesKey];
+    if (self.timeObserver) {
+        [self.player removeTimeObserver:self.timeObserver];
+        self.timeObserver = nil;
+    }
     [self removeNotificationObserver];
+}
+
+- (void)addNotificationObserver {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(didPlayeToEndTime) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [center addObserver:self selector:@selector(failedToPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.playerItem];
+}
+
+- (void)removeNotificationObserver {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [center removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.playerItem];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -240,23 +251,13 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
 
 
 
-- (void)addNotificationObserver {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(didPlayeToEndTime) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-    [center addObserver:self selector:@selector(failedToPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.playerItem];
-}
 
-- (void)removeNotificationObserver {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-    [center removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.playerItem];
-}
 
 
 #pragma mark - Target Methods
 
 - (void)didPlayeToEndTime {
-    self.playbackState = RJAudioPlayerPlaybackStatePlayFailed;
+    self.playbackState = RJAudioPlayerPlaybackStatePlayStopped;
     if ([self.delegate respondsToSelector:@selector(audioPlayer:didPlayeToEndTimeWithURL:)]) {
         [self.delegate audioPlayer:self didPlayeToEndTimeWithURL:self.url];
     }

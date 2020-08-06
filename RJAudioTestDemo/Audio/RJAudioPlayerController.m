@@ -108,7 +108,7 @@
 
 - (void)controlView:(RJAudioPlayerControlView *)controlView didClickPlayOrPauseButton:(BOOL)isPlay {
     if (isPlay) {
-        [self play];
+        [self.currentPlayer play];
     } else {
         [self.currentPlayer pause];
     }
