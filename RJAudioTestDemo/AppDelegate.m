@@ -10,6 +10,7 @@
 #import "RJAudioTestViewController.h"
 #import "RJAudioPlayerViewController.h"
 #import "RJCMTimeTestViewController.h"
+#import "RJAnchorPointViewController.h"
 
 @interface AppDelegate ()
 

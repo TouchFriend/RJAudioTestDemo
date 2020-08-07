@@ -13,7 +13,8 @@
 #import "RJLargeTapRangeButton.h"
 
 @interface RJAudioTestViewController ()
-
+/// <#Desription#>
+@property (nonatomic, weak) UIView *testView;
 @end
 
 @implementation RJAudioTestViewController
@@ -23,14 +24,28 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIView *testView = [[UIView alloc] init];
-    [self.view addSubview:testView];
-//    testView.frame = CGRectMake(100, 100, 50, 50);
-//    testView.center = CGPointMake(200, 100);
-    testView.bounds= CGRectMake(0, 0, 100, 100);
-    testView.frame = CGRectMake(0, 0, 10, 10);
-    testView.backgroundColor = [UIColor redColor];
+//    UIView *testView1 = [[UIView alloc] init];
+//    [self.view addSubview:testView1];
+//    testView1.bounds= CGRectMake(0, 0, 100, 100);
+//    testView1.center = CGPointMake(100, 100);
+//    testView1.backgroundColor = [UIColor orangeColor];
     
+    UIView *testView = [[UIView alloc] init];
+    self.testView = testView;
+    [self.view addSubview:testView];
+    testView.bounds= CGRectMake(0, 0, 100, 100);
+    testView.center = CGPointMake(100, 100);
+    testView.backgroundColor = [UIColor redColor];
+    NSLog(@"frame:%@--bounds:%@--center:%@", NSStringFromCGRect(testView.frame), NSStringFromCGRect(testView.bounds), NSStringFromCGPoint(testView.center));
+    NSLog(@"layer---frame:%@--bounds:%@--position:%@", NSStringFromCGRect(testView.layer.frame), NSStringFromCGRect(testView.layer.bounds), NSStringFromCGPoint(testView.layer.position));
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UIView *testView = self.testView;
+    testView.bounds = CGRectMake(20, 20, 100, 100);
+    NSLog(@"frame:%@--bounds:%@--center:%@", NSStringFromCGRect(testView.frame), NSStringFromCGRect(testView.bounds), NSStringFromCGPoint(testView.center));
+    NSLog(@"layer---frame:%@--bounds:%@--position:%@", NSStringFromCGRect(testView.layer.frame), NSStringFromCGRect(testView.layer.bounds), NSStringFromCGPoint(testView.layer.position));
 }
 
 - (void)addButtonTapRange {

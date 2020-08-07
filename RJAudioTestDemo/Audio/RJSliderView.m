@@ -65,29 +65,29 @@ static CGFloat const RJProgressHeight = 1.0;
     viewY = 0;
     viewWidth = maxWidth;
     viewHeight = self.sliderHeight;
-    self.bgProgressView.frame = CGRectMake(0, 0, viewWidth, viewHeight);
-    self.bgProgressView.center = CGPointMake(self.bgProgressView.center.x, maxHeight * 0.5);
+    self.bgProgressView.bounds = CGRectMake(0, 0, viewWidth, viewHeight);
+    self.bgProgressView.center = CGPointMake(maxWidth * 0.5, maxHeight * 0.5);
     
     viewX = 0;
     viewY = 0;
     viewWidth = self.thumSize.width;
     viewHeight = self.thumSize.height;
-    self.sliderBtn.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+    self.sliderBtn.bounds = CGRectMake(0, 0, viewWidth, viewHeight);
     self.sliderBtn.center = CGPointMake(CGRectGetWidth(self.bgProgressView.frame) * self.value, maxHeight * 0.5);
     
     viewX = 0;
     viewY = 0;
     viewWidth = self.sliderBtn.center.x;
     viewHeight = self.sliderHeight;
-    self.sliderProgressView.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+    self.sliderProgressView.bounds = CGRectMake(0, 0, viewWidth, viewHeight);
     self.sliderProgressView.center = CGPointMake(self.sliderProgressView.center.x, maxHeight * 0.5);
     
     viewX = 0;
     viewY = 0;
     viewWidth = maxWidth * self.bufferValue;
     viewHeight = self.sliderHeight;
-    self.bufferProgressView.frame = CGRectMake(0, 0, viewWidth, viewHeight);
-    self.bufferProgressView.center = CGPointMake(self.bufferProgressView.center.x, maxHeight * 0.5);
+    self.bufferProgressView.bounds = CGRectMake(0, 0, viewWidth, viewHeight);
+    self.bufferProgressView.center = CGPointMake(viewWidth * 0.5, maxHeight * 0.5);
 }
 
 #pragma mark - Add Subviews
@@ -161,7 +161,7 @@ static CGFloat const RJProgressHeight = 1.0;
         [self.delegate sliderTouchBegan:self value:self.value];
     }
     [UIView animateWithDuration:0.3 animations:^{
-        btn.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        btn.transform = CGAffineTransformMakeScale(2.0, 2.0);
     }];
 }
 
