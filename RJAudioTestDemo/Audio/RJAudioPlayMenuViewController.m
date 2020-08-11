@@ -156,6 +156,7 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     RJAudioAssertItem *item = self.audioAsserts[indexPath.row];
     RJAudioMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:RJCellIdentifier forIndexPath:indexPath];
     [cell changeTitle:item.title];
+    cell.isPlay = self.isPlay;
     return cell;
 }
 
@@ -219,7 +220,7 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     switch (self.playOrder) {
         case RJAudioPlayOrderSequence:
         {
-            title = @"顺序播放(30首)";
+            title = [NSString stringWithFormat:@"顺序播放(%ld首)", self.audioAsserts.count];
         }
             break;
         case RJAudioPlayOrderSingleCircle:
@@ -229,7 +230,7 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
             break;
         case RJAudioPlayOrderRandom:
         {
-            title = @"随机播放(30首)";
+            title = [NSString stringWithFormat:@"随机播放(%ld首)", self.audioAsserts.count];
         }
             break;
             
@@ -259,6 +260,11 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 
 - (void)changePlayIndex:(NSInteger)playIndex {
     self.playIndex = playIndex;
+}
+
+- (void)changePlayState:(BOOL)isPlay {
+    self.isPlay = isPlay;
+
 }
 
 #pragma mark - Property Methods

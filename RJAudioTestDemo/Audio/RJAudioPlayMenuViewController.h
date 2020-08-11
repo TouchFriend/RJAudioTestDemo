@@ -33,11 +33,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<RJAudioAssertItem *> *audioAsserts;
 /// 播放索引
 @property (nonatomic, assign) NSUInteger playIndex;
+/// <#Desription#>
+@property (nonatomic, assign) BOOL isPlay;
+
 
 
 - (void)changeAudioAsserts:(NSArray<RJAudioAssertItem *> *)audioAsserts playIndex:(NSInteger)playIndex;
 
 - (void)changePlayIndex:(NSInteger)playIndex;
+
+- (void)changePlayState:(BOOL)isPlay;
 
 @end
 

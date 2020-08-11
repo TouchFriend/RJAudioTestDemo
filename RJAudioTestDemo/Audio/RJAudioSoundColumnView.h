@@ -1,5 +1,5 @@
 //
-//  RJAudioMenuTableViewCell.h
+//  RJAudioSoundColumnView.h
 //  RJAudioTestDemo
 //
 //  Created by TouchWorld on 2020/8/11.
@@ -10,13 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RJAudioMenuTableViewCell : UITableViewCell
+@interface RJAudioSoundColumnView : UIView
 
-/// <#Desription#>
-@property (nonatomic, assign) BOOL isPlay;
+- (void)beginAnimation;
 
-
-- (void)changeTitle:(NSString *)title;
+- (void)removeAnimation;
 
 @end
 

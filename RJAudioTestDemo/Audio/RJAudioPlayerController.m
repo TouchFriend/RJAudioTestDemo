@@ -71,25 +71,34 @@
 }
 
 - (void)audioPlayer:(RJAudioPlayer *)player forURL:(NSURL *)url playStateChanged:(RJAudioPlayerPlaybackState)state {
+    BOOL isPlay = NO;
     switch (state) {
         case RJAudioPlayerPlaybackStatePlaying:
         {
             [self.controlView play];
+            isPlay = YES;
         }
             break;
         case RJAudioPlayerPlaybackStatePaused:
         {
             [self.controlView pause];
+            isPlay = NO;
         }
             break;
         case RJAudioPlayerPlaybackStatePlayStopped:
         {
             [self.controlView pause];
+            isPlay = NO;
+            
         }
             break;
             
         default:
             break;
+    }
+    
+    if (self.playMenuViewController) {
+        [self.playMenuViewController changePlayState:isPlay];
     }
 }
 

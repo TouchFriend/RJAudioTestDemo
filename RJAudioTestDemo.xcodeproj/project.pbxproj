@@ -10,6 +10,7 @@
 		0AA06870B51E5B6FD7DE8BCC /* Pods_RJAudioTestDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908C12889AD5A045ED8102B2 /* Pods_RJAudioTestDemoTests.framework */; };
 		42D47EBC6FC792B49907DF5E /* Pods_RJAudioTestDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91E021E3C7C978DEB15ECB3 /* Pods_RJAudioTestDemo.framework */; };
 		657EA06184068AF547F42BED /* Pods_RJAudioTestDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CECB3DE2EC88909C3578909 /* Pods_RJAudioTestDemoUITests.framework */; };
+		BF150A4924E28B5700065072 /* RJAudioSoundColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF150A4824E28B5700065072 /* RJAudioSoundColumnView.m */; };
 		BF3FBF6724DAAB970014E592 /* RJAudioRemoteControlHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */; };
 		BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674B24D2B44100611045 /* RJAudioPlayer.m */; };
 		BF42674F24D2B45800611045 /* RJAudioPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674E24D2B45800611045 /* RJAudioPlayerViewController.m */; };
@@ -65,6 +66,8 @@
 		8CECB3DE2EC88909C3578909 /* Pods_RJAudioTestDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RJAudioTestDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		908C12889AD5A045ED8102B2 /* Pods_RJAudioTestDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RJAudioTestDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91E021E3C7C978DEB15ECB3 /* Pods_RJAudioTestDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RJAudioTestDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF150A4724E28B5700065072 /* RJAudioSoundColumnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioSoundColumnView.h; sourceTree = "<group>"; };
+		BF150A4824E28B5700065072 /* RJAudioSoundColumnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioSoundColumnView.m; sourceTree = "<group>"; };
 		BF1D666924D7A81700FE9720 /* RJAudioConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioConst.h; sourceTree = "<group>"; };
 		BF3FBF6524DAAB970014E592 /* RJAudioRemoteControlHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioRemoteControlHelper.h; sourceTree = "<group>"; };
 		BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioRemoteControlHelper.m; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				BF7D469B24E22EAE0004B320 /* RJAudioPlayMenuViewController.m */,
 				BF7D46A024E247950004B320 /* RJAudioMenuTableViewCell.h */,
 				BF7D46A124E247950004B320 /* RJAudioMenuTableViewCell.m */,
+				BF150A4724E28B5700065072 /* RJAudioSoundColumnView.h */,
+				BF150A4824E28B5700065072 /* RJAudioSoundColumnView.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */,
 				BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */,
 				BFB84EB924DD308F007D10D4 /* RJAnchorPointViewController.m in Sources */,
+				BF150A4924E28B5700065072 /* RJAudioSoundColumnView.m in Sources */,
 				BF8E861224D95F80003225EE /* RJAudioAssertItem.m in Sources */,
 				BFFEAD8D24D80EC10089A462 /* RJAudioPlayerController.m in Sources */,
 				BFD869F824CEBEDC00520011 /* AppDelegate.m in Sources */,
