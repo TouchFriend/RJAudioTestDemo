@@ -314,6 +314,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 }
 
 - (void)downloadBtnClick:(UIButton *)btn {
+    btn.selected = !btn.selected;
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickDownloadButton:)]) {
         [self.delegate controlViewDidClickDownloadButton:self];
     }
@@ -321,7 +322,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 - (void)playOrderBtnClick:(UIButton *)btn {
     self.playOrder = (self.playOrder + 1) % 3;
-    NSArray *orderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"blue"], [UIImage imageNamed:@"green"]];
+    NSArray *orderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"audio_play_single_circle"], [UIImage imageNamed:@"audio_play_random_circle"]];
     [self.playOrderBtn setImage:orderImages[self.playOrder] forState:UIControlStateNormal];
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickPlayOrderButton:playOrder:)]) {
         [self.delegate controlViewDidClickPlayOrderButton:self playOrder:self.playOrder];
@@ -490,6 +491,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     if (!_downloadBtn) {
         _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_downloadBtn setImage:[UIImage imageNamed:@"audio_download_icon"] forState:UIControlStateNormal];
+        [_downloadBtn setImage:[UIImage imageNamed:@"audio_download_completed_icon"] forState:UIControlStateSelected];
         [_downloadBtn addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadBtn;
