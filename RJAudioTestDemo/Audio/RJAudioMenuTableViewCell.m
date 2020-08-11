@@ -46,9 +46,15 @@
     [self.contentView addSubview:titleLbl];
     self.titleLbl = titleLbl;
     titleLbl.font = [UIFont systemFontOfSize:16.0];
-    titleLbl.text = @"晴天，雨天";
+    titleLbl.text = @"";
     titleLbl.textColor = [UIColor colorWithRed:51.0 / 255.0 green:51.0 / 255.0 blue:51.0 / 255.0 alpha:1.0];
     titleLbl.textAlignment = NSTextAlignmentLeft;
+}
+
+#pragma mark - Public Methods
+
+- (void)changeTitle:(NSString *)title {
+    self.titleLbl.text = title;
 }
 
 @end

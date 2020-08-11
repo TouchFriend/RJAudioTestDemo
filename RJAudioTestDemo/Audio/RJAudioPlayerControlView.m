@@ -44,8 +44,10 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 @property (nonatomic, strong) UIButton *playOrderBtn;
 /// 播放菜单按钮
 @property (nonatomic, strong) UIButton *playMenuBtn;
-/// <#Desription#>
+/// 专辑旋转动画
 @property (nonatomic, strong) CABasicAnimation *rotationAnimation;
+/// 播放顺序图片
+@property (nonatomic, strong) NSArray *playOrderImages;
 
 
 @end
@@ -326,7 +328,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 - (void)playOrderBtnClick:(UIButton *)btn {
     self.playOrder = (self.playOrder + 1) % 3;
-    NSArray *orderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"audio_play_single_circle"], [UIImage imageNamed:@"audio_play_random_circle"]];
+    NSArray *orderImages = self.playOrderImages;
     [self.playOrderBtn setImage:orderImages[self.playOrder] forState:UIControlStateNormal];
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickPlayOrderButton:playOrder:)]) {
         [self.delegate controlViewDidClickPlayOrderButton:self playOrder:self.playOrder];
@@ -533,5 +535,18 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     return _rotationAnimation;
 }
 
+- (NSArray *)playOrderImages {
+    if (!_playOrderImages) {
+        _playOrderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"audio_play_single_circle"], [UIImage imageNamed:@"audio_play_random_circle"]];
+    }
+    
+    return _playOrderImages;
+}
+
+- (void)setPlayOrder:(RJAudioPlayOrder)playOrder {
+    _playOrder = playOrder;
+    NSArray *orderImages = self.playOrderImages;
+    [self.playOrderBtn setImage:orderImages[playOrder] forState:UIControlStateNormal];
+}
 
 @end

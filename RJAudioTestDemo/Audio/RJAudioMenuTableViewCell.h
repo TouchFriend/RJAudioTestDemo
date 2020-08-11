@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioMenuTableViewCell : UITableViewCell
 
+- (void)changeTitle:(NSString *)title;
+
 @end
 
 NS_ASSUME_NONNULL_END

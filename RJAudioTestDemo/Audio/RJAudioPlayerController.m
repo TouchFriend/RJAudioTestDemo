@@ -10,9 +10,12 @@
 #import "RJAudioRemoteControlHelper.h"
 #import "RJAudioPlayMenuViewController.h"
 
-@interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate> {
+@interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate, RJAudioPlayMenuProtocol> {
     RJAudioPlayerControlView *_controlView;
 }
+
+/// <#Desription#>
+@property (nonatomic, weak) RJAudioPlayMenuViewController *playMenuViewController;
 
 @end
 
@@ -139,7 +142,10 @@
 - (void)controlViewDidClickPlayMenuButton:(RJAudioPlayerControlView *)controlView {
     RJAudioPlayMenuViewController *vc = [[RJAudioPlayMenuViewController alloc] init];
     vc.playOrder = self.playOrder;
+    vc.delegate = self;
     vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [vc changeAudioAsserts:self.audioAsserts playIndex:self.currentPlayIndex];
+    self.playMenuViewController = vc;
     [self.viewController presentViewController:vc animated:YES completion:nil];
 }
 
@@ -160,6 +166,16 @@
         completionHandler(finished);
         NSLog(@"滑动条拖拽:%@", finished ? @"成功" : @"失败");
     }];
+}
+
+#pragma mark - RJAudioPlayMenuProtocol Methods
+
+- (void)playOrderDidChange:(RJAudioPlayOrder)playOrder {
+    self.playOrder = playOrder;
+}
+
+- (void)playIndexDidChange:(NSInteger)playIndex {
+    [self playWithIndex:playIndex];
 }
 
 #pragma mark - Public Methods
@@ -226,6 +242,9 @@
     }
     
     _currentPlayIndex = index;
+    if (self.playMenuViewController) {
+        [self.playMenuViewController changePlayIndex:_currentPlayIndex];
+    }
     [self play];
 }
 
@@ -260,6 +279,11 @@
 - (void)setCurrentPlayer:(RJAudioPlayer *)currentPlayer {
     _currentPlayer = currentPlayer;
     currentPlayer.delegate = self;
+}
+
+- (void)setPlayOrder:(RJAudioPlayOrder)playOrder {
+    _playOrder = playOrder;
+    self.controlView.playOrder = playOrder;
 }
 
 @end

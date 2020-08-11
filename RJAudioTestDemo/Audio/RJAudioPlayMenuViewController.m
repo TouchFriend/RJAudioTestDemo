@@ -10,6 +10,7 @@
 #import "RJAudioConst.h"
 #import "UIView+RJAudioFrame.h"
 #import "RJAudioMenuTableViewCell.h"
+#import "RJAudioAssertItem.h"
 
 static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 
@@ -42,6 +43,11 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupInit];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self changePlayIndex:_playIndex];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -143,18 +149,25 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.audioAsserts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RJAudioAssertItem *item = self.audioAsserts[indexPath.row];
     RJAudioMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:RJCellIdentifier forIndexPath:indexPath];
+    [cell changeTitle:item.title];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    NSInteger newPlayIndex = indexPath.row;
+    if (newPlayIndex != self.playIndex) {
+        if ([self.delegate respondsToSelector:@selector(playIndexDidChange:)]) {
+            [self.delegate playIndexDidChange:newPlayIndex];
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -189,6 +202,9 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 - (void)playOrderBtnClick:(UIButton *)circleBtn {
     self.playOrder = (self.playOrder + 1) % 3;
     [self updatePlayOrderAppearance];
+    if ([self.delegate respondsToSelector:@selector(playOrderDidChange:)]) {
+        [self.delegate playOrderDidChange:self.playOrder];
+    }
 }
 
 - (void)closeBtnClick {
@@ -234,6 +250,17 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     return self.playOrderBtn.rj_width = titleWidth + [self.playOrderBtn imageForState:UIControlStateNormal].size.width + self.playOrderBtn.titleEdgeInsets.left + 20.0;;
 }
 
+#pragma mark - Public Methods
+
+- (void)changeAudioAsserts:(NSArray<RJAudioAssertItem *> *)audioAsserts playIndex:(NSInteger)playIndex {
+    self.audioAsserts = audioAsserts;
+    [self changePlayIndex:playIndex];
+}
+
+- (void)changePlayIndex:(NSInteger)playIndex {
+    self.playIndex = playIndex;
+}
+
 #pragma mark - Property Methods
 
 - (NSArray<UIImage *> *)playOrderImages {
@@ -242,6 +269,16 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     }
     
     return _playOrderImages;
+}
+
+- (void)setAudioAsserts:(NSArray<RJAudioAssertItem *> *)audioAsserts {
+    _audioAsserts = audioAsserts;
+    [self.menuTableView reloadData];
+}
+
+- (void)setPlayIndex:(NSUInteger)playIndex {
+    _playIndex = playIndex;
+    [self.menuTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:playIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 }
 
 @end
