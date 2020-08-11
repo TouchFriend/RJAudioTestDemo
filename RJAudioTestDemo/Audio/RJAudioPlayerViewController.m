@@ -91,7 +91,7 @@
     RJAudioAssertItem *item2 = [[RJAudioAssertItem alloc] init];
     item2.title = @"偏爱";
     item2.assertURL = proxyURL;
-    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
+    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] viewController:self containerView:self.view];
     self.audioPlayerController.audioAsserts = @[item, item2];
     [self.audioPlayerController play];
 }

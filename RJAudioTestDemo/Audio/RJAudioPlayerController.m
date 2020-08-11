@@ -8,6 +8,7 @@
 
 #import "RJAudioPlayerController.h"
 #import "RJAudioRemoteControlHelper.h"
+#import "RJAudioPlayMenuViewController.h"
 
 @interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate> {
     RJAudioPlayerControlView *_controlView;
@@ -19,15 +20,16 @@
 
 #pragma mark - Init Methods
 
-+ (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView {
-    return [[self alloc] initWithPlayer:player containerView:containerView];
++ (instancetype)playerWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView {
+    return [[self alloc] initWithPlayer:player viewController:viewController containerView:containerView];
 }
 
-- (instancetype)initWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView {
+- (instancetype)initWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView {
     self = [self init];
     if (self) {
         self.currentPlayer = player;
         self.containerView = containerView;
+        self.viewController = viewController;
     }
     return self;
 }
@@ -135,7 +137,10 @@
 }
 
 - (void)controlViewDidClickPlayMenuButton:(RJAudioPlayerControlView *)controlView {
-    
+    RJAudioPlayMenuViewController *vc = [[RJAudioPlayMenuViewController alloc] init];
+    vc.playOrder = self.playOrder;
+    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self.viewController presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)controlView:(RJAudioPlayerControlView *)controlView sliderDidTapped:(CGFloat)value {
@@ -222,6 +227,10 @@
     
     _currentPlayIndex = index;
     [self play];
+}
+
+- (void)stop {
+    [self.currentPlayer stop];
 }
 
 #pragma mark - Property Methods

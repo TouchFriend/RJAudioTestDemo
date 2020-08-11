@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioPlayerController : NSObject
 
+/// modal播放列表的控制器
+@property (nonatomic, weak) UIViewController *viewController;
 /// 容器view
 @property (nonatomic, strong) UIView *containerView;
 /// 播放器
@@ -30,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RJAudioPlayOrder playOrder;
 
 
-+ (instancetype)playerWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
++ (instancetype)playerWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView;
 
-- (instancetype)initWithPlayer:(RJAudioPlayer *)player containerView:(UIView *)containerView;
+- (instancetype)initWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView;
 
 - (RJAudioAssertItem *)currentAssertItem;
 

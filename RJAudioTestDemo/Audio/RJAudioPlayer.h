@@ -28,6 +28,8 @@ typedef NS_ENUM(NSUInteger, RJAudioPlayerLoadState) {
 
 @protocol RJAudioPlayerDelegate <NSObject>
 
+@optional
+
 /// 当前播放进度。如果timeObserverQueue不为NULL，可能不在主队列回调。
 /// @param player 播放器
 /// @param current 当前播放时间

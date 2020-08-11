@@ -209,6 +209,10 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 /// 恢复图层动画
 /// @param layer 图层
 - (void)resumeLayer:(CALayer *)layer {
+    if (layer.speed == 1.0) {
+        return;
+    }
+    
     CFTimeInterval pausedTime = layer.timeOffset;
     layer.speed = 1.0;
     layer.timeOffset = 0.0;
@@ -220,6 +224,10 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 /// 暂停图层动画
 /// @param layer 图层
 - (void)pauseLayer:(CALayer *)layer {
+    if (layer.speed == 0.0) {
+        return;
+    }
+    
     CFTimeInterval pausedTime = [self.albumIconImageV.layer convertTime:CACurrentMediaTime() fromLayer:nil];
     layer.speed = 0.0;
     layer.timeOffset = pausedTime;
@@ -279,17 +287,13 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 }
 
 - (void)play {
-    if (!self.playOrPauseBtn.selected) {
-        self.playOrPauseBtn.selected = YES;
-        [self beginRotationAnimation];
-    }
+    self.playOrPauseBtn.selected = YES;
+    [self beginRotationAnimation];
 }
 
 - (void)pause {
-    if (self.playOrPauseBtn.selected) {
-        self.playOrPauseBtn.selected = NO;
-        [self stopRotationAnimation];
-    }
+    self.playOrPauseBtn.selected = NO;
+    [self stopRotationAnimation];
 }
 
 #pragma mark - Target Methods
