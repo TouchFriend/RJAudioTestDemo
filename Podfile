@@ -7,6 +7,7 @@ target 'RJAudioTestDemo' do
   
   pod 'SDWebImage'
   pod 'AFNetworking/Reachability'
+  pod 'KTVHTTPCache'
 
   # Pods for RJAudioTestDemo
 

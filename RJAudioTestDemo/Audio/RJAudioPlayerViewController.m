@@ -11,6 +11,7 @@
 #import "RJAudioAssertItem.h"
 #import <AVKit/AVKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <KTVHTTPCache/KTVHTTPCache.h>
 
 @interface RJAudioPlayerViewController ()
 
@@ -39,25 +40,60 @@
 #pragma mark - Setup Init
 
 - (void)setupInit {
+    [self setupHTTPCache];
     [self setupPlayerController];
     [self setupLockScreenRemoteControl];
 
 }
 
+- (void)setupHTTPCache {
+    [KTVHTTPCache logSetConsoleLogEnable:YES]; // 控制器输出日志
+    [KTVHTTPCache logSetRecordLogEnable:NO]; // 记录日志到文件中
+    NSError *startError = nil;
+    [KTVHTTPCache proxyStart:&startError];
+    if (startError) {
+        NSLog(@"proxy start error:%@.", startError);
+    } else {
+        NSLog(@"proxy start success.");
+    }
+    
+    [KTVHTTPCache downloadSetTimeoutInterval:30.0];
+    NSLog(@"cacheMaxCacheLength:%lld", [KTVHTTPCache cacheMaxCacheLength]);
+    NSLog(@"cacheTotalCacheLength:%lld", [KTVHTTPCache cacheTotalCacheLength]);
+    [KTVHTTPCache encodeSetURLConverter:^NSURL *(NSURL *URL) {
+        NSLog(@"URL Filter reviced URL : %@", URL);
+        return URL;
+    }];
+    
+    [KTVHTTPCache downloadSetUnacceptableContentTypeDisposer:^BOOL(NSURL *URL, NSString *contentType) {
+        NSLog(@"Unsupport Content-Type Filter reviced URL : %@, %@", URL, contentType);
+        return NO;
+    }];
+}
+
 - (void)setupPlayerController {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"蒲公英的约定" ofType:@"mp3"];
         NSURL *url = [NSURL fileURLWithPath:path];
-        RJAudioAssertItem *item = [[RJAudioAssertItem alloc] init];
-        item.title = @"蒲公英的约定";
-        item.assertURL = url;
-        NSString *urlString = @"https://mr3.doubanio.com/f229d8a03ba08bde8969de3899f773d2/0/fm/song/p1390309_128k.mp4";
-    //    NSString *urlString = [[NSBundle mainBundle] pathForResource:@"偏爱" ofType:@"mp4"];
-        RJAudioAssertItem *item2 = [[RJAudioAssertItem alloc] init];
-        item2.title = @"偏爱";
-        item2.assertURL = [NSURL fileURLWithPath:urlString];
-        self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
-        self.audioPlayerController.audioAsserts = @[item, item2];
-        [self.audioPlayerController play];
+    RJAudioAssertItem *item = [[RJAudioAssertItem alloc] init];
+    item.title = @"蒲公英的约定";
+    item.assertURL = url;
+    NSString *urlString = @"https://mr3.doubanio.com/f229d8a03ba08bde8969de3899f773d2/0/fm/song/p1390309_128k.mp4";
+    NSURL *originalURL = [NSURL URLWithString:urlString];
+    NSURL *completedURL = [KTVHTTPCache cacheCompleteFileURLWithURL:originalURL];
+    NSURL *proxyURL = nil;
+    if (completedURL) {
+        proxyURL = completedURL;
+        NSLog(@"completedURL:%@", completedURL);
+    } else {
+        proxyURL = [KTVHTTPCache proxyURLWithOriginalURL:originalURL];
+    }
+//    NSString *urlString = [[NSBundle mainBundle] pathForResource:@"偏爱" ofType:@"mp4"];
+    RJAudioAssertItem *item2 = [[RJAudioAssertItem alloc] init];
+    item2.title = @"偏爱";
+    item2.assertURL = proxyURL;
+    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] containerView:self.view];
+    self.audioPlayerController.audioAsserts = @[item, item2];
+    [self.audioPlayerController play];
 }
 
 - (void)setupLockScreenRemoteControl {
