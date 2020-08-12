@@ -1,52 +1,32 @@
 //
-//  RJAudioSoundColumnView.m
+//  RJAudioMiniSoundColumnView.m
 //  RJAudioTestDemo
 //
-//  Created by TouchWorld on 2020/8/11.
+//  Created by TouchWorld on 2020/8/12.
 //  Copyright © 2020 RJSoft. All rights reserved.
 //
 
-#import "RJAudioSoundColumnView.h"
+#import "RJAudioMiniSoundColumnView.h"
 #import "RJAudioConst.h"
 #import "UIView+RJAudioFrame.h"
+#import "RJAudioColumnItem.h"
 
-NSString * const RJAnimationScaleYKey = @"RJAnimationScaleYKey";
-NSString * const RJItemScaleKey = @"scale";
-NSString * const RJItemAnimationFromValueKey = @"animationFromValue";
-NSString * const RJItemAnimationToValueKey = @"animationToValue";
-NSString * const RJItemAnimationDurationKey = @"animationDuration";
+static NSString * const RJAnimationScaleYKey = @"RJAnimationScaleYKey";
+static NSString * const RJItemScaleKey = @"scale";
+static NSString * const RJItemAnimationFromValueKey = @"animationFromValue";
+static NSString * const RJItemAnimationToValueKey = @"animationToValue";
+static NSString * const RJItemAnimationDurationKey = @"animationDuration";
 
-@interface _RJAudioColumnItem : NSObject
-
-/// 比例
-@property (nonatomic, strong) NSNumber *scale;
-/// 动画fromValue
-@property (nonatomic, strong) NSNumber *animationFromValue;
-/// 动画ToValue
-@property (nonatomic, strong) NSNumber *animationToValue;
-/// 动画持续时间
-@property (nonatomic, strong) NSNumber *animationDuration;
-
-
-
-@end
-
-@implementation _RJAudioColumnItem
-
-
-
-@end
-
-@interface RJAudioSoundColumnView ()
+@interface RJAudioMiniSoundColumnView ()
 
 /// <#Desription#>
 @property (nonatomic, strong) NSArray<UIView *> *soundColumns;
 /// <#Desription#>
-@property (nonatomic, strong) NSArray<_RJAudioColumnItem *> *columnItems;
+@property (nonatomic, strong) NSArray<RJAudioColumnItem *> *columnItems;
 
 @end
 
-@implementation RJAudioSoundColumnView
+@implementation RJAudioMiniSoundColumnView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -60,19 +40,25 @@ NSString * const RJItemAnimationDurationKey = @"animationDuration";
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat columnViewX = 0;
-    CGFloat columnViewXWidth = 2.0;
+    CGFloat middleCenterX = self.rj_width * 0.5;
+    CGFloat columnViewXWidth = 3.0;
     CGFloat margin = 3.0;
+    NSInteger middle = ceil(self.columnItems.count / 2.0) - 1;
     for (NSInteger i = 0; i < self.columnItems.count; i++) {
-        _RJAudioColumnItem *item = self.columnItems[i];
+        RJAudioColumnItem *item = self.columnItems[i];
+        CGFloat centerX = middleCenterX + (i - middle) * (margin + columnViewXWidth);
         NSNumber *scale = item.scale;
         UIView *columnView = self.soundColumns[i];
-        CGFloat width = i == 1 ? columnViewXWidth - 0.5 : columnViewXWidth;
         CGFloat columnViewHeight = self.rj_height * scale.floatValue;
-        columnView.frame = CGRectMake(columnViewX, self.rj_height - columnViewHeight, width, columnViewHeight);
-        columnView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-        columnViewX += columnViewXWidth + margin;
+        columnView.bounds = CGRectMake(0, 0, columnViewXWidth, columnViewHeight);
+        columnView.center = CGPointMake(centerX, self.rj_height * 0.5);
+        columnView.layer.cornerRadius = columnView.rj_width * 0.5;
+        columnView.layer.masksToBounds = YES;
     }
+}
+
+- (void)dealloc {
+  
 }
 
 #pragma mark - Setup Init
@@ -92,10 +78,15 @@ NSString * const RJItemAnimationDurationKey = @"animationDuration";
         return;;
     }
     
+    NSInteger middle = ceil(self.columnItems.count / 2.0) - 1;
     for (NSInteger i = 0; i < self.soundColumns.count; i++) {
+        if(i == middle) {
+            continue;
+        }
+        
         UIView *columnView = self.soundColumns[i];
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
-        _RJAudioColumnItem *item = self.columnItems[i];
+        RJAudioColumnItem *item = self.columnItems[i];
         animation.fromValue = item.animationFromValue;
         animation.toValue = item.animationToValue;
         animation.duration = item.animationDuration.floatValue;
@@ -128,26 +119,29 @@ NSString * const RJItemAnimationDurationKey = @"animationDuration";
     return _soundColumns;
 }
 
-- (NSArray<_RJAudioColumnItem *> *)columnItems {
+- (NSArray<RJAudioColumnItem *> *)columnItems {
     if (!_columnItems) {
         NSArray *columnValue = @[
             @{
-                RJItemScaleKey : @0.5, RJItemAnimationFromValueKey : @0.8, RJItemAnimationToValueKey : @1.2, RJItemAnimationDurationKey : @0.5
+                RJItemScaleKey : @0.4, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.7, RJItemAnimationDurationKey : @0.1
             },
             @{
-                RJItemScaleKey : @1.0, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.4, RJItemAnimationDurationKey : @0.25
+                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.4, RJItemAnimationDurationKey : @0.2
             },
             @{
-                RJItemScaleKey : @0.7, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.357, RJItemAnimationDurationKey : @0.5
+                RJItemScaleKey : @0.52, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.0, RJItemAnimationDurationKey : @0.5
             },
             @{
-                RJItemScaleKey : @0.25, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @2.8, RJItemAnimationDurationKey : @0.5
+                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.4, RJItemAnimationDurationKey : @0.2
+            },
+            @{
+                RJItemScaleKey : @0.4, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.7, RJItemAnimationDurationKey : @0.1
             }
         ];
         
         NSMutableArray *items = [NSMutableArray array];
         for (NSDictionary *dic in columnValue) {
-            _RJAudioColumnItem *item = [[_RJAudioColumnItem alloc] init];
+            RJAudioColumnItem *item = [[RJAudioColumnItem alloc] init];
             item.scale = dic[RJItemScaleKey];
             item.animationFromValue = dic[RJItemAnimationFromValueKey];
             item.animationToValue = dic[RJItemAnimationToValueKey];

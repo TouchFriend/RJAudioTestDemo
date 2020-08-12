@@ -11,6 +11,7 @@
 #import "RJAudioPlayerViewController.h"
 #import "RJCMTimeTestViewController.h"
 #import "RJAnchorPointViewController.h"
+#import "RJAudioListViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,7 +24,7 @@
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    RJAudioPlayerViewController *demoVC = [[RJAudioPlayerViewController alloc] init];
+    RJAudioListViewController *demoVC = [[RJAudioListViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoVC];
     navigationController.navigationBar.translucent = NO;
     self.window.rootViewController = navigationController;
