@@ -12,21 +12,21 @@
 #import "RJAudioConst.h"
 
 static CGFloat const RJProgressLineWidth = 3.8;
-static CGFloat const RJMiniControlViewMargin = 15.0;
+CGFloat const RJMiniControlViewMargin = 15.0;
 
 @interface RJAudioPlayerMiniControlView ()
 
-/// <#Desription#>
+/// 音柱容器
 @property (nonatomic, weak) UIView *soundColumnContainerView;
-/// <#Desription#>
+/// 迷你音柱
 @property (nonatomic, weak) RJAudioMiniSoundColumnView *miniSoundColumnView;
-/// <#Desription#>
+/// 播放或暂停按钮
 @property (nonatomic, weak) UIButton *playOrPauseBtn;
-/// <#Desription#>
+/// 关闭按钮
 @property (nonatomic, weak) UIButton *closeBtn;
 /// 上一个点
 @property (nonatomic, assign) CGPoint lastPoint;
-/// <#Desription#>
+/// 进度图层
 @property (nonatomic, weak) CAShapeLayer *progressLayer;
 
 @end

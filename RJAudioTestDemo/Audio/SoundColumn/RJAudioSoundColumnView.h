@@ -12,8 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioSoundColumnView : UIView
 
+/// 开始动画
 - (void)beginAnimation;
 
+/// 移除动画
 - (void)removeAnimation;
 
 @end

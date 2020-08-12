@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+UIKIT_EXTERN CGFloat const RJMiniControlViewMargin;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioPlayerMiniControlView : UIView
 
-/// <#Desription#>
+/// 进度
 @property (nonatomic, assign) CGFloat progress;
 
 

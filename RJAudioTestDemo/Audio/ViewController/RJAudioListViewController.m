@@ -26,15 +26,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    self.miniControlView.frame = CGRectMake(100, 100, 150, 50.0);
-    self.miniControlView.layer.cornerRadius = 25.0;
-    self.miniControlView.layer.masksToBounds = YES;
 }
 
 #pragma mark - Setup Init
@@ -42,8 +39,12 @@
 - (void)setupInit {
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIWindow *keyWindow = [UIApplication sharedApplication].windows.lastObject;
     RJAudioPlayerMiniControlView *miniControlView = [[RJAudioPlayerMiniControlView alloc] init];
-    [self.view addSubview:miniControlView];
+    [keyWindow addSubview:miniControlView];
+    miniControlView.frame = CGRectMake(RJMiniControlViewMargin, 200, 150, 50.0);
+    miniControlView.layer.cornerRadius = 25.0;
+    miniControlView.layer.masksToBounds = YES;
     self.miniControlView = miniControlView;
     
 }
