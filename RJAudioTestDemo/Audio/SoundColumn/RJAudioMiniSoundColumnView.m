@@ -19,9 +19,9 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
 
 @interface RJAudioMiniSoundColumnView ()
 
-/// <#Desription#>
+/// 音柱
 @property (nonatomic, strong) NSArray<UIView *> *soundColumns;
-/// <#Desription#>
+/// 音柱模型
 @property (nonatomic, strong) NSArray<RJAudioColumnItem *> *columnItems;
 
 @end
