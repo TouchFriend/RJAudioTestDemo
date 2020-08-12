@@ -154,6 +154,7 @@
     vc.delegate = self;
     vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [vc changeAudioAsserts:self.audioAsserts playIndex:self.currentPlayIndex];
+    [vc changePlayState:self.currentPlayer.isPlaying];
     self.playMenuViewController = vc;
     [self.viewController presentViewController:vc animated:YES completion:nil];
 }

@@ -257,14 +257,20 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
     self.audioAsserts = audioAsserts;
     [self changePlayIndex:playIndex];
 }
-
+ 
 - (void)changePlayIndex:(NSInteger)playIndex {
     self.playIndex = playIndex;
 }
 
 - (void)changePlayState:(BOOL)isPlay {
     self.isPlay = isPlay;
-
+    NSIndexPath *indexPath = [self.menuTableView indexPathForSelectedRow];
+    if (!indexPath) {
+        return;
+    }
+    
+    [self.menuTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.menuTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone]; // 重新选中行
 }
 
 #pragma mark - Property Methods
