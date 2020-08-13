@@ -33,6 +33,18 @@ CGFloat const RJMiniControlViewMargin = 15.0;
 
 @implementation RJAudioPlayerMiniControlView
 
+- (void)didMoveToWindow {
+    [super didMoveToWindow];
+    
+    if (self.window) {
+        if (self.isPlaying) {
+            [self play];
+        } else {
+            [self pause];
+        }
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -151,8 +163,8 @@ CGFloat const RJMiniControlViewMargin = 15.0;
 
 - (void)tapped:(UITapGestureRecognizer *)tapGesture {
     NSLog(@"%s", __func__);
-    if ([self.delegate respondsToSelector:@selector(controlViewDidTapped:)]) {
-        [self.delegate controlViewDidTapped:self];
+    if ([self.delegate respondsToSelector:@selector(miniControlViewDidTapped:)]) {
+        [self.delegate miniControlViewDidTapped:self];
     }
 }
 
@@ -161,11 +173,11 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     if (playOrPauseBtn.selected) {
         [self.miniSoundColumnView beginAnimation];
     } else {
-        [self.miniSoundColumnView removeAnimation];
+        [self.miniSoundColumnView stopAnimation];
     }
     
-    if ([self.delegate respondsToSelector:@selector(controlView:didClickPlayOrPauseButton:)]) {
-        [self.delegate controlView:self didClickPlayOrPauseButton:playOrPauseBtn.selected];
+    if ([self.delegate respondsToSelector:@selector(miniControlView:didClickPlayOrPauseButton:)]) {
+        [self.delegate miniControlView:self didClickPlayOrPauseButton:playOrPauseBtn.selected];
     }
 }
 
@@ -177,6 +189,12 @@ CGFloat const RJMiniControlViewMargin = 15.0;
 
 - (void)show {
     UIWindow *keyWindow = [UIApplication sharedApplication].windows.lastObject;
+    if ([keyWindow.subviews containsObject:self]) {
+        self.hidden = NO;
+        return;
+    }
+    
+    self.hidden = NO;
     [keyWindow addSubview:self];
     CGFloat height = 50.0;
     self.frame = CGRectMake(RJMiniControlViewMargin, keyWindow.rj_height - height - NAVIGATION_BAR_Max_Y - RJMiniControlViewMargin, 150, height);
@@ -188,12 +206,36 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     [self removeFromSuperview];
     
     self.playOrPauseBtn.selected = NO;
-    [self.miniSoundColumnView removeAnimation];
+    [self.miniSoundColumnView stopAnimation];
     self.progress = 0;
     
-    if ([self.delegate respondsToSelector:@selector(controlViewDidClosed:)]) {
-        [self.delegate controlViewDidClosed:self];
+    if ([self.delegate respondsToSelector:@selector(miniControlViewDidClosed:)]) {
+        [self.delegate miniControlViewDidClosed:self];
     }
+}
+
+- (void)hidden {
+    self.hidden = YES;
+}
+
+- (void)play {
+    self.isPlaying = YES;
+    if (!self.window) {
+        return;
+    }
+    
+    self.playOrPauseBtn.selected = YES;
+    [self.miniSoundColumnView beginAnimation];
+}
+
+- (void)pause {
+    self.isPlaying = NO;
+    if (!self.window) {
+        return;
+    }
+    
+    self.playOrPauseBtn.selected = NO;
+    [self.miniSoundColumnView stopAnimation];
 }
 
 #pragma mark - Property Methods

@@ -35,7 +35,7 @@
     [super prepareForReuse];
     
     self.soundColumnView.hidden = YES;
-    [self.soundColumnView removeAnimation];
+    [self.soundColumnView stopAnimation];
 }
 
 - (void)layoutSubviews {
@@ -64,7 +64,7 @@
     if (selected && self.isPlay) {
         [self.soundColumnView beginAnimation];
     } else {
-        [self.soundColumnView removeAnimation];
+        [self.soundColumnView stopAnimation];
     }
 }
 

@@ -63,6 +63,9 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     for (UIView *columnView in self.soundColumns) {
         [self addSubview:columnView];
     }
+    
+#warning 处理进入后台，再进入前台，动画停止的问题
+    
 }
 
 #pragma mark - Public Methods
@@ -85,7 +88,7 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     }
 }
 
-- (void)removeAnimation {
+- (void)stopAnimation {
     for (UIView *columnView in self.soundColumns) {
         [columnView.layer removeAnimationForKey:RJAnimationScaleYKey];
     }

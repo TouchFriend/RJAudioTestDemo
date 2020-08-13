@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)beginAnimation;
 
 /// 移除动画
-- (void)removeAnimation;
+- (void)stopAnimation;
 
 @end
 

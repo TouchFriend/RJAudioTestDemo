@@ -18,11 +18,21 @@
 /// <#Desription#>
 @property (nonatomic, strong) RJAudioPlayerController *audioPlayerController;
 
-
-
 @end
 
+
 @implementation RJAudioPlayerViewController
+
+@synthesize isPlay = _isPlay;
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.isPlay = @(YES);
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +45,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.audioPlayerController.miniControlView hidden];
+}
+
+- (void)dealloc {
+    [self.audioPlayerController.miniControlView show];
+    NSLog(@"RJAudioPlayerViewControlleri is dead");
 }
 
 #pragma mark - Setup Init
@@ -42,7 +58,6 @@
 - (void)setupInit {
     [self setupHTTPCache];
     [self setupPlayerController];
-    [self setupLockScreenRemoteControl];
 
 }
 
@@ -91,9 +106,21 @@
     RJAudioAssertItem *item2 = [[RJAudioAssertItem alloc] init];
     item2.title = @"偏爱";
     item2.assertURL = proxyURL;
-    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] viewController:self containerView:self.view];
+    
+//    self.audioPlayerController = [RJAudioPlayerController playerWithPlayer:[RJAudioPlayer player] viewController:self containerView:self.view];
+//    self.audioPlayerController.audioAsserts = @[item, item2];
+//    [self.audioPlayerController play];
+    
+    self.audioPlayerController = [RJAudioPlayerController sharedInstance];
+    self.audioPlayerController.containerView = self.view;
+    self.audioPlayerController.viewController = self;
     self.audioPlayerController.audioAsserts = @[item, item2];
-    [self.audioPlayerController play];
+    if ([self.isPlay boolValue]) {
+        [self.audioPlayerController playOrResume];
+    } else {
+        [self.audioPlayerController pause];
+    }
+    
 }
 
 - (void)setupLockScreenRemoteControl {
@@ -170,6 +197,13 @@
     //    self.player = [RJAudioPlayer playerWithURL:[NSURL fileURLWithPath:path]];
 }
 
+- (void)downloadAudio:(NSURL *)url {
+    NSLog(@"下载音频:%@", url.absoluteString);
+}
+
+- (void)setIsPlay:(NSNumber *)isPlay {
+    _isPlay = isPlay;
+}
 
 
 @end

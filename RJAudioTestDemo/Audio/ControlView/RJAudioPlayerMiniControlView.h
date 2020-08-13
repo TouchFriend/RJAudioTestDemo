@@ -16,11 +16,11 @@ UIKIT_EXTERN CGFloat const RJMiniControlViewMargin;
 
 @optional
 
-- (void)controlViewDidTapped:(RJAudioPlayerMiniControlView *_Nonnull)controlView;
+- (void)miniControlViewDidTapped:(RJAudioPlayerMiniControlView *_Nonnull)controlView;
 
-- (void)controlView:(RJAudioPlayerMiniControlView *_Nonnull)controlView didClickPlayOrPauseButton:(BOOL)isPlay;
+- (void)miniControlView:(RJAudioPlayerMiniControlView *_Nonnull)controlView didClickPlayOrPauseButton:(BOOL)isPlay;
 
-- (void)controlViewDidClosed:(RJAudioPlayerMiniControlView *_Nonnull)controlView;
+- (void)miniControlViewDidClosed:(RJAudioPlayerMiniControlView *_Nonnull)controlView;
 
 @end
 
@@ -32,10 +32,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <RJAudioPlayerMiniControlViewDelegate> delegate;
 /// 进度
 @property (nonatomic, assign) CGFloat progress;
+/// <#Desription#>
+@property (nonatomic, assign) BOOL isPlaying;
+
 
 - (void)show;
 
 - (void)dismiss;
+
+- (void)hidden;
+
+- (void)play;
+
+- (void)pause;
 
 @end
 

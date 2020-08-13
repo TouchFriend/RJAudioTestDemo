@@ -9,9 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @class RJAudioPlayerController;
+
+@class RJAudioPlayerController;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioRemoteControlHelper : NSObject
+
+/// <#Desription#>
+@property (nonatomic, weak) RJAudioPlayerController *playerController;
+
++ (instancetype)helperWithPlayer:(RJAudioPlayerController *)playerController;
+
+- (void)setupLockScreenRemoteControl;
 
 + (void)setupLockScreenMediaInfo:(RJAudioPlayerController *)playerController;
 

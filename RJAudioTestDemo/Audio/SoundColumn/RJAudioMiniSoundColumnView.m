@@ -69,13 +69,16 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     for (UIView *columnView in self.soundColumns) {
         [self addSubview:columnView];
     }
+    
+#warning 处理进入后台，再进入前台，动画停止的问题
+    
 }
 
 #pragma mark - Public Methods
 
 - (void)beginAnimation {
     if ([self.soundColumns.firstObject.layer animationForKey:RJAnimationScaleYKey]) {
-        return;;
+        return;
     }
     
     NSInteger middle = ceil(self.columnItems.count / 2.0) - 1;
@@ -96,7 +99,7 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     }
 }
 
-- (void)removeAnimation {
+- (void)stopAnimation {
     for (UIView *columnView in self.soundColumns) {
         [columnView.layer removeAnimationForKey:RJAnimationScaleYKey];
     }

@@ -9,19 +9,36 @@
 #import "RJAudioPlayerController.h"
 #import "RJAudioRemoteControlHelper.h"
 #import "RJAudioPlayMenuViewController.h"
+#import "RJAudioPlayerViewController.h"
 
-@interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate, RJAudioPlayMenuProtocol> {
+@interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate, RJAudioPlayMenuProtocol, RJAudioPlayerMiniControlViewDelegate> {
+    
     RJAudioPlayerControlView *_controlView;
+    RJAudioPlayerMiniControlView *_miniControlView;
+    
 }
 
 /// <#Desription#>
 @property (nonatomic, weak) RJAudioPlayMenuViewController *playMenuViewController;
+/// <#Desription#>
+@property (nonatomic, strong) RJAudioRemoteControlHelper *remoteControlHelper;
+
 
 @end
 
 @implementation RJAudioPlayerController
 
 #pragma mark - Init Methods
+
++ (instancetype)sharedInstance {
+    static RJAudioPlayerController *_playerController = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _playerController = [[RJAudioPlayerController alloc] initWithPlayer:[RJAudioPlayer player] viewController:nil containerView:nil];
+    });
+    
+    return _playerController;
+}
 
 + (instancetype)playerWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView {
     return [[self alloc] initWithPlayer:player viewController:viewController containerView:containerView];
@@ -33,6 +50,7 @@
         self.currentPlayer = player;
         self.containerView = containerView;
         self.viewController = viewController;
+        [self.remoteControlHelper setupLockScreenRemoteControl];
     }
     return self;
 }
@@ -76,18 +94,21 @@
         case RJAudioPlayerPlaybackStatePlaying:
         {
             [self.controlView play];
+            [self.miniControlView play];
             isPlay = YES;
         }
             break;
         case RJAudioPlayerPlaybackStatePaused:
         {
             [self.controlView pause];
+            [self.miniControlView pause];
             isPlay = NO;
         }
             break;
         case RJAudioPlayerPlaybackStatePlayStopped:
         {
             [self.controlView pause];
+            [self.miniControlView pause];
             isPlay = NO;
             
         }
@@ -145,7 +166,10 @@
 }
 
 - (void)controlViewDidClickDownloadButton:(RJAudioPlayerControlView *)controlView {
-    
+    if ([self.viewController respondsToSelector:@selector(downloadAudio:)]) {
+        RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
+        [self.viewController downloadAudio:item.assertURL];
+    }
 }
 
 - (void)controlViewDidClickPlayOrderButton:(RJAudioPlayerControlView *)controlView playOrder:(RJAudioPlayOrder)playOrder {
@@ -192,6 +216,35 @@
     [self playWithIndex:playIndex];
 }
 
+#pragma mark - RJAudioPlayerMiniControlViewDelegate Methods
+
+- (void)miniControlViewDidTapped:(RJAudioPlayerMiniControlView *)controlView {
+    Class modalClass = self.modalViewControllerClass;
+    UIViewController *rootViewController = [UIApplication sharedApplication].windows.lastObject.rootViewController;
+    UIViewController <RJAudioPlayerViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
+    modalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    if ([modalViewController respondsToSelector:@selector(setIsPlay:)]) {
+        [modalViewController setIsPlay:@(self.currentPlayer.isPlaying)];
+    }
+    [rootViewController presentViewController:modalViewController animated:YES completion:nil];
+}
+
+- (void)miniControlView:(RJAudioPlayerMiniControlView *)controlView didClickPlayOrPauseButton:(BOOL)isPlay {
+    if (isPlay) {
+        if (!self.currentPlayer.url) {
+            [self play];
+        } else {
+            [self.currentPlayer play];
+        }
+    } else {
+        [self.currentPlayer pause];
+    }
+}
+
+- (void)miniControlViewDidClosed:(RJAudioPlayerMiniControlView *)controlView {
+    [self stop];
+}
+
 #pragma mark - Public Methods
 
 - (RJAudioAssertItem *)currentAssertItem {
@@ -210,6 +263,20 @@
     RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
     [self.currentPlayer playWithURL:item.assertURL];
     [self.controlView showTitle:item.title albumURL:item.albumIconURL];
+}
+
+- (void)playOrResume {
+    if (self.audioAsserts.count == 0) {
+        return;
+    }
+    
+    if (!self.currentPlayer.isPlaying) {
+        if (!self.currentPlayer.url) {
+            [self play];
+        } else {
+            [self.currentPlayer play];
+        }
+    }
 }
 
 - (void)playNextSong {
@@ -262,8 +329,13 @@
     [self play];
 }
 
+- (void)pause {
+    [self.currentPlayer pause];
+}
+
 - (void)stop {
     [self.currentPlayer stop];
+    [self.controlView changeCurrentTime:0 totalTime:0];
 }
 
 #pragma mark - Property Methods
@@ -278,16 +350,21 @@
     [self layoutPlayerSubviews];
 }
 
-
-
-#pragma mark - Property Methods
-
 - (RJAudioPlayerControlView *)controlView {
     if (!_controlView) {
         _controlView = [[RJAudioPlayerControlView alloc] init];
         _controlView.delegate = self;
     }
     return _controlView;
+}
+
+- (RJAudioPlayerMiniControlView *)miniControlView {
+    if (!_miniControlView) {
+        _miniControlView = [[RJAudioPlayerMiniControlView alloc] init];
+        _miniControlView.delegate = self;
+    }
+    
+    return _miniControlView;
 }
 
 - (void)setCurrentPlayer:(RJAudioPlayer *)currentPlayer {
@@ -298,6 +375,22 @@
 - (void)setPlayOrder:(RJAudioPlayOrder)playOrder {
     _playOrder = playOrder;
     self.controlView.playOrder = playOrder;
+}
+
+- (RJAudioRemoteControlHelper *)remoteControlHelper {
+    if (!_remoteControlHelper) {
+        _remoteControlHelper = [RJAudioRemoteControlHelper helperWithPlayer:self];
+    }
+    
+    return _remoteControlHelper;
+}
+
+- (Class<RJAudioPlayerViewControllerProtocol>)modalViewControllerClass {
+    if (!_modalViewControllerClass) {
+        _modalViewControllerClass = [RJAudioPlayerViewController class];
+    }
+    
+    return _modalViewControllerClass;
 }
 
 @end

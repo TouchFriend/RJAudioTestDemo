@@ -10,19 +10,26 @@
 #import "RJAudioPlayer.h"
 #import "RJAudioPlayerControlView.h"
 #import "RJAudioAssertItem.h"
+#import "RJAudioPlayerMiniControlView.h"
+#import "RJAudioPlayerViewControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioPlayerController : NSObject
 
+/// 要modal的
+@property (nonatomic, strong) Class <RJAudioPlayerViewControllerProtocol> modalViewControllerClass;
+
 /// modal播放列表的控制器
-@property (nonatomic, weak) UIViewController *viewController;
+@property (nonatomic, weak, nullable) UIViewController <RJAudioPlayerViewControllerProtocol> *viewController;
 /// 容器view
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong, nullable) UIView *containerView;
 /// 播放器
-@property (nonatomic, strong) RJAudioPlayer *currentPlayer;
+@property (nonatomic, strong, nullable) RJAudioPlayer *currentPlayer;
 /// 控制view
 @property (nonatomic, strong, readonly) RJAudioPlayerControlView *controlView;
+/// mini控制view
+@property (nonatomic, strong, readonly) RJAudioPlayerMiniControlView *miniControlView;
 /// 音频资源
 @property (nonatomic, strong) NSArray<RJAudioAssertItem *> *audioAsserts;
 
@@ -32,19 +39,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) RJAudioPlayOrder playOrder;
 
 
-+ (instancetype)playerWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView;
++ (instancetype)playerWithPlayer:(RJAudioPlayer *_Nullable)player viewController:(UIViewController *_Nullable)viewController containerView:(UIView *_Nullable)containerView;
 
-- (instancetype)initWithPlayer:(RJAudioPlayer *)player viewController:(UIViewController *)viewController containerView:(UIView *)containerView;
+- (instancetype)initWithPlayer:(RJAudioPlayer *_Nullable)player viewController:(UIViewController *_Nullable)viewController containerView:(UIView *_Nullable)containerView;
+
++ (instancetype)sharedInstance;
 
 - (RJAudioAssertItem *)currentAssertItem;
 
 - (void)play;
+
+- (void)playOrResume;
 
 - (void)playNextSong;
 
 - (void)playPreviousSong;
 
 - (void)playWithIndex:(NSInteger)index;
+
+- (void)pause;
 
 - (void)stop;
 
