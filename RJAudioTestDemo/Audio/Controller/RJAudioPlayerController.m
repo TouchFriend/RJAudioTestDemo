@@ -120,6 +120,10 @@
 
 #pragma mark - RJAudioPlayerControlViewDelegate Methods
 
+- (void)controlViewDidClickBackButton:(RJAudioPlayerControlView *)controlView {
+    [self.viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)controlView:(RJAudioPlayerControlView *)controlView didClickPlayOrPauseButton:(BOOL)isPlay {
     if (isPlay) {
         if (!self.currentPlayer.url) {

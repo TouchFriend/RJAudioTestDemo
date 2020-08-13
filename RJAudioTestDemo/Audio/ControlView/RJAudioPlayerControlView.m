@@ -16,6 +16,8 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 @interface RJAudioPlayerControlView () <RJSliderViewDelegate>
 
+/// 返回按钮
+@property (nonatomic, strong) UIButton *backBtn;
 /// 标题
 @property (nonatomic, strong) UILabel *titleLbl;
 /// 专辑图片
@@ -74,6 +76,13 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     CGFloat maxWidth = CGRectGetWidth(self.frame);
     CGFloat maxHeight = CGRectGetHeight(self.frame);
     CGFloat homeIndicatorHeight = HOME_INDICATOR_HEIGHT;
+    
+    // 返回按钮
+    viewX = 10;
+    viewY = STATUS_BAR_HEIGHT;
+    viewWidth = 50.0;
+    viewHeight = NAVIGATION_BAR_HEIGHT;
+    self.backBtn.frame = CGRectMake(viewX, viewY, viewWidth, viewHeight);
     
     // 播放操作
     viewHeight = 96.0;
@@ -168,6 +177,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 #pragma mark - Add Subviews
 
 - (void)addAllSubviews {
+    [self addSubview:self.backBtn];
     [self addSubview:self.titleLbl];
     [self addSubview:self.albumIconImageV];
     
@@ -341,7 +351,11 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     }
 }
 
-
+- (void)backBtnClick:(UIButton *)backBtn {
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClickBackButton:)]) {
+        [self.delegate controlViewDidClickBackButton:self];
+    }
+}
 
 #pragma mark - RJSliderViewDelegate Methods
 
@@ -382,6 +396,16 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 }
 
 #pragma mark - Property Methods
+
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backBtn setImage:[UIImage imageNamed:@"audio_back_icon"] forState:UIControlStateNormal];
+        [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _backBtn;
+}
 
 - (UIView *)playActionView {
     if (!_playActionView) {

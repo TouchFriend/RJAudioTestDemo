@@ -8,11 +8,13 @@
 
 #import "RJAudioListViewController.h"
 #import "RJAudioPlayerMiniControlView.h"
+#import "RJAudioPlayerViewController.h"
 
-@interface RJAudioListViewController ()
+@interface RJAudioListViewController () <RJAudioPlayerMiniControlViewDelegate>
 
 /// <#Desription#>
-@property (nonatomic, weak) RJAudioPlayerMiniControlView *miniControlView;
+@property (nonatomic, strong) RJAudioPlayerMiniControlView *miniControlView;
+
 
 @end
 
@@ -39,15 +41,28 @@
 - (void)setupInit {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIWindow *keyWindow = [UIApplication sharedApplication].windows.lastObject;
-    RJAudioPlayerMiniControlView *miniControlView = [[RJAudioPlayerMiniControlView alloc] init];
-    [keyWindow addSubview:miniControlView];
-    miniControlView.frame = CGRectMake(RJMiniControlViewMargin, 200, 150, 50.0);
-    miniControlView.layer.cornerRadius = 25.0;
-    miniControlView.layer.masksToBounds = YES;
-    self.miniControlView = miniControlView;
-    
+    UIButton *jumpBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:jumpBtn];
+    jumpBtn.bounds = CGRectMake(0, 0, 100, 60.0);
+    jumpBtn.center = self.view.center;
+    [jumpBtn setBackgroundColor:[UIColor orangeColor]];
+    [jumpBtn setTitle:@"跳转" forState:UIControlStateNormal];
+    [jumpBtn addTarget:self action:@selector(jumpBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)jumpBtnClick {
+    RJAudioPlayerViewController *playerVC = [[RJAudioPlayerViewController alloc] init];
+    playerVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:playerVC animated:YES completion:nil];
+}
+
+- (RJAudioPlayerMiniControlView *)miniControlView {
+    if (!_miniControlView) {
+        _miniControlView = [[RJAudioPlayerMiniControlView alloc] init];
+        _miniControlView.delegate = self;
+    }
+    
+    return _miniControlView;
+}
 
 @end

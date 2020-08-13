@@ -106,6 +106,8 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     [closeBtn setBackgroundColor:[UIColor orangeColor]];
     [closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    [self addGestureRecognizer:tapGesture];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:panGesture];
@@ -147,20 +149,51 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     }
 }
 
+- (void)tapped:(UITapGestureRecognizer *)tapGesture {
+    NSLog(@"%s", __func__);
+    if ([self.delegate respondsToSelector:@selector(controlViewDidTapped:)]) {
+        [self.delegate controlViewDidTapped:self];
+    }
+}
+
 - (void)playOrPauseBtnClick:(UIButton *)playOrPauseBtn {
     playOrPauseBtn.selected = !playOrPauseBtn.selected;
     if (playOrPauseBtn.selected) {
         [self.miniSoundColumnView beginAnimation];
-        self.progress = MIN(self.progress + 0.1, 1.0);
-        
     } else {
         [self.miniSoundColumnView removeAnimation];
     }
     
+    if ([self.delegate respondsToSelector:@selector(controlView:didClickPlayOrPauseButton:)]) {
+        [self.delegate controlView:self didClickPlayOrPauseButton:playOrPauseBtn.selected];
+    }
 }
 
 - (void)closeBtnClick:(UIButton *)closeBtn {
+    [self dismiss];
+}
+
+#pragma mark - Public Methods
+
+- (void)show {
+    UIWindow *keyWindow = [UIApplication sharedApplication].windows.lastObject;
+    [keyWindow addSubview:self];
+    CGFloat height = 50.0;
+    self.frame = CGRectMake(RJMiniControlViewMargin, keyWindow.rj_height - height - NAVIGATION_BAR_Max_Y - RJMiniControlViewMargin, 150, height);
+    self.layer.cornerRadius = height * 0.5;
+    self.layer.masksToBounds = YES;
+}
+
+- (void)dismiss {
     [self removeFromSuperview];
+    
+    self.playOrPauseBtn.selected = NO;
+    [self.miniSoundColumnView removeAnimation];
+    self.progress = 0;
+    
+    if ([self.delegate respondsToSelector:@selector(controlViewDidClosed:)]) {
+        [self.delegate controlViewDidClosed:self];
+    }
 }
 
 #pragma mark - Property Methods

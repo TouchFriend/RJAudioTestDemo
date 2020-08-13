@@ -15,6 +15,8 @@
 
 @optional
 
+- (void)controlViewDidClickBackButton:(RJAudioPlayerControlView *_Nonnull)controlView;
+
 - (void)controlView:(RJAudioPlayerControlView *_Nonnull)controlView didClickPlayOrPauseButton:(BOOL)isPlay;
 
 - (void)controlViewDidClickNextButton:(RJAudioPlayerControlView *_Nonnull)controlView;
