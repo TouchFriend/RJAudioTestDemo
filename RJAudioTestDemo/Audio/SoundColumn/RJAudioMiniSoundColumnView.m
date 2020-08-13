@@ -23,6 +23,8 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
 @property (nonatomic, strong) NSArray<UIView *> *soundColumns;
 /// 音柱模型
 @property (nonatomic, strong) NSArray<RJAudioColumnItem *> *columnItems;
+/// Desription
+@property (nonatomic, assign) BOOL isAnimate;
 
 @end
 
@@ -70,17 +72,22 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
         [self addSubview:columnView];
     }
     
-#warning 处理进入后台，再进入前台，动画停止的问题
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+#pragma mark - Target Methods
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    if (self.isAnimate) {
+        [self beginAnimation];
+    } else {
+        [self stopAnimation];
+    }
 }
 
 #pragma mark - Public Methods
 
 - (void)beginAnimation {
-    if ([self.soundColumns.firstObject.layer animationForKey:RJAnimationScaleYKey]) {
-        return;
-    }
-    
     NSInteger middle = ceil(self.columnItems.count / 2.0) - 1;
     for (NSInteger i = 0; i < self.soundColumns.count; i++) {
         if(i == middle) {
@@ -97,12 +104,16 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
         animation.autoreverses = YES;
         [columnView.layer addAnimation:animation forKey:RJAnimationScaleYKey];
     }
+    
+    self.isAnimate = YES;
 }
 
 - (void)stopAnimation {
     for (UIView *columnView in self.soundColumns) {
         [columnView.layer removeAnimationForKey:RJAnimationScaleYKey];
     }
+    
+    self.isAnimate = NO;
 }
 
 #pragma mark - Property Methods

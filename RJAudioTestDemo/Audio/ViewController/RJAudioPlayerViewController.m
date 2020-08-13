@@ -199,6 +199,7 @@
 
 - (void)downloadAudio:(NSURL *)url {
     NSLog(@"下载音频:%@", url.absoluteString);
+    [self.audioPlayerController.controlView changeDownloadState:YES];
 }
 
 - (void)setIsPlay:(NSNumber *)isPlay {

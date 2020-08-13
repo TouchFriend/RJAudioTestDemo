@@ -308,6 +308,10 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     [self stopRotationAnimation];
 }
 
+- (void)changeDownloadState:(BOOL)isDownloaded {
+    self.downloadBtn.selected = isDownloaded;
+}
+
 #pragma mark - Target Methods
 
 - (void)playOrPauseBtnClick:(UIButton *)btn {
@@ -330,7 +334,6 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 }
 
 - (void)downloadBtnClick:(UIButton *)btn {
-    btn.selected = !btn.selected;
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickDownloadButton:)]) {
         [self.delegate controlViewDidClickDownloadButton:self];
     }
