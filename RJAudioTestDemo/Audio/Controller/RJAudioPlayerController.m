@@ -15,7 +15,7 @@
     
     RJAudioPlayerControlView *_controlView;
     RJAudioPlayerMiniControlView *_miniControlView;
-    
+    Class <RJAudioPlayerViewControllerProtocol> _modalViewControllerClass;
 }
 
 /// <#Desription#>
@@ -226,6 +226,7 @@
     if ([modalViewController respondsToSelector:@selector(setIsPlay:)]) {
         [modalViewController setIsPlay:@(self.currentPlayer.isPlaying)];
     }
+    
     [rootViewController presentViewController:modalViewController animated:YES completion:nil];
 }
 
@@ -383,6 +384,17 @@
     }
     
     return _remoteControlHelper;
+}
+
+- (void)setModalViewControllerClass:(Class<RJAudioPlayerViewControllerProtocol>)modalViewControllerClass {
+    Class modalClass = modalViewControllerClass;
+    id modalViewController = [[modalClass alloc] init];
+    if (![modalViewController isKindOfClass:[UIViewController class]]) {
+        NSLog(@"------------------modalViewControllerClass需要是UIViewController类或者子类");
+        return;
+    }
+    
+    _modalViewControllerClass = modalViewControllerClass;
 }
 
 - (Class<RJAudioPlayerViewControllerProtocol>)modalViewControllerClass {

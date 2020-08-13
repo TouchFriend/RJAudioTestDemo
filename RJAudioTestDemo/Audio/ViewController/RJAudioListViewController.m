@@ -9,6 +9,7 @@
 #import "RJAudioListViewController.h"
 #import "RJAudioPlayerMiniControlView.h"
 #import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayerController.h"
 
 @interface RJAudioListViewController () <RJAudioPlayerMiniControlViewDelegate>
 
