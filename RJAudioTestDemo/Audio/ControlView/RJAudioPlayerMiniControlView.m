@@ -82,11 +82,9 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     self.miniSoundColumnView= miniSoundColumnView;
     miniSoundColumnView.backgroundColor = [UIColor whiteColor];
     
-    
     CAShapeLayer *progressLayer = [[CAShapeLayer alloc] init];
     [soundColumnContainerView.layer addSublayer:progressLayer];
     self.progressLayer = progressLayer;
-    
     progressLayer.strokeColor = [UIColor colorWithRed:207.0 / 255.0 green:207.0 / 255.0 blue:207.0 / 255.0 alpha:1.0].CGColor;
     progressLayer.fillColor = [UIColor clearColor].CGColor;
     progressLayer.lineWidth = RJProgressLineWidth;

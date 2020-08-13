@@ -184,6 +184,40 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BF02E1CC24E4CC170038CF5A /* UIKIt */ = {
+			isa = PBXGroup;
+			children = (
+				BF1D666924D7A81700FE9720 /* RJAudioConst.h */,
+				BF8E860A24D8FDA8003225EE /* RJAudioGlobalConst.h */,
+				BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */,
+				BF7D469D24E232350004B320 /* UIView+RJAudioFrame.h */,
+				BF7D469E24E232350004B320 /* UIView+RJAudioFrame.m */,
+			);
+			path = UIKIt;
+			sourceTree = "<group>";
+		};
+		BF02E1CD24E4CC2D0038CF5A /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				BF3FBF6524DAAB970014E592 /* RJAudioRemoteControlHelper.h */,
+				BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */,
+				BF42674A24D2B44100611045 /* RJAudioPlayer.h */,
+				BF42674B24D2B44100611045 /* RJAudioPlayer.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		BF02E1CE24E4CC4E0038CF5A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BFFEAD8B24D80EC10089A462 /* RJAudioPlayerController.h */,
+				BFFEAD8C24D80EC10089A462 /* RJAudioPlayerController.m */,
+				BF8E861024D95F80003225EE /* RJAudioAssertItem.h */,
+				BF8E861124D95F80003225EE /* RJAudioAssertItem.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		BF2953A124E3D284002AE0A5 /* SoundColumn */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,22 +287,12 @@
 			isa = PBXGroup;
 			children = (
 				BF2953A724E3D5A4002AE0A5 /* ViewController */,
+				BF02E1CE24E4CC4E0038CF5A /* Controller */,
+				BF02E1CD24E4CC2D0038CF5A /* Player */,
+				BF02E1CC24E4CC170038CF5A /* UIKIt */,
 				BF2953A624E3D3AF002AE0A5 /* ControlView */,
 				BF2953A524E3D384002AE0A5 /* PlayMenu */,
 				BF2953A124E3D284002AE0A5 /* SoundColumn */,
-				BF1D666924D7A81700FE9720 /* RJAudioConst.h */,
-				BF8E860A24D8FDA8003225EE /* RJAudioGlobalConst.h */,
-				BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */,
-				BF7D469D24E232350004B320 /* UIView+RJAudioFrame.h */,
-				BF7D469E24E232350004B320 /* UIView+RJAudioFrame.m */,
-				BFFEAD8B24D80EC10089A462 /* RJAudioPlayerController.h */,
-				BFFEAD8C24D80EC10089A462 /* RJAudioPlayerController.m */,
-				BF42674A24D2B44100611045 /* RJAudioPlayer.h */,
-				BF42674B24D2B44100611045 /* RJAudioPlayer.m */,
-				BF8E861024D95F80003225EE /* RJAudioAssertItem.h */,
-				BF8E861124D95F80003225EE /* RJAudioAssertItem.m */,
-				BF3FBF6524DAAB970014E592 /* RJAudioRemoteControlHelper.h */,
-				BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
