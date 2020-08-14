@@ -81,6 +81,7 @@
 
 - (void)audioPlayerPlayTimeChanged:(RJAudioPlayer *)player currentTime:(NSTimeInterval)current totalTime:(NSTimeInterval)total {
     [self.controlView changeCurrentTime:current totalTime:total];
+    self.miniControlView.progress = total == 0 ? 0 : current / total;
     [RJAudioRemoteControlHelper setupLockScreenMediaInfo:self];
 }
 
@@ -92,7 +93,7 @@
     BOOL isPlay = NO;
     switch (state) {
         case RJAudioPlayerPlaybackStatePlaying:
-        {
+        { 
             [self.controlView play];
             [self.miniControlView play];
             isPlay = YES;
