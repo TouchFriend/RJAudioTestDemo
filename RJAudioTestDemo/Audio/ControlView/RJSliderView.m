@@ -7,6 +7,7 @@
 //
 
 #import "RJSliderView.h"
+#import "UIImage+RJAudioPlayerImage.h"
 
 // 滑动按钮宽高
 static CGFloat const RJSliderButtonWH = 19.0;
@@ -99,7 +100,7 @@ static CGFloat const RJProgressHeight = 1.0;
     [self addSubview:self.bgProgressView];
     [self addSubview:self.bufferProgressView];
     [self addSubview:self.sliderProgressView];
-    UIImage *sliderImage = [[UIImage imageNamed:@"audio_slider"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *sliderImage = [[UIImage rj_imageNamedFromMyBundle:@"audio_slider"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.sliderBtn setImage:sliderImage  forState:UIControlStateNormal];
     self.sliderBtn.tintColor = [UIColor colorWithRed:36.0 / 255.0 green:153.0 / 255.0 blue:255.0 / 255.0 alpha:1.0];
     [self addSubview:self.sliderBtn];

@@ -10,6 +10,7 @@
 #import "RJAudioMiniSoundColumnView.h"
 #import "UIView+RJAudioFrame.h"
 #import "RJAudioConst.h"
+#import "UIImage+RJAudioPlayerImage.h"
 
 static CGFloat const RJProgressLineWidth = 2.8;
 CGFloat const RJMiniControlViewMargin = 15.0;
@@ -108,7 +109,7 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:closeBtn];
     self.closeBtn = closeBtn;
-    [closeBtn setImage:[UIImage imageNamed:@"audio_mini_close_icon"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_mini_close_icon"] forState:UIControlStateNormal];
     closeBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [closeBtn setBackgroundColor:[UIColor clearColor]];
     [closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -116,8 +117,8 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     UIButton *playOrPauseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:playOrPauseBtn];
     self.playOrPauseBtn = playOrPauseBtn;
-    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_mini_play_icon"] forState:UIControlStateNormal];
-    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_pause"] forState:UIControlStateSelected];
+    [playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_mini_play_icon"] forState:UIControlStateNormal];
+    [playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_play_pause"] forState:UIControlStateSelected];
     [playOrPauseBtn addTarget:self action:@selector(playOrPauseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];

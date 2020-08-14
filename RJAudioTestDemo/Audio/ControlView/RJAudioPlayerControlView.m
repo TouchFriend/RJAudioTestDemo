@@ -10,6 +10,7 @@
 #import "RJSliderView.h"
 #import "RJAudioConst.h"
 #import <UIImageView+WebCache.h>
+#import "UIImage+RJAudioPlayerImage.h"
 
 static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation";
 #define RJAlbumDefaultPlaceholderName @"audio_play_spin_icon"
@@ -257,7 +258,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 - (void)showTitle:(NSString *)title albumURL:(NSURL *)albumURL placeholder:(UIImage *)placeholder currentTime:(NSTimeInterval)currentTime totalTime:(NSTimeInterval)totalTime bufferTime:(NSTimeInterval)bufferTime {
     self.titleLbl.text = title;
-    placeholder = placeholder ? : [UIImage imageNamed:RJAlbumDefaultPlaceholderName];
+    placeholder = placeholder ? : [UIImage rj_imageNamedFromMyBundle:RJAlbumDefaultPlaceholderName];
     if (!albumURL || albumURL.absoluteString.length == 0) {
         self.albumIconImageV.image = placeholder;
     } else {
@@ -403,7 +404,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backBtn setImage:[UIImage imageNamed:@"audio_back_icon"] forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_back_icon"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -474,7 +475,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
     if (!_albumIconImageV) {
         _albumIconImageV = [[UIImageView alloc] init];
         _albumIconImageV.backgroundColor = [UIColor clearColor];
-        _albumIconImageV.image = [UIImage imageNamed:RJAlbumDefaultPlaceholderName];
+        _albumIconImageV.image = [UIImage rj_imageNamedFromMyBundle:RJAlbumDefaultPlaceholderName];
         [_albumIconImageV.layer addAnimation:self.rotationAnimation forKey:RJAlbumIconRotationAnimationKey];
         [self stopRotationAnimation]; // 停止旋转
     }
@@ -495,8 +496,8 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)playOrPauseBtn {
     if (!_playOrPauseBtn) {
         _playOrPauseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_start"] forState:UIControlStateNormal];
-        [_playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_pause"] forState:UIControlStateSelected];
+        [_playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_play_start"] forState:UIControlStateNormal];
+        [_playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_play_pause"] forState:UIControlStateSelected];
         [_playOrPauseBtn addTarget:self action:@selector(playOrPauseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playOrPauseBtn;
@@ -505,7 +506,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
         _nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_nextBtn setImage:[UIImage imageNamed:@"audio_next_song"] forState:UIControlStateNormal];
+        [_nextBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_next_song"] forState:UIControlStateNormal];
         [_nextBtn addTarget:self action:@selector(nextBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextBtn;
@@ -514,7 +515,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)previousBtn {
     if (!_previousBtn) {
         _previousBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_previousBtn setImage:[UIImage imageNamed:@"audio_previous_song"] forState:UIControlStateNormal];
+        [_previousBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_previous_song"] forState:UIControlStateNormal];
         [_previousBtn addTarget:self action:@selector(previousBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _previousBtn;
@@ -523,8 +524,8 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)downloadBtn {
     if (!_downloadBtn) {
         _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_downloadBtn setImage:[UIImage imageNamed:@"audio_download_icon"] forState:UIControlStateNormal];
-        [_downloadBtn setImage:[UIImage imageNamed:@"audio_download_completed_icon"] forState:UIControlStateSelected];
+        [_downloadBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_download_icon"] forState:UIControlStateNormal];
+        [_downloadBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_download_completed_icon"] forState:UIControlStateSelected];
         [_downloadBtn addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downloadBtn;
@@ -533,7 +534,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)playOrderBtn {
     if (!_playOrderBtn) {
         _playOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playOrderBtn setImage:[UIImage imageNamed:@"audio_play_order_circle"] forState:UIControlStateNormal];
+        [_playOrderBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_play_order_circle"] forState:UIControlStateNormal];
         [_playOrderBtn addTarget:self action:@selector(playOrderBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playOrderBtn;
@@ -542,7 +543,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 - (UIButton *)playMenuBtn {
     if (!_playMenuBtn) {
         _playMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playMenuBtn setImage:[UIImage imageNamed:@"audio_music_list"] forState:UIControlStateNormal];
+        [_playMenuBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_music_list"] forState:UIControlStateNormal];
         [_playMenuBtn addTarget:self action:@selector(playMenuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playMenuBtn;
@@ -564,7 +565,7 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
 
 - (NSArray *)playOrderImages {
     if (!_playOrderImages) {
-        _playOrderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"audio_play_single_circle"], [UIImage imageNamed:@"audio_play_random_circle"]];
+        _playOrderImages = @[[UIImage rj_imageNamedFromMyBundle:@"audio_play_order_circle"], [UIImage rj_imageNamedFromMyBundle:@"audio_play_single_circle"], [UIImage rj_imageNamedFromMyBundle:@"audio_play_random_circle"]];
     }
     
     return _playOrderImages;

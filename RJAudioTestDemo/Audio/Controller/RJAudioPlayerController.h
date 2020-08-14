@@ -12,6 +12,7 @@
 #import "RJAudioAssertItem.h"
 #import "RJAudioPlayerMiniControlView.h"
 #import "RJAudioPlayerViewControllerProtocol.h"
+#import "UIImage+RJAudioPlayerImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

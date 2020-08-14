@@ -10,6 +10,7 @@
 #import "RJAudioRemoteControlHelper.h"
 #import "RJAudioPlayMenuViewController.h"
 #import "RJAudioPlayerViewController.h"
+#import "UIImage+RJAudioPlayerImage.h"
 
 @interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate, RJAudioPlayMenuProtocol, RJAudioPlayerMiniControlViewDelegate> {
     

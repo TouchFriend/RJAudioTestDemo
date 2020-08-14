@@ -11,6 +11,7 @@
 #import "UIView+RJAudioFrame.h"
 #import "RJAudioMenuTableViewCell.h"
 #import "RJAudioAssertItem.h"
+#import "UIImage+RJAudioPlayerImage.h"
 
 static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 
@@ -277,7 +278,7 @@ static NSString * const RJCellIdentifier = @"RJAudioMenuTableViewCell";
 
 - (NSArray<UIImage *> *)playOrderImages {
     if (!_playOrderImages) {
-        _playOrderImages = @[[UIImage imageNamed:@"audio_play_order_circle"], [UIImage imageNamed:@"audio_play_single_circle"], [UIImage imageNamed:@"audio_play_random_circle"]];
+        _playOrderImages = @[[UIImage rj_imageNamedFromMyBundle:@"audio_play_order_circle"], [UIImage rj_imageNamedFromMyBundle:@"audio_play_single_circle"], [UIImage rj_imageNamedFromMyBundle:@"audio_play_random_circle"]];
     }
     
     return _playOrderImages;
