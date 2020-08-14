@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RJAudioPlayerViewControllerProtocol <NSObject>
 
-/// <#Desription#>
-@property (nonatomic, strong) NSNumber *isPlay;
-
 - (void)downloadAudio:(NSURL *)url;
 
 @end

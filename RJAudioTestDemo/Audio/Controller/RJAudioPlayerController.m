@@ -223,10 +223,6 @@
     UIViewController *rootViewController = [UIApplication sharedApplication].windows.lastObject.rootViewController;
     UIViewController <RJAudioPlayerViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
     modalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    if ([modalViewController respondsToSelector:@selector(setIsPlay:)]) {
-        [modalViewController setIsPlay:@(self.currentPlayer.isPlaying)];
-    }
-    
     [rootViewController presentViewController:modalViewController animated:YES completion:nil];
 }
 

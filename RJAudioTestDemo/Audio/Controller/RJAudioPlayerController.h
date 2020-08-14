@@ -43,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPlayer:(RJAudioPlayer *_Nullable)player viewController:(UIViewController *_Nullable)viewController containerView:(UIView *_Nullable)containerView;
 
+/// 单例
 + (instancetype)sharedInstance;
 
 - (RJAudioAssertItem *)currentAssertItem;
