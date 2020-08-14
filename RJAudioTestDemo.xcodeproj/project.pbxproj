@@ -22,6 +22,7 @@
 		BF56402624D003EB00C1BFB3 /* RJLargeTapRangeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF56402524D003EB00C1BFB3 /* RJLargeTapRangeButton.m */; };
 		BF602B4824E683DB00BBA915 /* NSBundle+RJAudioPlayerBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = BF602B4424E683DB00BBA915 /* NSBundle+RJAudioPlayerBundle.m */; };
 		BF602B4924E683DB00BBA915 /* UIImage+RJAudioPlayerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF602B4724E683DB00BBA915 /* UIImage+RJAudioPlayerImage.m */; };
+		BF602B4E24E694BE00BBA915 /* RJAudioPlayerKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BF602B4D24E694BE00BBA915 /* RJAudioPlayerKit.bundle */; };
 		BF609FF024D3CAFC009FE5E4 /* RJCMTimeTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */; };
 		BF6C598924CFD08200C591BA /* RJPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6C598824CFD08200C591BA /* RJPerson.m */; };
 		BF7D469C24E22EAE0004B320 /* RJAudioPlayMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7D469B24E22EAE0004B320 /* RJAudioPlayMenuViewController.m */; };
@@ -97,6 +98,7 @@
 		BF602B4624E683DB00BBA915 /* NSBundle+RJAudioPlayerBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+RJAudioPlayerBundle.h"; sourceTree = "<group>"; };
 		BF602B4724E683DB00BBA915 /* UIImage+RJAudioPlayerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RJAudioPlayerImage.m"; sourceTree = "<group>"; };
 		BF602B4A24E686CD00BBA915 /* RJAudioPlayerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayerKit.h; sourceTree = "<group>"; };
+		BF602B4D24E694BE00BBA915 /* RJAudioPlayerKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RJAudioPlayerKit.bundle; sourceTree = "<group>"; };
 		BF609FEE24D3CAFC009FE5E4 /* RJCMTimeTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJCMTimeTestViewController.h; sourceTree = "<group>"; };
 		BF609FEF24D3CAFC009FE5E4 /* RJCMTimeTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJCMTimeTestViewController.m; sourceTree = "<group>"; };
 		BF6C598724CFD08200C591BA /* RJPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJPerson.h; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				BF602B4A24E686CD00BBA915 /* RJAudioPlayerKit.h */,
+				BF602B4D24E694BE00BBA915 /* RJAudioPlayerKit.bundle */,
 				BF2953A724E3D5A4002AE0A5 /* ViewController */,
 				BF02E1CC24E4CC170038CF5A /* UIKIt */,
 				BF02E1CE24E4CC4E0038CF5A /* Controller */,
@@ -487,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF602B4E24E694BE00BBA915 /* RJAudioPlayerKit.bundle in Resources */,
 				BFD86A0624CEBEDD00520011 /* LaunchScreen.storyboard in Resources */,
 				BFCB891A24DA45BF00D9C3F6 /* 偏爱.mp4 in Resources */,
 				BFD86A0324CEBEDD00520011 /* Assets.xcassets in Resources */,
