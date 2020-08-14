@@ -11,7 +11,7 @@
 #import "UIView+RJAudioFrame.h"
 #import "RJAudioConst.h"
 
-static CGFloat const RJProgressLineWidth = 3.8;
+static CGFloat const RJProgressLineWidth = 2.8;
 CGFloat const RJMiniControlViewMargin = 15.0;
 
 @interface RJAudioPlayerMiniControlView ()
@@ -60,7 +60,7 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     CGFloat soundColumnContainerViewWH = self.rj_height;
     self.soundColumnContainerView.frame = CGRectMake(0, 0, soundColumnContainerViewWH, soundColumnContainerViewWH);
     
-    CGFloat miniSoundColumnViewMargin = 4.0;
+    CGFloat miniSoundColumnViewMargin = 3.0;
     CGFloat miniSoundColumnViewWH = self.soundColumnContainerView.rj_height - 2 * miniSoundColumnViewMargin;
     self.miniSoundColumnView.frame = CGRectMake(miniSoundColumnViewMargin, miniSoundColumnViewMargin, miniSoundColumnViewWH, miniSoundColumnViewWH);
     self.miniSoundColumnView.layer.cornerRadius = self.miniSoundColumnView.rj_height * 0.5;
@@ -70,11 +70,13 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:self.soundColumnContainerView.rj_width * 0.5 - RJProgressLineWidth * 0.5 startAngle:0 endAngle:M_PI * 2 clockwise:YES];
     self.progressLayer.path = path.CGPath;
     
-    CGFloat playOrPauseBtnWH = self.rj_height;
-    self.playOrPauseBtn.frame = CGRectMake(self.miniSoundColumnView.rj_maxX + miniSoundColumnViewMargin, 0, playOrPauseBtnWH, playOrPauseBtnWH);
+    CGFloat playOrPauseBtnHeight = self.rj_height;
+    CGFloat playOrPauseBtnWidth = 40.0;
+    self.playOrPauseBtn.frame = CGRectMake(self.miniSoundColumnView.rj_maxX + miniSoundColumnViewMargin, 0, playOrPauseBtnWidth, playOrPauseBtnHeight);
     
     CGFloat closeBtnWidthHeight = self.rj_height - 2 * miniSoundColumnViewMargin;
-    self.closeBtn.frame = CGRectMake(self.rj_width - miniSoundColumnViewMargin - closeBtnWidthHeight, miniSoundColumnViewMargin, closeBtnWidthHeight, closeBtnWidthHeight);
+    CGFloat closeBtnWidth = 38.0;
+    self.closeBtn.frame = CGRectMake(self.rj_width - miniSoundColumnViewMargin - closeBtnWidth, miniSoundColumnViewMargin, closeBtnWidth, closeBtnWidthHeight);
     self.closeBtn.layer.cornerRadius = self.closeBtn.rj_height * 0.5;
     self.closeBtn.layer.masksToBounds = YES;
 }
@@ -103,20 +105,20 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     progressLayer.lineCap = kCALineCapRound;
     progressLayer.strokeEnd = 0.0;
     
-    UIButton *playOrPauseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self addSubview:playOrPauseBtn];
-    self.playOrPauseBtn = playOrPauseBtn;
-    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_start"] forState:UIControlStateNormal];
-    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_pause"] forState:UIControlStateSelected];
-    [playOrPauseBtn addTarget:self action:@selector(playOrPauseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:closeBtn];
     self.closeBtn = closeBtn;
-    [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"audio_mini_close_icon"] forState:UIControlStateNormal];
     closeBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    [closeBtn setBackgroundColor:[UIColor orangeColor]];
+    [closeBtn setBackgroundColor:[UIColor clearColor]];
     [closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *playOrPauseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self addSubview:playOrPauseBtn];
+    self.playOrPauseBtn = playOrPauseBtn;
+    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_mini_play_icon"] forState:UIControlStateNormal];
+    [playOrPauseBtn setImage:[UIImage imageNamed:@"audio_play_pause"] forState:UIControlStateSelected];
+    [playOrPauseBtn addTarget:self action:@selector(playOrPauseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self addGestureRecognizer:tapGesture];
@@ -196,8 +198,8 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     
     self.hidden = NO;
     [keyWindow addSubview:self];
-    CGFloat height = 50.0;
-    self.frame = CGRectMake(RJMiniControlViewMargin, keyWindow.rj_height - height - NAVIGATION_BAR_Max_Y - RJMiniControlViewMargin, 150, height);
+    CGFloat height = 46.0;
+    self.frame = CGRectMake(RJMiniControlViewMargin, keyWindow.rj_height - height - NAVIGATION_BAR_Max_Y - RJMiniControlViewMargin, 120, height);
     self.layer.cornerRadius = height * 0.5;
     self.layer.masksToBounds = YES;
 }

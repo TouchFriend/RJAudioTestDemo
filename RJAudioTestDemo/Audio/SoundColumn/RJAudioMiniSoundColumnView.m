@@ -43,8 +43,8 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     [super layoutSubviews];
     
     CGFloat middleCenterX = self.rj_width * 0.5;
-    CGFloat columnViewXWidth = 3.0;
-    CGFloat margin = 3.0;
+    CGFloat columnViewXWidth = 2.5;
+    CGFloat margin = 2.5;
     NSInteger middle = ceil(self.columnItems.count / 2.0) - 1;
     for (NSInteger i = 0; i < self.columnItems.count; i++) {
         RJAudioColumnItem *item = self.columnItems[i];
@@ -102,6 +102,7 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
         animation.duration = item.animationDuration.floatValue;
         animation.repeatCount = CGFLOAT_MAX;
         animation.autoreverses = YES;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         [columnView.layer addAnimation:animation forKey:RJAnimationScaleYKey];
     }
     
@@ -137,19 +138,19 @@ static NSString * const RJItemAnimationDurationKey = @"animationDuration";
     if (!_columnItems) {
         NSArray *columnValue = @[
             @{
-                RJItemScaleKey : @0.4, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.7, RJItemAnimationDurationKey : @0.1
+                RJItemScaleKey : @0.35, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.6, RJItemAnimationDurationKey : @0.1
             },
             @{
-                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.4, RJItemAnimationDurationKey : @0.2
+                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.5, RJItemAnimationDurationKey : @0.2
             },
             @{
-                RJItemScaleKey : @0.52, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.0, RJItemAnimationDurationKey : @0.5
+                RJItemScaleKey : @0.5, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.0, RJItemAnimationDurationKey : @0.5
             },
             @{
-                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.4, RJItemAnimationDurationKey : @0.2
+                RJItemScaleKey : @0.23, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @1.5, RJItemAnimationDurationKey : @0.2
             },
             @{
-                RJItemScaleKey : @0.4, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.7, RJItemAnimationDurationKey : @0.1
+                RJItemScaleKey : @0.35, RJItemAnimationFromValueKey : @1.0, RJItemAnimationToValueKey : @0.6, RJItemAnimationDurationKey : @0.1
             }
         ];
         

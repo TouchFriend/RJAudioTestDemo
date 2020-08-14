@@ -246,10 +246,10 @@
 		BF2953A624E3D3AF002AE0A5 /* ControlView */ = {
 			isa = PBXGroup;
 			children = (
-				BF29539824E39499002AE0A5 /* RJAudioPlayerMiniControlView.h */,
-				BF29539924E39499002AE0A5 /* RJAudioPlayerMiniControlView.m */,
 				BFF3E83F24D3FEF200CBA623 /* RJAudioPlayerControlView.h */,
 				BFF3E84024D3FEF200CBA623 /* RJAudioPlayerControlView.m */,
+				BF29539824E39499002AE0A5 /* RJAudioPlayerMiniControlView.h */,
+				BF29539924E39499002AE0A5 /* RJAudioPlayerMiniControlView.m */,
 				BFF3E84224D40ECF00CBA623 /* RJSliderView.h */,
 				BFF3E84324D40ECF00CBA623 /* RJSliderView.m */,
 			);
