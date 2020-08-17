@@ -9,8 +9,8 @@
 #ifndef RJAudioPlayerKit_h
 #define RJAudioPlayerKit_h
 
-#import "RJAudioPlayerViewControllerProtocol.h"
-#import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayViewControllerProtocol.h"
+#import "RJAudioPlayViewController.h"
 #import "RJAudioPlayerController.h"
 #import "RJAudioPlayer.h"
 #import "RJAudioAssertItem.h"
