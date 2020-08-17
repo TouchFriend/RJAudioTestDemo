@@ -191,7 +191,7 @@ CGFloat const RJMiniControlViewMargin = 15.0;
 #pragma mark - Public Methods
 
 - (void)show {
-    UIWindow *keyWindow = [UIApplication sharedApplication].windows.lastObject;
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     if ([keyWindow.subviews containsObject:self]) {
         self.hidden = NO;
         return;

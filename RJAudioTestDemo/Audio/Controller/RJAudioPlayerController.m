@@ -222,7 +222,7 @@
 
 - (void)miniControlViewDidTapped:(RJAudioPlayerMiniControlView *)controlView {
     Class modalClass = self.modalViewControllerClass;
-    UIViewController *rootViewController = [UIApplication sharedApplication].windows.lastObject.rootViewController;
+    UIViewController *rootViewController = [UIApplication sharedApplication].windows.firstObject.rootViewController;
     UIViewController <RJAudioPlayViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
     modalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [rootViewController presentViewController:modalViewController animated:YES completion:nil];
