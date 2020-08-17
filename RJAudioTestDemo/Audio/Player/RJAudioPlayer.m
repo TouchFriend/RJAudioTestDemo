@@ -269,10 +269,9 @@ static NSString * const RJPlayerItemObserverPlaybackLikelyToKeepUpKey = @"playba
                         }
                     }];
                     self.seekTime = 0;
+                } else if (self.shouldAutoPlay) {
+                    [self play];
                 }
-//                else if (self.shouldAutoPlay) {
-//                    [self play];
-//                }
                 NSArray<NSValue *> *loadedTimeRanges = self.player.currentItem.loadedTimeRanges;
                 if (loadedTimeRanges.count > 0) {
                     if ([self.delegate respondsToSelector:@selector(audioPlayerPlayTimeChanged:currentTime:totalTime:)]) {

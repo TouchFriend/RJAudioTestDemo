@@ -118,7 +118,7 @@ CGFloat const RJMiniControlViewMargin = 15.0;
     [self addSubview:playOrPauseBtn];
     self.playOrPauseBtn = playOrPauseBtn;
     [playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_mini_play_icon"] forState:UIControlStateNormal];
-    [playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_play_pause"] forState:UIControlStateSelected];
+    [playOrPauseBtn setImage:[UIImage rj_imageNamedFromMyBundle:@"audio_mini_pause_icon"] forState:UIControlStateSelected];
     [playOrPauseBtn addTarget:self action:@selector(playOrPauseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
