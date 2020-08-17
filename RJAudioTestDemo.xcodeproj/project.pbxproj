@@ -109,7 +109,6 @@
 		BF7D469E24E232350004B320 /* UIView+RJAudioFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+RJAudioFrame.m"; sourceTree = "<group>"; };
 		BF7D46A024E247950004B320 /* RJAudioMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioMenuTableViewCell.h; sourceTree = "<group>"; };
 		BF7D46A124E247950004B320 /* RJAudioMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioMenuTableViewCell.m; sourceTree = "<group>"; };
-		BF8E7D5B24E5258E009D1C65 /* RJAudioPlayViewControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioPlayViewControllerProtocol.h; sourceTree = "<group>"; };
 		BF8E860A24D8FDA8003225EE /* RJAudioGlobalConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioGlobalConst.h; sourceTree = "<group>"; };
 		BF8E860B24D8FDA8003225EE /* RJAudioGlobalConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAudioGlobalConst.m; sourceTree = "<group>"; };
 		BF8E861024D95F80003225EE /* RJAudioAssertItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAudioAssertItem.h; sourceTree = "<group>"; };
@@ -272,7 +271,6 @@
 		BF2953A724E3D5A4002AE0A5 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				BF8E7D5B24E5258E009D1C65 /* RJAudioPlayViewControllerProtocol.h */,
 				BF42674D24D2B45800611045 /* RJAudioPlayViewController.h */,
 				BF42674E24D2B45800611045 /* RJAudioPlayViewController.m */,
 			);

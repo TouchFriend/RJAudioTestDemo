@@ -11,18 +11,29 @@
 #import "RJAudioPlayerControlView.h"
 #import "RJAudioAssertItem.h"
 #import "RJAudioPlayerMiniControlView.h"
-#import "RJAudioPlayViewControllerProtocol.h"
 #import "UIImage+RJAudioPlayerImage.h"
+
+@class RJAudioPlayerController, RJAudioAssertItem;
+
+@protocol RJAudioPlayerControllerDelegate <NSObject>
+
+- (void)playerController:(RJAudioPlayerController *_Nonnull)controller playIndexDidChange:(NSInteger)playIndex url:(NSURL *_Nonnull)url;
+
+- (void)playerController:(RJAudioPlayerController *_Nonnull)controller fileToDownload:(NSURL *_Nonnull)url;
+
+@end
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RJAudioPlayerController : NSObject
 
+/// 代理
+@property (nonatomic, weak) id <RJAudioPlayerControllerDelegate> delegate;
 /// 要modal的
-@property (nonatomic, strong) Class <RJAudioPlayViewControllerProtocol> modalViewControllerClass;
+@property (nonatomic, strong) Class modalViewControllerClass;
 
 /// modal播放列表的控制器
-@property (nonatomic, weak, nullable) UIViewController <RJAudioPlayViewControllerProtocol> *viewController;
+@property (nonatomic, weak, nullable) UIViewController *viewController;
 /// 容器view
 @property (nonatomic, strong, nullable) UIView *containerView;
 /// 播放器

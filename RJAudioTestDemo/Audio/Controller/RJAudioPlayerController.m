@@ -16,7 +16,7 @@
     
     RJAudioPlayerControlView *_controlView;
     RJAudioPlayerMiniControlView *_miniControlView;
-    Class <RJAudioPlayViewControllerProtocol> _modalViewControllerClass;
+    Class _modalViewControllerClass;
 }
 
 /// <#Desription#>
@@ -168,9 +168,9 @@
 }
 
 - (void)controlViewDidClickDownloadButton:(RJAudioPlayerControlView *)controlView {
-    if ([self.viewController respondsToSelector:@selector(downloadAudio:)]) {
+    if ([self.delegate respondsToSelector:@selector(playerController:fileToDownload:)]) {
         RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
-        [self.viewController downloadAudio:item.assertURL];
+        [self.delegate playerController:self fileToDownload:item.assertURL];
     }
 }
 
@@ -222,8 +222,8 @@
 
 - (void)miniControlViewDidTapped:(RJAudioPlayerMiniControlView *)controlView {
     Class modalClass = self.modalViewControllerClass;
-    UIViewController *rootViewController = [UIApplication sharedApplication].windows.firstObject.rootViewController;
-    UIViewController <RJAudioPlayViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *modalViewController = [[modalClass alloc] init];
     modalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [rootViewController presentViewController:modalViewController animated:YES completion:nil];
 }
@@ -262,6 +262,10 @@
     RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
     [self.currentPlayer playWithURL:item.assertURL];
     [self.controlView showTitle:item.title albumURL:item.albumIconURL];
+    
+    if ([self.delegate respondsToSelector:@selector(playerController:playIndexDidChange:url:)]) {
+        [self.delegate playerController:self playIndexDidChange:self.currentPlayIndex url:item.assertURL];
+    }
 }
 
 - (void)playOrResume {
@@ -384,7 +388,7 @@
     return _remoteControlHelper;
 }
 
-- (void)setModalViewControllerClass:(Class<RJAudioPlayViewControllerProtocol>)modalViewControllerClass {
+- (void)setModalViewControllerClass:(Class)modalViewControllerClass {
     Class modalClass = modalViewControllerClass;
     id modalViewController = [[modalClass alloc] init];
     if (![modalViewController isKindOfClass:[UIViewController class]]) {
@@ -395,7 +399,7 @@
     _modalViewControllerClass = modalViewControllerClass;
 }
 
-- (Class<RJAudioPlayViewControllerProtocol>)modalViewControllerClass {
+- (Class)modalViewControllerClass {
     if (!_modalViewControllerClass) {
         _modalViewControllerClass = [RJAudioPlayViewController class];
     }

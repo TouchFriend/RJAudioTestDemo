@@ -7,7 +7,6 @@
 //
 
 #import "RJAudioPlayViewController.h"
-#import "RJAudioPlayerController.h"
 #import "RJAudioAssertItem.h"
 #import <AVKit/AVKit.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -51,13 +50,19 @@
 
 - (void)setupPlayerController {
     self.audioPlayerController = [RJAudioPlayerController sharedInstance];
+    self.audioPlayerController.delegate = self;
     self.audioPlayerController.containerView = self.view;
     self.audioPlayerController.viewController = self;
 }
 
-- (void)downloadAudio:(NSURL *)url {
+#pragma mark - RJAudioPlayerControllerDelegate Methods
+
+- (void)playerController:(RJAudioPlayerController *)controller playIndexDidChange:(NSInteger)playIndex url:(NSURL * _Nonnull)url {
+    NSLog(@"索引改变--%ld:%@", playIndex, url.absoluteString);
+}
+
+- (void)playerController:(RJAudioPlayerController *)controller fileToDownload:(NSURL * _Nonnull)url {
     NSLog(@"下载音频:%@", url.absoluteString);
-    [self.audioPlayerController.controlView changeDownloadState:YES];
 }
 
 @end
