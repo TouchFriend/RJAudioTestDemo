@@ -1,5 +1,5 @@
 //
-//  RJAudioPlayerViewControllerProtocol.h
+//  RJAudioPlayViewControllerProtocol.h
 //  RJAudioTestDemo
 //
 //  Created by TouchWorld on 2020/8/13.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol RJAudioPlayerViewControllerProtocol <NSObject>
+@protocol RJAudioPlayViewControllerProtocol <NSObject>
 
 - (void)downloadAudio:(NSURL *)url;
 

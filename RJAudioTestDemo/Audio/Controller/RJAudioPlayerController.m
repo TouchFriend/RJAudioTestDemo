@@ -9,14 +9,14 @@
 #import "RJAudioPlayerController.h"
 #import "RJAudioRemoteControlHelper.h"
 #import "RJAudioPlayMenuViewController.h"
-#import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayViewController.h"
 #import "UIImage+RJAudioPlayerImage.h"
 
 @interface RJAudioPlayerController () <RJAudioPlayerDelegate, RJAudioPlayerControlViewDelegate, RJAudioPlayMenuProtocol, RJAudioPlayerMiniControlViewDelegate> {
     
     RJAudioPlayerControlView *_controlView;
     RJAudioPlayerMiniControlView *_miniControlView;
-    Class <RJAudioPlayerViewControllerProtocol> _modalViewControllerClass;
+    Class <RJAudioPlayViewControllerProtocol> _modalViewControllerClass;
 }
 
 /// <#Desription#>
@@ -223,7 +223,7 @@
 - (void)miniControlViewDidTapped:(RJAudioPlayerMiniControlView *)controlView {
     Class modalClass = self.modalViewControllerClass;
     UIViewController *rootViewController = [UIApplication sharedApplication].windows.lastObject.rootViewController;
-    UIViewController <RJAudioPlayerViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
+    UIViewController <RJAudioPlayViewControllerProtocol> *modalViewController = [[modalClass alloc] init];
     modalViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [rootViewController presentViewController:modalViewController animated:YES completion:nil];
 }
@@ -384,7 +384,7 @@
     return _remoteControlHelper;
 }
 
-- (void)setModalViewControllerClass:(Class<RJAudioPlayerViewControllerProtocol>)modalViewControllerClass {
+- (void)setModalViewControllerClass:(Class<RJAudioPlayViewControllerProtocol>)modalViewControllerClass {
     Class modalClass = modalViewControllerClass;
     id modalViewController = [[modalClass alloc] init];
     if (![modalViewController isKindOfClass:[UIViewController class]]) {
@@ -395,9 +395,9 @@
     _modalViewControllerClass = modalViewControllerClass;
 }
 
-- (Class<RJAudioPlayerViewControllerProtocol>)modalViewControllerClass {
+- (Class<RJAudioPlayViewControllerProtocol>)modalViewControllerClass {
     if (!_modalViewControllerClass) {
-        _modalViewControllerClass = [RJAudioPlayerViewController class];
+        _modalViewControllerClass = [RJAudioPlayViewController class];
     }
     
     return _modalViewControllerClass;

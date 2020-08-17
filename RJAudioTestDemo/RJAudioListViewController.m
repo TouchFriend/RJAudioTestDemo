@@ -8,7 +8,7 @@
 
 #import "RJAudioListViewController.h"
 #import "RJAudioPlayerMiniControlView.h"
-#import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayViewController.h"
 #import "RJAudioPlayerController.h"
 #import <KTVHTTPCache/KTVHTTPCache.h>
 #import "RJAudioPlayerController.h"
@@ -82,7 +82,7 @@
 
 - (void)jumpBtnClick {
     [self setupAudioAsserts];
-    RJAudioPlayerViewController *playerVC = [[RJAudioPlayerViewController alloc] init];
+    RJAudioPlayViewController *playerVC = [[RJAudioPlayViewController alloc] init];
     playerVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [self presentViewController:playerVC animated:YES completion:nil];
 }

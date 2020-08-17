@@ -1,18 +1,18 @@
 //
-//  RJAudioPlayerViewController.m
+//  RJAudioPlayViewController.m
 //  RJAudioTestDemo
 //
 //  Created by TouchWorld on 2020/7/30.
 //  Copyright © 2020 RJSoft. All rights reserved.
 //
 
-#import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayViewController.h"
 #import "RJAudioPlayerController.h"
 #import "RJAudioAssertItem.h"
 #import <AVKit/AVKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface RJAudioPlayerViewController ()
+@interface RJAudioPlayViewController ()
 
 /// <#Desription#>
 @property (nonatomic, strong) RJAudioPlayerController *audioPlayerController;
@@ -20,7 +20,7 @@
 @end
 
 
-@implementation RJAudioPlayerViewController
+@implementation RJAudioPlayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

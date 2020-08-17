@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RJAudioTestViewController.h"
-#import "RJAudioPlayerViewController.h"
+#import "RJAudioPlayViewController.h"
 #import "RJCMTimeTestViewController.h"
 #import "RJAnchorPointViewController.h"
 #import "RJAudioListViewController.h"
