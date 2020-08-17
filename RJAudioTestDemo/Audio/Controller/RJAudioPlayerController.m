@@ -170,7 +170,7 @@
 - (void)controlViewDidClickDownloadButton:(RJAudioPlayerControlView *)controlView {
     if ([self.delegate respondsToSelector:@selector(playerController:fileToDownload:)]) {
         RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
-        [self.delegate playerController:self fileToDownload:item.assertURL];
+        [self.delegate playerController:self fileToDownload:item];
     }
 }
 
@@ -263,8 +263,8 @@
     [self.currentPlayer playWithURL:item.assertURL];
     [self.controlView showTitle:item.title albumURL:item.albumIconURL];
     
-    if ([self.delegate respondsToSelector:@selector(playerController:playIndexDidChange:url:)]) {
-        [self.delegate playerController:self playIndexDidChange:self.currentPlayIndex url:item.assertURL];
+    if ([self.delegate respondsToSelector:@selector(playerController:playIndexDidChange:item:)]) {
+        [self.delegate playerController:self playIndexDidChange:self.currentPlayIndex item:item];
     }
 }
 

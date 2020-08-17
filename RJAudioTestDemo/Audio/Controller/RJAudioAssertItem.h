@@ -18,9 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURL *albumIconURL;
 /// 资源地址
 @property (nonatomic, strong) NSURL *assertURL;
-
-
-
+/// 其他数据
+@property (nonatomic, strong) id otherData;
 
 @end
 

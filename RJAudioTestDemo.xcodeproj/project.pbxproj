@@ -15,6 +15,7 @@
 		BF29539A24E39499002AE0A5 /* RJAudioPlayerMiniControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29539924E39499002AE0A5 /* RJAudioPlayerMiniControlView.m */; };
 		BF29539D24E3C236002AE0A5 /* RJAudioMiniSoundColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29539C24E3C236002AE0A5 /* RJAudioMiniSoundColumnView.m */; };
 		BF2953A424E3D2B2002AE0A5 /* RJAudioColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2953A324E3D2B2002AE0A5 /* RJAudioColumnItem.m */; };
+		BF3C961B24EA7F5A00ED62DD /* RJAudioPlayerKit.h in Sources */ = {isa = PBXBuildFile; fileRef = BF602B4A24E686CD00BBA915 /* RJAudioPlayerKit.h */; };
 		BF3FBF6724DAAB970014E592 /* RJAudioRemoteControlHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3FBF6624DAAB970014E592 /* RJAudioRemoteControlHelper.m */; };
 		BF42674C24D2B44100611045 /* RJAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674B24D2B44100611045 /* RJAudioPlayer.m */; };
 		BF42674F24D2B45800611045 /* RJAudioPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF42674E24D2B45800611045 /* RJAudioPlayViewController.m */; };
@@ -604,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF3C961B24EA7F5A00ED62DD /* RJAudioPlayerKit.h in Sources */,
 				BF3FBF6724DAAB970014E592 /* RJAudioRemoteControlHelper.m in Sources */,
 				BF2953A424E3D2B2002AE0A5 /* RJAudioColumnItem.m in Sources */,
 				BFD869FE24CEBEDC00520011 /* ViewController.m in Sources */,

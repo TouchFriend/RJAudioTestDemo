@@ -57,12 +57,12 @@
 
 #pragma mark - RJAudioPlayerControllerDelegate Methods
 
-- (void)playerController:(RJAudioPlayerController *)controller playIndexDidChange:(NSInteger)playIndex url:(NSURL * _Nonnull)url {
-    NSLog(@"索引改变--%ld:%@", playIndex, url.absoluteString);
+- (void)playerController:(RJAudioPlayerController *)controller playIndexDidChange:(NSInteger)playIndex item:(RJAudioAssertItem * _Nonnull)item {
+    NSLog(@"索引改变--%ld:%@", playIndex, item.assertURL.absoluteString);
 }
 
-- (void)playerController:(RJAudioPlayerController *)controller fileToDownload:(NSURL * _Nonnull)url {
-    NSLog(@"下载音频:%@", url.absoluteString);
+- (void)playerController:(RJAudioPlayerController *)controller fileToDownload:(RJAudioAssertItem * _Nonnull)item {
+    NSLog(@"下载音频:%@", item.assertURL.absoluteString);
 }
 
 @end

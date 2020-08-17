@@ -13,13 +13,13 @@
 #import "RJAudioPlayerMiniControlView.h"
 #import "UIImage+RJAudioPlayerImage.h"
 
-@class RJAudioPlayerController, RJAudioAssertItem;
+@class RJAudioPlayerController;
 
 @protocol RJAudioPlayerControllerDelegate <NSObject>
 
-- (void)playerController:(RJAudioPlayerController *_Nonnull)controller playIndexDidChange:(NSInteger)playIndex url:(NSURL *_Nonnull)url;
+- (void)playerController:(RJAudioPlayerController *_Nonnull)controller playIndexDidChange:(NSInteger)playIndex item:(RJAudioAssertItem *_Nonnull)item;
 
-- (void)playerController:(RJAudioPlayerController *_Nonnull)controller fileToDownload:(NSURL *_Nonnull)url;
+- (void)playerController:(RJAudioPlayerController *_Nonnull)controller fileToDownload:(RJAudioAssertItem *_Nonnull)item;
 
 @end
 

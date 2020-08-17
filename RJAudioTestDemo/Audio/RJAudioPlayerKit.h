@@ -9,7 +9,7 @@
 #ifndef RJAudioPlayerKit_h
 #define RJAudioPlayerKit_h
 
-#import "RJAudioPlayViewControllerProtocol.h"
+#import <UIKit/UIKit.h>
 #import "RJAudioPlayViewController.h"
 #import "RJAudioPlayerController.h"
 #import "RJAudioPlayer.h"
