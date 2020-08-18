@@ -436,7 +436,6 @@ static NSString * const RJAlbumIconRotationAnimationKey = @"player_Icon_Rotation
         _sliderView.sliderRadius = _sliderView.sliderHeight * 0.5;
         _sliderView.thumSize = CGSizeMake(9.0, 9.0);
         _sliderView.delegate = self;
-        _sliderView.bufferTrackTintColor = [UIColor redColor];
     }
     return _sliderView;
 }

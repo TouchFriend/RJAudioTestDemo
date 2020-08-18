@@ -194,7 +194,7 @@ static CGFloat const RJProgressHeight = 1.0;
 - (UIImageView *)bgProgressView {
     if (!_bgProgressView) {
         _bgProgressView = [[UIImageView alloc] init];
-        _bgProgressView.backgroundColor = [UIColor colorWithRed:220.0 / 255.0 green:220.0 / 255.0 blue:220.0 / 255.0 alpha:1.0];
+        _bgProgressView.backgroundColor = [UIColor colorWithRed:235.0 / 255.0 green:235.0 / 255.0 blue:235.0 / 255.0 alpha:1.0];
         _bgProgressView.contentMode = UIViewContentModeScaleAspectFill;
         _bgProgressView.clipsToBounds = YES;
     }
@@ -204,7 +204,7 @@ static CGFloat const RJProgressHeight = 1.0;
 - (UIImageView *)bufferProgressView {
     if (!_bufferProgressView) {
         _bufferProgressView = [[UIImageView alloc] init];
-        _bufferProgressView.backgroundColor = [UIColor colorWithRed:200.0 / 255.0 green:200.0 / 255.0 blue:200.0 / 255.0 alpha:1.0];
+        _bufferProgressView.backgroundColor = [UIColor colorWithRed:210.0 / 255.0 green:210.0 / 255.0 blue:210.0 / 255.0 alpha:1.0];
         _bufferProgressView.contentMode = UIViewContentModeScaleAspectFill;
         _bufferProgressView.clipsToBounds = YES;
     }
