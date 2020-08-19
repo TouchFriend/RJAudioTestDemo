@@ -139,6 +139,10 @@
 
 - (void)audioPlayer:(RJAudioPlayer *)player playFailedForURL:(NSURL *)url error:(NSError *)error {
     NSLog(@"播放出错, %@ error:%@", url, error);
+    if ([self.delegate respondsToSelector:@selector(playerController:playFailed:error:)]) {
+        RJAudioAssertItem *item = self.audioAsserts[self.currentPlayIndex];
+        [self.delegate playerController:self playFailed:item error:error];
+    }
 }
 
 #pragma mark - RJAudioPlayerControlViewDelegate Methods

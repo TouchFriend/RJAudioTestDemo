@@ -17,9 +17,22 @@
 
 @protocol RJAudioPlayerControllerDelegate <NSObject>
 
+/// 播放索引改变
+/// @param controller 控制器
+/// @param playIndex 播放索引
+/// @param item 模型
 - (void)playerController:(RJAudioPlayerController *_Nonnull)controller playIndexDidChange:(NSInteger)playIndex item:(RJAudioAssertItem *_Nonnull)item;
 
+/// 下载文件
+/// @param controller 控制器
+/// @param item 模型
 - (void)playerController:(RJAudioPlayerController *_Nonnull)controller fileToDownload:(RJAudioAssertItem *_Nonnull)item;
+
+/// 播放出错
+/// @param controller 控制器
+/// @param item 模型
+/// @param error 错误
+- (void)playerController:(RJAudioPlayerController *_Nonnull)controller playFailed:(RJAudioAssertItem *_Nonnull)item error:(NSError *_Nonnull)error;
 
 @end
 
